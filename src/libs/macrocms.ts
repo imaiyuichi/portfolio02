@@ -15,6 +15,6 @@ export const getTop = async (queries?: MicroCMSQueries) => {
 //     return await client.get({ endpoint: 'about', queries });
 // };
 
-export const getAbout = async (queries?: MicroCMSQueries) => {
-    return await client.get<ApiResponse>({ endpoint: 'about', queries });
-};
+// export const getAbout = async (queries?: MicroCMSQueries) => {
+//     return await client.get<ApiResponse>({ endpoint: 'about', queries });
+// };
