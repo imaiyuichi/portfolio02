@@ -1,0 +1,55 @@
+---
+/**
+ * @description IntersectionObserverを使って要素が画面内に入ったらクラスを付与する
+ * @param {string} ratio - 画面内に入ったと判定する位置
+ * @param {boolean} loop - 画面内に入ったらクラスを付与し続けるかどうか
+ * @param {string} classValue - 付与するクラス名
+ */
+
+export interface Props {
+  classValue?: string;
+  ratio?: string;
+  loop?: boolean;
+}
+
+const { ratio = "-30%", loop = false, classValue = "is-view" } = Astro.props;
+---
+
+<div
+  class="view-element"
+  data-class={classValue}
+  data-ratio={ratio}
+  data-loop={loop ? "true" : "false"}
+>
+  <slot />
+</div>
+
+<script>
+  const targets = document.querySelectorAll(".view-element");
+
+  targets.forEach((target) => {
+    const isLoop = target.dataset.loop;
+    const classValue = target.dataset.class;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const target = entry.target;
+
+            target.classList.add(`${classValue}`);
+            if (isLoop === "false") observer.unobserve(target);
+          } else if (isLoop === "true") {
+            const target = entry.target;
+
+            target.classList.remove(`${classValue}`);
+          }
+        });
+      },
+      {
+        rootMargin: `${target.dataset.ratio} 0%`,
+      }
+    );
+    observer.observe(target);
+  });
+</script>

@@ -1,0 +1,44 @@
+---
+/**
+ * @description ブラーアニメーション
+ * @param {Number} scale - Scale of the element
+ * @param {Number} delay - Delay of the animation
+ */
+
+export interface Props {
+  scale?: Number;
+  delay?: Number;
+}
+
+const { scale = 1.0, delay = 0 } = Astro.props;
+---
+
+<div
+  class="animation-blur"
+  style={`transform: scale(${scale}); transition-delay:${delay}s`}
+>
+  <slot />
+</div>
+
+<style lang="scss">
+  @import "../styles/_single";
+
+  .animation-blur {
+    filter: blur(20px);
+    opacity: 0;
+    transition: transform $duration-full $easing-transform,
+      opacity $duration-full $easing-material,
+      filter $duration-full $easing-material;
+    transform-origin: center;
+  }
+</style>
+
+<style lang="scss" is:global>
+  @import "../styles/_single";
+
+  .is-view .animation-blur {
+    filter: blur(0);
+    opacity: 1;
+    transform: scale(1) !important;
+  }
+</style>
