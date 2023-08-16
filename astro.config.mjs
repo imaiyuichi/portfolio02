@@ -4,5 +4,5 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
     site: 'https://imaiyuichi.github.io/',
     outDir: './docs',
-    base: '/portfolio02',
+    base: '/docs',
 });
