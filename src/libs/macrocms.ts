@@ -10,6 +10,21 @@ export const getTop = async (queries?: MicroCMSQueries) => {
     return await client.get({ endpoint: 'top', queries });
 };
 
+export const getBlogs = async (queries?: MicroCMSQueries) => {
+    return await client.get({ endpoint: 'blogs', queries });
+};
+
+export const getBlogDetail = async (
+    blogId: string,
+    queries?: MicroCMSQueries
+) => {
+    return await client.getListDetail({
+        endpoint: 'blogs',
+        contentId: blogId,
+        queries,
+    });
+};
+
 // //APIの呼び出し
 // export const getAbout = async (queries?: MicroCMSQueries) => {
 //     return await client.get({ endpoint: 'about', queries });

@@ -1,232 +1,229 @@
-@use "variables" as *;
-@use "functions" as *;
-@use "mixins" as *;
+@use 'variables' as *;
+@use 'functions' as *;
+@use 'mixins' as *;
 
 html,
 body {
-  overflow-x: clip;
+    overflow-x: clip;
 }
 
 html {
-  // 1rem = 60分割のグリッドとする処理
-  // calc(100vw / 60)
-  // pc,sp共通
-  font-size: 1.6667vw;
+    font-size: 1.6667vw;
 }
 
 body {
-  overflow-x: clip;
-  font-family: $hiragino-ud-sans-w4;
-  font-size: vw(16);
-  line-height: 1.8;
-  color: $color-base-black;
-  letter-spacing: 0;
-  background-color: $color-base-white;
+    overflow-x: clip;
+    font-family: $hiragino-ud-sans-w4;
+    font-size: vw(16);
+    line-height: 1.8;
+    color: $color-base-black;
+    letter-spacing: 0;
+    background-color: $color-base-white;
 
-  @include sp() {
-    font-size: vw_sp(13);
-  }
+    @include sp() {
+        font-size: vw_sp(13);
+    }
 }
 
 // コンテナークラス
 // 基本的にはこの中にコンテンツを入れる
 // 例外の場合は適宜Astroファイルのスタイル内で指定してください
 .container {
-  width: 50rem;
-  margin: 0 auto;
+    width: 50rem;
+    margin: 0 auto;
 
-  @include sp() {
-    width: 52rem;
-  }
+    @include sp() {
+        width: 52rem;
+    }
 }
 
 img {
-  width: 100%;
-  height: auto;
+    width: 100%;
+    height: auto;
 }
 
 svg {
-  display: flex;
-  width: 100%;
-  height: auto;
+    display: flex;
+    width: 100%;
+    height: auto;
 }
 
 h1 {
-  font-family: $hiragino-ud-sans-w5;
-  font-size: vw(50);
-  line-height: 1.37;
+    font-family: $hiragino-ud-sans-w5;
+    font-size: vw(50);
+    line-height: 1.37;
 
-  @include sp() {
-    font-size: vw_sp(60);
-  }
+    @include sp() {
+        font-size: vw_sp(60);
+    }
 }
 
 .primary-h2 {
-  font-family: $hiragino-ud-sans-w5;
-  font-size: vw(50);
-  line-height: 1.37;
-  letter-spacing: 0.1em;
+    font-family: $hiragino-ud-sans-w5;
+    font-size: vw(50);
+    line-height: 1.37;
+    letter-spacing: 0.1em;
 
-  @include sp() {
-    font-size: vw_sp(30);
-    line-height: 1.5;
-  }
+    @include sp() {
+        font-size: vw_sp(30);
+        line-height: 1.5;
+    }
 }
 
 h2 {
-  font-family: $hiragino-ud-sans-w5;
-  font-size: vw(46);
-  line-height: 1.37;
-  letter-spacing: 0.1em;
+    font-family: $hiragino-ud-sans-w5;
+    font-size: vw(46);
+    line-height: 1.37;
+    letter-spacing: 0.1em;
 
-  @include sp() {
-    font-size: vw_sp(30);
-    line-height: 1.5;
-  }
+    @include sp() {
+        font-size: vw_sp(30);
+        line-height: 1.5;
+    }
 }
 
 h3 {
-  font-family: $hiragino-ud-sans-w5;
-  font-size: vw(36);
-  line-height: 1.5;
-  letter-spacing: 0.05em;
+    font-family: $hiragino-ud-sans-w5;
+    font-size: vw(36);
+    line-height: 1.5;
+    letter-spacing: 0.05em;
 
-  @include sp() {
-    font-size: vw_sp(24);
-  }
+    @include sp() {
+        font-size: vw_sp(24);
+    }
 }
 
 h4 {
-  font-family: $hiragino-ud-sans-w5;
-  font-size: vw(24);
-  line-height: 1.5;
+    font-family: $hiragino-ud-sans-w5;
+    font-size: vw(24);
+    line-height: 1.5;
 
-  @include sp() {
-    font-size: vw_sp(18);
-  }
+    @include sp() {
+        font-size: vw_sp(18);
+    }
 }
 
 h5 {
-  font-family: $hiragino-ud-sans-w5;
-  font-size: vw(20);
-  line-height: 1.5;
+    font-family: $hiragino-ud-sans-w5;
+    font-size: vw(20);
+    line-height: 1.5;
 
-  @include sp() {
-    font-size: vw_sp(15);
-  }
+    @include sp() {
+        font-size: vw_sp(15);
+    }
 }
 
 .subtitle {
-  /* stylelint-disable */
-  display: inline-block;
-  background: $color-cellsource-green;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: $hiragino-ud-sans-w5;
-  font-size: vw(22);
-  line-height: 1.5;
-  letter-spacing: 0.05em;
+    /* stylelint-disable */
+    display: inline-block;
+    background: $color-cellsource-green;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-family: $hiragino-ud-sans-w5;
+    font-size: vw(22);
+    line-height: 1.5;
+    letter-spacing: 0.05em;
 
-  @include sp() {
-    font-size: vw_sp(16);
-  }
-  /* stylelint-enable */
+    @include sp() {
+        font-size: vw_sp(16);
+    }
+    /* stylelint-enable */
 }
 
 .primary-paragraph {
-  font-family: $hiragino-ud-sans-w4;
-  font-size: vw(18);
-  line-height: 2.2;
-  letter-spacing: 0.06em;
+    font-family: $hiragino-ud-sans-w4;
+    font-size: vw(18);
+    line-height: 2.2;
+    letter-spacing: 0.06em;
 
-  @include sp() {
-    font-size: vw_sp(14);
-    line-height: 1.5;
-  }
+    @include sp() {
+        font-size: vw_sp(14);
+        line-height: 1.5;
+    }
 }
 
 .note {
-  font-family: $hiragino-ud-sans-w4;
-  font-size: vw(12);
-  line-height: 1.8;
+    font-family: $hiragino-ud-sans-w4;
+    font-size: vw(12);
+    line-height: 1.8;
 
-  @include sp() {
-    font-size: vw_sp(12);
-  }
+    @include sp() {
+        font-size: vw_sp(12);
+    }
 }
 
 /** リッチエディタのカスタムclass */
 
 .rich-editor-infinity-blue {
-  /* stylelint-disable */
-  background: $color-infinity-blue;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  /* stylelint-enable */
+    /* stylelint-disable */
+    background: $color-infinity-blue;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* stylelint-enable */
 }
 
 .rich-editor-green {
-  /* stylelint-disable */
-  background: $color-base-green;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  /* stylelint-enable */
+    /* stylelint-disable */
+    background: $color-base-green;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    /* stylelint-enable */
 }
 
 .richeditor {
-  li {
-    position: relative;
-    padding: 0 0 0 0.8rem;
+    li {
+        position: relative;
+        padding: 0 0 0 0.8rem;
 
-    @include sp() {
-      padding: 0 2rem;
+        @include sp() {
+            padding: 0 2rem;
+        }
+
+        &::after {
+            position: absolute;
+            top: vw(12);
+            left: 1%;
+            display: block;
+            width: vw(4);
+            height: vw(4);
+            content: '';
+            background-color: $color-base-black;
+            border-radius: 50%;
+            transform: translate3d(-50%, 0, 0);
+
+            @include sp() {
+                top: vw_sp(10);
+                width: vw_sp(4);
+                height: vw_sp(4);
+            }
+        }
     }
 
-    &::after {
-      position: absolute;
-      top: vw(12);
-      left: 1%;
-      display: block;
-      width: vw(4);
-      height: vw(4);
-      content: "";
-      background-color: $color-base-black;
-      border-radius: 50%;
-      transform: translate3d(-50%, 0, 0);
+    .info-text {
+        p {
+            position: relative;
+            padding: 0 0 0 1rem;
 
-      @include sp() {
-        top: vw_sp(10);
-        width: vw_sp(4);
-        height: vw_sp(4);
-      }
+            @include sp() {
+                padding: 0 0 0 3rem;
+            }
+        }
+
+        p::before {
+            position: absolute;
+            top: 0.5rem;
+            left: 0;
+            width: 0.333rem;
+            height: 0.333rem;
+            content: '';
+            background: $color-base-green;
+            border-radius: 50%;
+
+            @include sp() {
+                top: 1.666rem;
+                width: 1rem;
+                height: 1rem;
+            }
+        }
     }
-  }
-
-  .info-text {
-    p {
-      position: relative;
-      padding: 0 0 0 1rem;
-
-      @include sp() {
-        padding: 0 0 0 3rem;
-      }
-    }
-
-    p::before {
-      position: absolute;
-      top: 0.5rem;
-      left: 0;
-      width: 0.333rem;
-      height: 0.333rem;
-      content: "";
-      background: $color-base-green;
-      border-radius: 50%;
-
-      @include sp() {
-        top: 1.666rem;
-        width: 1rem;
-        height: 1rem;
-      }
-    }
-  }
 }

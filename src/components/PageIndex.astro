@@ -1,22 +1,25 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Card from './Card.astro';
-import LoadingAnimation from './LoadingAnimation.astro';
 import { getTop } from '../libs/macrocms';
+import AnimationBlur from './AnimationBlur.astro';
+import ViewElement from './ViewElement.astro';
+import { getBlogs } from '../libs/macrocms';
 
 const MvData = await getTop({
     fields: ['MvTitle', 'MvSubTitle', 'MvCatch'],
+});
+
+const BlogData = await getBlogs({
+    fields: ['id', 'title'],
 });
 ---
 
 <Layout title="Welcome to Astro.">
     <main>
-        <div class="loader-animation">
-            <LoadingAnimation />
-        </div>
         <div class="container">
             <h1 class="title">
-                <span class="text-gradient">Astro</span>を触ってみた
+                <span class="text-gradient">{MvData.MvTitle}</span>
             </h1>
             <svg
                 class="astro-a"
@@ -55,20 +58,22 @@ const MvData = await getTop({
                 <Card body="" />
                 <Card body="" />
             </ul>
+            <ViewElement>
+                <AnimationBlur>test</AnimationBlur>
+            </ViewElement>
+            <div class="blogs">
+                <ul>
+                    {
+                        BlogData.contents.map((item: any) => (
+                            <a href={item.id}>{item.title}</a>
+                        ))
+                    }
+                </ul>
+                {console.log(BlogData.contents)}
+            </div>
         </div>
     </main>
 </Layout>
-
-<script>
-    window.onload = () => {
-        setTimeout(() => {
-            const loader = document.querySelector('.loader-animation');
-            loader.classList.add('loaded');
-            const onPreview = document.querySelector('.container');
-            onPreview.classList.add('onPreview');
-        }, 1300);
-    };
-</script>
 
 <style>
     main {
@@ -80,9 +85,6 @@ const MvData = await getTop({
         color: white;
         font-size: 20px;
         line-height: 1.6;
-    }
-    .container {
-        opacity: 0;
     }
     .onPreview {
         opacity: 1;
@@ -147,10 +149,5 @@ const MvData = await getTop({
         grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
         gap: 2rem;
         padding: 0;
-    }
-
-    .loaded {
-        opacity: 0;
-        transition: 1s;
     }
 </style>
