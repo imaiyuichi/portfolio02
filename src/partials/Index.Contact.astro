@@ -1,0 +1,29 @@
+---
+import { getTop, getBlogs } from '../libs/macrocms';
+
+const MvData = await getTop({
+    fields: ['MvTitle', 'MvSubTitle', 'MvCatch'],
+});
+---
+
+<section class="root">
+    <div class="inner">
+        <h2 class="title">
+            <span class="text-gradient">これはContactページ</span>
+        </h2>
+    </div>
+</section>
+
+<style lang="scss">
+    @import '../styles/_single.scss';
+    .root {
+        padding: vw(80) 0 0;
+    }
+
+    .title {
+        font-size: 4rem;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+    }
+</style>

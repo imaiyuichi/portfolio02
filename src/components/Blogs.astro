@@ -1,0 +1,44 @@
+---
+import { getBlogs } from '../libs/macrocms';
+import Card from './Card.astro';
+import AnimationBlur from './AnimationBlur.astro';
+import ViewElement from './ViewElement.astro';
+
+const BlogData = await getBlogs({
+    fields: ['id', 'title', 'eyecatch', 'category'],
+});
+---
+
+<section class="root">
+    <div class="blogs">
+        {
+            BlogData.contents.map((item: any) => (
+                <Card
+                    title={item.title}
+                    href={item.id}
+                    img={item.eyecatch.url}
+                    date={new Date(item.category.publishedAt).toLocaleString()}
+                />
+            ))
+        }
+    </div>
+</section>
+
+<style lang="scss">
+    @import '../styles/_single.scss';
+    .root {
+        position: relative;
+        padding: vw(80) 0 0;
+        color: white;
+        font-size: 20px;
+        line-height: 1.6;
+    }
+
+    .title {
+        font-size: 4rem;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        margin: 2em 0;
+    }
+</style>

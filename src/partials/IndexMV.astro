@@ -1,0 +1,63 @@
+---
+import { getTop, getBlogs } from '../libs/macrocms';
+
+const MvData = await getTop({
+    fields: ['MvTitle', 'MvSubTitle', 'MvCatch'],
+});
+---
+
+<section class="root">
+    <div class="inner">
+        <canvas id="myCanvas"></canvas>
+        <div class="hero">
+            <h2 class="title">
+                <span class="text-gradient">{MvData.MvTitle}</span>
+            </h2>
+        </div>
+    </div>
+</section>
+
+<script
+    src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"
+    integrity="sha512-dLxUelApnYxpLt6K2iomGngnHO83iUvZytA3YjDUCjT0HDOHKXnVYdf3hU4JjM8uEhxf9nD1/ey98U3t2vZ0qQ=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"></script>
+<script src="../script/mv.js"></script>
+
+<style lang="scss">
+    @import '../styles/_single.scss';
+
+    .title {
+        font-size: 4rem;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+    }
+
+    canvas {
+        position: relative;
+        width: 100vw;
+        height: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+    }
+
+    .hero {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 100%;
+        color: white;
+        transform: translate(-50%, -50%);
+    }
+
+    .hero h1 {
+        font-size: 100px;
+        padding: 0px;
+    }
+
+    .hero p {
+        font-size: 30px;
+    }
+</style>

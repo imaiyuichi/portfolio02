@@ -1,434 +1,121 @@
-class Slider {
-    constructor() {
-        this.bindAll();
+// ページの読み込みを待つ
+window.addEventListener('load', init);
 
-        this.vert = `
-    varying vec2 vUv;
-    void main() {
-      vUv = uv;
-      gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
-    }
-    `;
+function init() {
+    // サイズを指定
+    const width = 960;
+    const height = 540;
+    let rot = 0;
 
-        this.frag = `
-    varying vec2 vUv;
+    // レンダラーを作成
+    const renderer = new THREE.WebGLRenderer({
+        canvas: document.querySelector('#myCanvas'),
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
 
-    uniform sampler2D texture1;
-    uniform sampler2D texture2;
-    uniform sampler2D disp;
+    // 0x を追加してカラーコードを指定
+    renderer.setClearColor(0x13151b);
 
-    uniform float dispPower;
-    uniform float intensity;
+    // シーンを作成
+    const scene = new THREE.Scene();
 
-    uniform vec2 size;
-    uniform vec2 res;
+    // カメラを作成
+    const camera = new THREE.PerspectiveCamera(45, width / height);
+    //   camera.position.z = 2000;
 
-    vec2 backgroundCoverUv( vec2 screenSize, vec2 imageSize, vec2 uv ) {
-      float screenRatio = screenSize.x / screenSize.y;
-      float imageRatio = imageSize.x / imageSize.y;
-      vec2 newSize = screenRatio < imageRatio 
-          ? vec2(imageSize.x * (screenSize.y / imageSize.y), screenSize.y)
-          : vec2(screenSize.x, imageSize.y * (screenSize.x / imageSize.x));
-      vec2 newOffset = (screenRatio < imageRatio 
-          ? vec2((newSize.x - screenSize.x) / 2.0, 0.0) 
-          : vec2(0.0, (newSize.y - screenSize.y) / 2.0)) / newSize;
-      return uv * screenSize / newSize + newOffset;
-    }
+    // 球体作成
+    const geometry = new THREE.SphereGeometry(300, 30, 30);
+    // マテリアルを作成
+    const material = new THREE.MeshStandardMaterial({
+        map: new THREE.TextureLoader().load('../images/earth.jpg'),
+        side: THREE.DoubleSide,
+    });
+    // 地球メッシュを作成
+    const earth = new THREE.Mesh(geometry, material);
+    // 3D空間にメッシュを追加
+    scene.add(earth);
 
-    void main() {
-      vec2 uv = vUv;
-      
-      vec4 disp = texture2D(disp, uv);
-      vec2 dispVec = vec2(disp.x, disp.y);
-      
-      vec2 distPos1 = uv + (dispVec * intensity * dispPower);
-      vec2 distPos2 = uv + (dispVec * -(intensity * (1.0 - dispPower)));
-      
-      vec4 _texture1 = texture2D(texture1, distPos1);
-      vec4 _texture2 = texture2D(texture2, distPos2);
-      
-      gl_FragColor = mix(_texture1, _texture2, dispPower);
-    }
-    `;
+    // 平行光源
+    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.9);
+    directionalLight.position.set(1, 1, 1);
+    scene.add(directionalLight);
 
-        this.el = document.querySelector('.js-slider');
-        this.inner = this.el.querySelector('.js-slider__inner');
-        this.slides = [...this.el.querySelectorAll('.js-slide')];
-        this.bullets = [...this.el.querySelectorAll('.js-slider-bullet')];
+    // ポイント光源
+    const pointLight = new THREE.PointLight(0xffffff, 2, 1000);
+    scene.add(pointLight);
+    const pointLightHelper = new THREE.PointLightHelper(pointLight, 30);
+    scene.add(pointLightHelper);
 
-        this.renderer = null;
-        this.scene = null;
-        this.clock = null;
-        this.camera = null;
+    /* 星屑追加 */
+    createStarField();
 
-        this.images = [
-            'https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/bg1.jpg',
-            'https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/bg2.jpg',
-            'https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/bg3.jpg',
-        ];
+    /* 星屑作成 */
+    function createStarField() {
+        /* x,y,z座標の値がランダムに入った配列を1000個作成 */
+        const vertices = [];
+        for (let i = 0; i < 500; i++) {
+            const x = 3000 * (Math.random() - 0.5);
+            const y = 3000 * (Math.random() - 0.5);
+            const z = 3000 * (Math.random() - 0.5);
 
-        this.data = {
-            current: 0,
-            next: 1,
-            total: this.images.length - 1,
-            delta: 0,
-        };
-
-        this.state = {
-            animating: false,
-            text: false,
-            initial: true,
-        };
-
-        this.textures = null;
-
-        this.init();
-    }
-
-    bindAll() {
-        ['render', 'nextSlide'].forEach(
-            (fn) => (this[fn] = this[fn].bind(this))
-        );
-    }
-
-    setStyles() {
-        this.slides.forEach((slide, index) => {
-            if (index === 0) return;
-
-            TweenMax.set(slide, { autoAlpha: 0 });
-        });
-
-        this.bullets.forEach((bullet, index) => {
-            if (index === 0) return;
-
-            const txt = bullet.querySelector('.js-slider-bullet__text');
-            const line = bullet.querySelector('.js-slider-bullet__line');
-
-            TweenMax.set(txt, {
-                alpha: 0.25,
-            });
-            TweenMax.set(line, {
-                scaleX: 0,
-                transformOrigin: 'left',
-            });
-        });
-    }
-
-    cameraSetup() {
-        this.camera = new THREE.OrthographicCamera(
-            this.el.offsetWidth / -2,
-            this.el.offsetWidth / 2,
-            this.el.offsetHeight / 2,
-            this.el.offsetHeight / -2,
-            1,
-            1000
-        );
-
-        this.camera.lookAt(this.scene.position);
-        this.camera.position.z = 1;
-    }
-
-    setup() {
-        this.scene = new THREE.Scene();
-        this.clock = new THREE.Clock(true);
-
-        this.renderer = new THREE.WebGLRenderer({ alpha: true });
-        this.renderer.setPixelRatio(window.devicePixelRatio);
-        this.renderer.setSize(this.el.offsetWidth, this.el.offsetHeight);
-
-        this.inner.appendChild(this.renderer.domElement);
-    }
-
-    loadTextures() {
-        const loader = new THREE.TextureLoader();
-        loader.crossOrigin = '';
-
-        this.textures = [];
-        this.images.forEach((image, index) => {
-            const texture = loader.load(
-                image + '?v=' + Date.now(),
-                this.render
-            );
-
-            texture.minFilter = THREE.LinearFilter;
-            texture.generateMipmaps = false;
-
-            if (index === 0 && this.mat) {
-                this.mat.uniforms.size.value = [
-                    texture.image.naturalWidth,
-                    texture.image.naturalHeight,
-                ];
-            }
-
-            this.textures.push(texture);
-        });
-
-        this.disp = loader.load(
-            'https://s3-us-west-2.amazonaws.com/s.cdpn.io/58281/rock-_disp.png',
-            this.render
-        );
-        this.disp.magFilter = this.disp.minFilter = THREE.LinearFilter;
-        this.disp.wrapS = this.disp.wrapT = THREE.RepeatWrapping;
-    }
-
-    createMesh() {
-        this.mat = new THREE.ShaderMaterial({
-            uniforms: {
-                dispPower: { type: 'f', value: 0.0 },
-                intensity: { type: 'f', value: 0.5 },
-                res: {
-                    value: new THREE.Vector2(
-                        window.innerWidth,
-                        window.innerHeight
-                    ),
-                },
-                size: { value: new THREE.Vector2(1, 1) },
-                texture1: { type: 't', value: this.textures[0] },
-                texture2: { type: 't', value: this.textures[1] },
-                disp: { type: 't', value: this.disp },
-            },
-            transparent: true,
-            vertexShader: this.vert,
-            fragmentShader: this.frag,
-        });
-
-        const geometry = new THREE.PlaneBufferGeometry(
-            this.el.offsetWidth,
-            this.el.offsetHeight,
-            1
-        );
-
-        const mesh = new THREE.Mesh(geometry, this.mat);
-
-        this.scene.add(mesh);
-    }
-
-    transitionNext() {
-        TweenMax.to(this.mat.uniforms.dispPower, 2.5, {
-            value: 1,
-            ease: Expo.easeInOut,
-            onUpdate: this.render,
-            onComplete: () => {
-                this.mat.uniforms.dispPower.value = 0.0;
-                this.changeTexture();
-                this.render.bind(this);
-                this.state.animating = false;
-            },
-        });
-
-        const current = this.slides[this.data.current];
-        const next = this.slides[this.data.next];
-
-        const currentImages = current.querySelectorAll('.js-slide__img');
-        const nextImages = next.querySelectorAll('.js-slide__img');
-
-        const currentText = current.querySelectorAll(
-            '.js-slider__text-line div'
-        );
-        const nextText = next.querySelectorAll('.js-slider__text-line div');
-
-        const currentBullet = this.bullets[this.data.current];
-        const nextBullet = this.bullets[this.data.next];
-
-        const currentBulletTxt = currentBullet.querySelectorAll(
-            '.js-slider-bullet__text'
-        );
-        const nextBulletTxt = nextBullet.querySelectorAll(
-            '.js-slider-bullet__text'
-        );
-
-        const currentBulletLine = currentBullet.querySelectorAll(
-            '.js-slider-bullet__line'
-        );
-        const nextBulletLine = nextBullet.querySelectorAll(
-            '.js-slider-bullet__line'
-        );
-
-        const tl = new TimelineMax({ paused: true });
-
-        if (this.state.initial) {
-            TweenMax.to('.js-scroll', 1.5, {
-                yPercent: 100,
-                alpha: 0,
-                ease: Power4.easeInOut,
-            });
-
-            this.state.initial = false;
+            vertices.push(x, y, z);
         }
 
-        tl.staggerFromTo(
-            currentImages,
-            1.5,
-            {
-                yPercent: 0,
-                scale: 1,
-            },
-            {
-                yPercent: -185,
-                scaleY: 1.5,
-                ease: Expo.easeInOut,
-            },
-            0.075
-        )
-            .to(
-                currentBulletTxt,
-                1.5,
-                {
-                    alpha: 0.25,
-                    ease: Linear.easeNone,
-                },
-                0
-            )
-            .set(
-                currentBulletLine,
-                {
-                    transformOrigin: 'right',
-                },
-                0
-            )
-            .to(
-                currentBulletLine,
-                1.5,
-                {
-                    scaleX: 0,
-                    ease: Expo.easeInOut,
-                },
-                0
-            );
-
-        if (currentText) {
-            tl.fromTo(
-                currentText,
-                2,
-                {
-                    yPercent: 0,
-                },
-                {
-                    yPercent: -100,
-                    ease: Power4.easeInOut,
-                },
-                0
-            );
-        }
-
-        tl.set(current, {
-            autoAlpha: 0,
-        }).set(
-            next,
-            {
-                autoAlpha: 1,
-            },
-            1
+        /* 形状データ作成 */
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute(
+            'position',
+            new THREE.Float32BufferAttribute(vertices, 3)
         );
 
-        if (nextText) {
-            tl.fromTo(
-                nextText,
-                2,
-                {
-                    yPercent: 100,
-                },
-                {
-                    yPercent: 0,
-                    ease: Power4.easeOut,
-                },
-                1.5
-            );
-        }
+        /* マテリアル作成 */
+        const material = new THREE.PointsMaterial({
+            size: 8,
+            color: 0xffffff,
+        });
 
-        tl.staggerFromTo(
-            nextImages,
-            1.5,
-            {
-                yPercent: 150,
-                scaleY: 1.5,
-            },
-            {
-                yPercent: 0,
-                scaleY: 1,
-                ease: Expo.easeInOut,
-            },
-            0.075,
-            1
-        )
-            .to(
-                nextBulletTxt,
-                1.5,
-                {
-                    alpha: 1,
-                    ease: Linear.easeNone,
-                },
-                1
-            )
-            .set(
-                nextBulletLine,
-                {
-                    transformOrigin: 'left',
-                },
-                1
-            )
-            .to(
-                nextBulletLine,
-                1.5,
-                {
-                    scaleX: 1,
-                    ease: Expo.easeInOut,
-                },
-                1
-            );
-
-        tl.play();
+        /* 物体を作成 */
+        const stars = new THREE.Points(geometry, material);
+        scene.add(stars);
     }
 
-    prevSlide() {}
+    /* マウス座標はマウスが動いた時のみ取得 */
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.pageX;
+    });
 
-    nextSlide() {
-        if (this.state.animating) return;
+    // 毎フレーム時に実行されるループイベント
+    function tick() {
+        rot += 0.5; /* 角度 */
 
-        this.state.animating = true;
+        const radian = (rot * Math.PI) / 180; /* ラジアン変換 */
 
-        this.transitionNext();
+        /* 角度に応じてカメラの位置を変更 */
+        camera.position.x = 1000 * Math.sin(radian);
+        camera.position.z = 2000 * Math.cos(radian);
 
-        this.data.current =
-            this.data.current === this.data.total ? 0 : this.data.current + 1;
-        this.data.next =
-            this.data.current === this.data.total ? 0 : this.data.current + 1;
+        /* 原点方向を見つめる */
+        camera.lookAt(new THREE.Vector3(0, 0, -400));
+
+        // ライトを周回させる
+        pointLight.position.set(
+            500 * Math.sin(Date.now() / 500),
+            500 * Math.sin(Date.now() / 1000),
+            500 * Math.cos(Date.now() / 500)
+        );
+
+        // レンダリング
+        renderer.render(scene, camera);
+        requestAnimationFrame(tick);
     }
 
-    changeTexture() {
-        this.mat.uniforms.texture1.value = this.textures[this.data.current];
-        this.mat.uniforms.texture2.value = this.textures[this.data.next];
-    }
+    tick();
+    window.addEventListener('resize', onWindowResize);
 
-    listeners() {
-        window.addEventListener('wheel', this.nextSlide, { passive: true });
-    }
-
-    render() {
-        this.renderer.render(this.scene, this.camera);
-    }
-
-    init() {
-        this.setup();
-        this.cameraSetup();
-        this.loadTextures();
-        this.createMesh();
-        this.setStyles();
-        this.render();
-        this.listeners();
+    /* ウィンドウ変更時にサイズを維持する処理 */
+    function onWindowResize() {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
     }
 }
-
-// Toggle active link
-const links = document.querySelectorAll('.js-nav a');
-
-links.forEach((link) => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        links.forEach((other) => other.classList.remove('is-active'));
-        link.classList.add('is-active');
-    });
-});
-
-// Init classes
-const slider = new Slider();

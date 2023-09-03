@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import { getBlogDetail, getBlogs } from '../libs/macrocms';
+import BaseHeader from '../components/BaseHeader.astro';
 
 export async function getStaticPaths() {
     const BlogData = await getBlogs({ fields: 'id' });
@@ -16,6 +17,7 @@ const blog = await getBlogDetail(blogId as string);
 ---
 
 <Layout title="blogs">
+    <BaseHeader />
     <main class="main">
         <div class="bg"></div>
         <div class="inner">
