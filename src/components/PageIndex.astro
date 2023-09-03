@@ -1,10 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Card from './Card.astro';
+import { getBlogs } from '../libs/macrocms';
 import { getTop } from '../libs/macrocms';
+import Card from './Card.astro';
+import BaseHeader from './BaseHeader.astro';
 import AnimationBlur from './AnimationBlur.astro';
 import ViewElement from './ViewElement.astro';
-import { getBlogs } from '../libs/macrocms';
 
 const MvData = await getTop({
     fields: ['MvTitle', 'MvSubTitle', 'MvCatch'],
@@ -16,6 +17,7 @@ const BlogData = await getBlogs({
 ---
 
 <Layout title="Welcome to Astro.">
+    <BaseHeader />
     <main>
         <div class="container">
             <h1 class="title">
@@ -69,8 +71,27 @@ const BlogData = await getBlogs({
                         ))
                     }
                 </ul>
-                {console.log(BlogData.contents)}
             </div>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
+            <p>test</p>
         </div>
     </main>
 </Layout>

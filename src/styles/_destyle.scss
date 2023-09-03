@@ -7,9 +7,9 @@
 *,
 ::before,
 ::after {
-  box-sizing: border-box;
-  border-style: solid;
-  border-width: 0;
+    box-sizing: border-box;
+    border-style: solid;
+    border-width: 0;
 }
 
 /* Document */
@@ -23,9 +23,9 @@
  */
 
 html {
-  line-height: 1.15; /* 1 */
-  text-size-adjust: 100%; /* 2 */
-  -webkit-tap-highlight-color: transparent; /* 3 */
+    line-height: 1.15; /* 1 */
+    text-size-adjust: 100%; /* 2 */
+    -webkit-tap-highlight-color: transparent; /* 3 */
 }
 
 /* Sections */
@@ -37,7 +37,7 @@ html {
  */
 
 body {
-  margin: 0;
+    margin: 0;
 }
 
 /**
@@ -45,7 +45,7 @@ body {
  */
 
 main {
-  display: block;
+    display: block;
 }
 
 /* Vertical rhythm */
@@ -61,7 +61,7 @@ iframe,
 form,
 figure,
 dl {
-  margin: 0;
+    margin: 0;
 }
 
 /* Headings */
@@ -74,9 +74,10 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0;
-  font-size: inherit;
-  font-weight: inherit;
+    margin: 0;
+    padding: 0;
+    font-size: inherit;
+    font-weight: inherit;
 }
 
 /* Lists (enumeration) */
@@ -85,9 +86,9 @@ h6 {
 
 ul,
 ol {
-  padding: 0;
-  margin: 0;
-  list-style: none;
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
 
 /* Lists (definition) */
@@ -95,11 +96,11 @@ ol {
 /* ============================================ */
 
 dt {
-  font-weight: bold;
+    font-weight: bold;
 }
 
 dd {
-  margin-left: 0;
+    margin-left: 0;
 }
 
 /* Grouping content */
@@ -112,13 +113,13 @@ dd {
  */
 
 hr {
-  box-sizing: content-box; /* 1 */
-  height: 0; /* 1 */
-  margin: 0;
-  overflow: visible; /* 2 */
-  clear: both;
-  color: inherit;
-  border-top-width: 1px;
+    box-sizing: content-box; /* 1 */
+    height: 0; /* 1 */
+    margin: 0;
+    overflow: visible; /* 2 */
+    clear: both;
+    color: inherit;
+    border-top-width: 1px;
 }
 
 /**
@@ -127,12 +128,12 @@ hr {
  */
 
 pre {
-  font-family: monospace, monospace; /* 1 */
-  font-size: inherit; /* 2 */
+    font-family: monospace, monospace; /* 1 */
+    font-size: inherit; /* 2 */
 }
 
 address {
-  font-style: inherit;
+    font-style: inherit;
 }
 
 /* Text-level semantics */
@@ -144,9 +145,9 @@ address {
  */
 
 a {
-  color: inherit;
-  text-decoration: none;
-  background-color: transparent;
+    color: inherit;
+    text-decoration: none;
+    background-color: transparent;
 }
 
 /**
@@ -155,7 +156,7 @@ a {
  */
 
 abbr[title] {
-  text-decoration: underline dotted; /* 2 */
+    text-decoration: underline dotted; /* 2 */
 }
 
 /**
@@ -164,7 +165,7 @@ abbr[title] {
 
 b,
 strong {
-  font-weight: bolder;
+    font-weight: bolder;
 }
 
 /**
@@ -175,8 +176,8 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace; /* 1 */
-  font-size: inherit; /* 2 */
+    font-family: monospace, monospace; /* 1 */
+    font-size: inherit; /* 2 */
 }
 
 /**
@@ -184,7 +185,7 @@ samp {
  */
 
 small {
-  font-size: 80%;
+    font-size: 80%;
 }
 
 /**
@@ -194,18 +195,18 @@ small {
 
 sub,
 sup {
-  position: relative;
-  font-size: 75%;
-  line-height: 0;
-  vertical-align: baseline;
+    position: relative;
+    font-size: 75%;
+    line-height: 0;
+    vertical-align: baseline;
 }
 
 sub {
-  bottom: -0.25em;
+    bottom: -0.25em;
 }
 
 sup {
-  top: -0.5em;
+    top: -0.5em;
 }
 
 /* Replaced content */
@@ -221,7 +222,7 @@ img,
 embed,
 object,
 iframe {
-  vertical-align: bottom;
+    vertical-align: bottom;
 }
 
 /* Forms */
@@ -239,18 +240,18 @@ input,
 optgroup,
 select,
 textarea {
-  padding: 0;
-  margin: 0;
-  font: inherit;
-  color: inherit;
-  text-align: inherit;
-  text-transform: inherit; /* 2 */
-  vertical-align: middle;
+    padding: 0;
+    margin: 0;
+    font: inherit;
+    color: inherit;
+    text-align: inherit;
+    text-transform: inherit; /* 2 */
+    vertical-align: middle;
 
-  /* 1 */
-  appearance: none;
-  background: transparent;
-  border-radius: 0;
+    /* 1 */
+    appearance: none;
+    background: transparent;
+    border-radius: 0;
 }
 
 /**
@@ -258,17 +259,17 @@ textarea {
  */
 
 button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  cursor: pointer;
+[type='button'],
+[type='reset'],
+[type='submit'] {
+    cursor: pointer;
 }
 
 button:disabled,
-[type="button"]:disabled,
-[type="reset"]:disabled,
-[type="submit"]:disabled {
-  cursor: default;
+[type='button']:disabled,
+[type='reset']:disabled,
+[type='submit']:disabled {
+    cursor: default;
 }
 
 /**
@@ -276,11 +277,11 @@ button:disabled,
  */
 
 :-moz-focusring {
-  outline: auto;
+    outline: auto;
 }
 
 select:disabled {
-  opacity: inherit;
+    opacity: inherit;
 }
 
 /**
@@ -288,7 +289,7 @@ select:disabled {
  */
 
 option {
-  padding: 0;
+    padding: 0;
 }
 
 /**
@@ -296,13 +297,13 @@ option {
  */
 
 fieldset {
-  min-width: 0;
-  padding: 0;
-  margin: 0;
+    min-width: 0;
+    padding: 0;
+    margin: 0;
 }
 
 legend {
-  padding: 0;
+    padding: 0;
 }
 
 /**
@@ -310,7 +311,7 @@ legend {
  */
 
 progress {
-  vertical-align: baseline;
+    vertical-align: baseline;
 }
 
 /**
@@ -318,32 +319,32 @@ progress {
  */
 
 textarea {
-  overflow: auto;
+    overflow: auto;
 }
 
 /**
  * Correct the cursor style of increment and decrement buttons in Chrome.
  */
 
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
-  height: auto;
+[type='number']::-webkit-inner-spin-button,
+[type='number']::-webkit-outer-spin-button {
+    height: auto;
 }
 
 /**
  * Correct the outline style in Safari.
  */
 
-[type="search"] {
-  outline-offset: -2px; /* 1 */
+[type='search'] {
+    outline-offset: -2px; /* 1 */
 }
 
 /**
  * Remove the inner padding in Chrome and Safari on macOS.
  */
 
-[type="search"]::-webkit-search-decoration {
-  appearance: none;
+[type='search']::-webkit-search-decoration {
+    appearance: none;
 }
 
 /**
@@ -352,15 +353,15 @@ textarea {
  */
 
 ::-webkit-file-upload-button {
-  font: inherit; /* 2 */
-  appearance: button; /* 1 */
+    font: inherit; /* 2 */
+    appearance: button; /* 1 */
 }
 
 /**
  * Fix appearance for Firefox
  */
-[type="number"] {
-  appearance: textfield;
+[type='number'] {
+    appearance: textfield;
 }
 
 /**
@@ -368,7 +369,7 @@ textarea {
  */
 
 label[for] {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 /* Interactive */
@@ -380,7 +381,7 @@ label[for] {
  */
 
 details {
-  display: block;
+    display: block;
 }
 
 /*
@@ -388,7 +389,7 @@ details {
  */
 
 summary {
-  display: list-item;
+    display: list-item;
 }
 
 /*
@@ -396,7 +397,7 @@ summary {
  */
 
 [contenteditable]:focus {
-  outline: auto;
+    outline: auto;
 }
 
 /* Tables */
@@ -408,21 +409,21 @@ summary {
 */
 
 table {
-  border-collapse: collapse;
-  border-color: inherit; /* 1 */
+    border-collapse: collapse;
+    border-color: inherit; /* 1 */
 }
 
 caption {
-  text-align: left;
+    text-align: left;
 }
 
 td,
 th {
-  padding: 0;
-  vertical-align: top;
+    padding: 0;
+    vertical-align: top;
 }
 
 th {
-  font-weight: bold;
-  text-align: left;
+    font-weight: bold;
+    text-align: left;
 }
