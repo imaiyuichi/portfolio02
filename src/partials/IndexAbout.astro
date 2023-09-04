@@ -9,7 +9,10 @@ const MvData = await getTop({
 <section class="root">
     <div class="inner">
         <h2 class="title">
-            <span class="text-gradient">これはAboutページ</span>
+            <p>今井 裕一</p>
+            <p>Imai Yuichi</p>
+            <p>Web Developer</p>
+            <p>Front End Engineer</p>
         </h2>
     </div>
 </section>
@@ -17,6 +20,8 @@ const MvData = await getTop({
 <style lang="scss">
     @import '../styles/_single.scss';
     .root {
+        position: relative;
+        z-index: 10;
         padding: vw(80) 0 0;
     }
 
@@ -25,5 +30,6 @@ const MvData = await getTop({
         font-weight: 700;
         line-height: 1;
         text-align: center;
+        color: #fff;
     }
 </style>

@@ -1,0 +1,41 @@
+---
+// import Typed from 'typed.js';
+
+// new Typed('#typed', {
+//     stringsElement: '#typed-strings',
+// });
+---
+
+<section class="root">
+    <div class="container">
+        <h2 class="title js-title"></h2>
+    </div>
+</section>
+
+<script>
+    import Typed from 'typed.js';
+
+    new Typed('.js-title', {
+        strings: ['Welcome to my website', 'I am a web developer'],
+        typeSpeed: 140,
+        backDelay: 2000,
+        backSpeed: 40,
+    });
+</script>
+
+<style lang="scss">
+    @import '../styles/_single.scss';
+    @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+    .root {
+        padding: vw(80) 0 0;
+    }
+
+    .title {
+        font-size: 4rem;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        font-family: 'DotGothic16', sans-serif;
+        color: #fff;
+    }
+</style>

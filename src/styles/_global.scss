@@ -119,3 +119,30 @@ h5 {
     opacity: 1;
     transform: scale(1) !important;
 }
+
+/* カーソル */
+.typed-cursor {
+    font-size: 1em;
+    opacity: 1;
+    -webkit-animation: blink 0.3s infinite;
+    -moz-animation: blink 0.3s infinite;
+    animation: blink 0.3s infinite;
+    animation-direction: alternate;
+    color: #fff;
+    font-size: 40px;
+}
+@keyframes blink {
+    100% {
+        opacity: 0;
+    }
+}
+@-webkit-keyframes blink {
+    100% {
+        opacity: 0;
+    }
+}
+@-moz-keyframes blink {
+    100% {
+        opacity: 0;
+    }
+}

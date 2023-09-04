@@ -4,12 +4,58 @@
 <header class="header">
     <div class="bg"></div>
     <div class="inner">
-        <h1 class="logo text-gradient">Yuu Blogs</h1>
+        <h1 class="title text-gradient"></h1>
+        <nav class="nav">
+            <ul class="list">
+                <li class="item">
+                    <a class="link" href=""> <p class="text01"></p></a>
+                </li>
+                <li class="item">
+                    <a class="link" href=""><p class="text02"></p></a>
+                </li>
+            </ul>
+        </nav>
     </div>
 </header>
 
+<script>
+    import Typed from 'typed.js';
+
+    // タイトルのアニメーション
+    new Typed('.title', {
+        strings: ['Yuu Blogs'],
+        typeSpeed: 50,
+        backDelay: 2000,
+        startDelay: 9000,
+        backSpeed: 40,
+        showCursor: false,
+    });
+
+    // text01のアニメーション
+    new Typed('.text01', {
+        strings: ['About'],
+        typeSpeed: 50,
+        backDelay: 2000,
+        startDelay: 9500, // text01の遅延
+        backSpeed: 40,
+        showCursor: false,
+    });
+
+    // text02のアニメーション
+    new Typed('.text02', {
+        strings: ['Blogs'],
+        typeSpeed: 50,
+        backDelay: 2000,
+        startDelay: 10000, // text02の遅延
+        backSpeed: 40,
+        showCursor: false,
+    });
+</script>
+
 <style lang="scss">
     @import '../styles/_single.scss';
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500&display=swap');
+
     .header {
         position: relative;
         width: 100%;
@@ -37,6 +83,9 @@
     }
 
     .inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         font-size: vw(20);
         color: #fff;
         width: vw(1200);
@@ -44,8 +93,39 @@
         margin: auto;
     }
 
-    .logo {
+    .title {
         padding: vw(10) 0 0;
         height: 100%;
+        font-family: 'DotGothic16', sans-serif;
+    }
+
+    .list {
+        display: flex;
+        gap: vw(20);
+    }
+
+    .nav {
+        height: 100%;
+    }
+
+    .list {
+        height: 100%;
+    }
+
+    .item {
+        height: 100%;
+    }
+
+    .link {
+        height: 100%;
+    }
+
+    .text01,
+    .text02 {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-family: 'DotGothic16', sans-serif;
     }
 </style>
