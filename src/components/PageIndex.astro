@@ -23,5 +23,10 @@ import IndexContact from "../partials/IndexAbout.astro";
     width: vw(1200);
     margin: auto;
     padding: vw(110) 0;
+
+    @include sp() {
+      width: 100%;
+      padding: 0 vw_sp(30);
+    }
   }
 </style>

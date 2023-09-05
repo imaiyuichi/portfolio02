@@ -168,6 +168,45 @@ export function startMyAnimation() {
 
   tick();
 
+  // キラキラするパーティクルを追加（丸く、ランダムな明るい色）
+  const particleGeometry = new THREE.BufferGeometry();
+  const particleCount = 1000;
+  const particlePositions = new Float32Array(particleCount * 3);
+  const particleColors = new Float32Array(particleCount * 3);
+
+  for (let i = 0; i < particleCount; i++) {
+    const x = (Math.random() - 0.5) * 30;
+    const y = (Math.random() - 0.5) * 30;
+    const z = (Math.random() - 0.5) * 30;
+
+    // パーティクルの色をランダムで生成
+    const color = new THREE.Color();
+    color.setHSL(Math.random(), 1, 0.7); // HSLカラースペースを使用
+    particleColors[i * 3] = color.r;
+    particleColors[i * 3 + 1] = color.g;
+    particleColors[i * 3 + 2] = color.b;
+
+    particlePositions[i * 3] = x;
+    particlePositions[i * 3 + 1] = y;
+    particlePositions[i * 3 + 2] = z;
+  }
+
+  particleGeometry.setAttribute(
+    "position",
+    new THREE.BufferAttribute(particlePositions, 3)
+  );
+  particleGeometry.setAttribute(
+    "color",
+    new THREE.BufferAttribute(particleColors, 3)
+  );
+
+  const particleMaterial = new THREE.PointsMaterial({
+    size: 0.05, // パーティクルのサイズを調整
+    vertexColors: true, // パーティクルに色を適用
+  });
+  const particles = new THREE.Points(particleGeometry, particleMaterial);
+  scene.add(particles);
+
   //ブラウザのリサイズ操作
   window.addEventListener("resize", () => {
     sizes.width = window.innerWidth;
