@@ -1,121 +1,184 @@
-// ページの読み込みを待つ
-window.addEventListener('load', init);
+import Typed from "typed.js";
+import * as THREE from "three";
 
-function init() {
-    // サイズを指定
-    const width = 960;
-    const height = 540;
-    let rot = 0;
+export function startMyAnimation() {
+  new Typed(".js-title", {
+    strings: ["Welcome to my website", "I am a web developer"],
+    typeSpeed: 100,
+    backDelay: 1500,
+    backSpeed: 30,
+  });
 
-    // レンダラーを作成
-    const renderer = new THREE.WebGLRenderer({
-        canvas: document.querySelector('#myCanvas'),
+  /**
+   * 必須の3要素
+   */
+  // Canvas
+  const canvas = document.querySelector("#webgl");
+
+  //Sizes
+  const sizes = {
+    width: window.innerWidth,
+    height: window.innerHeight,
+  };
+
+  // Scene
+  const scene = new THREE.Scene();
+
+  /**
+   * GridHelperの設定
+   */
+  const gridHelper = new THREE.GridHelper(30, 30);
+  scene.add(gridHelper);
+
+  // Camera
+  const camera = new THREE.PerspectiveCamera(
+    75,
+    sizes.width / sizes.height,
+    0.1,
+    100
+  );
+  camera.position.z = 6;
+  scene.add(camera);
+
+  //Renderer
+  const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+  });
+  renderer.setSize(sizes.width, sizes.height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  //オブジェクトの追加
+  const geometry = new THREE.BoxGeometry(5, 5, 5, 10);
+  const material = new THREE.MeshNormalMaterial();
+
+  const torus = new THREE.Mesh(geometry, material);
+  torus.position.set(0, 0.5, -15);
+  torus.rotation.set(1, 1, 0);
+  scene.add(torus);
+
+  /**
+   * 線形補間
+   * lerp(min, max, ratio)
+   * eg,
+   * lerp(20, 60, .5)) = 40
+   * lerp(-20, 60, .5)) = 20
+   * lerp(20, 60, .75)) = 50
+   * lerp(-20, -10, .1)) = -.19
+   */
+  function lerp(x, y, a) {
+    return (1 - a) * x + a * y;
+  }
+
+  /**
+   * 特定のスクロール率で開始、終了
+   **/
+  function scaleParcent(start, end) {
+    return (scrollPercent - start) / (end - start);
+  }
+
+  /**
+   * 関数用の空の配列を準備
+   */
+  const animationScripts = [];
+
+  /**
+   * スクロールアニメーション
+   */
+  animationScripts.push({
+    start: 0,
+    end: 40,
+    function() {
+      camera.lookAt(torus.position);
+      camera.position.set(0, 1, 10);
+      torus.position.z = lerp(-10, 2, scaleParcent(0, 40));
+      // console.log(torus.position.z);
+    },
+  });
+  // console.log(animationScripts);
+
+  animationScripts.push({
+    start: 40,
+    end: 60,
+    function() {
+      camera.lookAt(torus.position);
+      camera.position.set(0, 1, 10);
+      torus.rotation.z = lerp(0, Math.PI, scaleParcent(40, 60));
+      // console.log(torus.position.z);
+    },
+  });
+
+  animationScripts.push({
+    start: 60,
+    end: 80,
+    function() {
+      camera.lookAt(torus.position);
+      camera.position.x = lerp(0, 10, scaleParcent(60, 80));
+      camera.position.y = lerp(1, 12, scaleParcent(60, 80));
+      camera.position.z = lerp(10, 20, scaleParcent(60, 80));
+      // console.log(torus.position.z);
+    },
+  });
+
+  animationScripts.push({
+    start: 80,
+    end: 101,
+    function() {
+      camera.lookAt(torus.position);
+      torus.rotation.x += 0.02;
+      torus.rotation.y += 0.02;
+      // console.log(torus.position.z);
+    },
+  });
+
+  /**
+   * スクロールアニメーション開始
+   */
+  function playScrollAnimation() {
+    animationScripts.forEach((animation) => {
+      if (scrollPercent >= animation.start && scrollPercent < animation.end) {
+        animation.function();
+      }
     });
-    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
 
-    // 0x を追加してカラーコードを指定
-    renderer.setClearColor(0x13151b);
+  /**
+   * ブラウザのスクロール率を導出
+   */
+  let scrollPercent = 0;
 
-    // シーンを作成
-    const scene = new THREE.Scene();
+  document.body.onscroll = () => {
+    //現在のスクロールの進捗をパーセントで計算する
+    scrollPercent =
+      (document.documentElement.scrollTop /
+        (document.documentElement.scrollHeight -
+          document.documentElement.clientHeight)) *
+      100;
+    console.log(document.documentElement.scrollTop); //一番上からの距離
+    console.log(document.documentElement.scrollHeight); //5029
+    console.log(document.documentElement.clientHeight); //927
+    console.log(scrollPercent); //0~100%で取得
+  };
 
-    // カメラを作成
-    const camera = new THREE.PerspectiveCamera(45, width / height);
-    //   camera.position.z = 2000;
+  //アニメーション
+  const tick = () => {
+    window.requestAnimationFrame(tick);
+    playScrollAnimation();
+    renderer.render(scene, camera);
+  };
 
-    // 球体作成
-    const geometry = new THREE.SphereGeometry(300, 30, 30);
-    // マテリアルを作成
-    const material = new THREE.MeshStandardMaterial({
-        map: new THREE.TextureLoader().load('../images/earth.jpg'),
-        side: THREE.DoubleSide,
-    });
-    // 地球メッシュを作成
-    const earth = new THREE.Mesh(geometry, material);
-    // 3D空間にメッシュを追加
-    scene.add(earth);
+  tick();
 
-    // 平行光源
-    const directionalLight = new THREE.DirectionalLight(0xffffff, 1.9);
-    directionalLight.position.set(1, 1, 1);
-    scene.add(directionalLight);
+  //ブラウザのリサイズ操作
+  window.addEventListener("resize", () => {
+    sizes.width = window.innerWidth;
+    sizes.height = window.innerHeight;
 
-    // ポイント光源
-    const pointLight = new THREE.PointLight(0xffffff, 2, 1000);
-    scene.add(pointLight);
-    const pointLightHelper = new THREE.PointLightHelper(pointLight, 30);
-    scene.add(pointLightHelper);
+    camera.aspect = sizes.width / sizes.height;
+    camera.updateProjectionMatrix();
 
-    /* 星屑追加 */
-    createStarField();
+    renderer.setSize(sizes.width, sizes.height);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  });
 
-    /* 星屑作成 */
-    function createStarField() {
-        /* x,y,z座標の値がランダムに入った配列を1000個作成 */
-        const vertices = [];
-        for (let i = 0; i < 500; i++) {
-            const x = 3000 * (Math.random() - 0.5);
-            const y = 3000 * (Math.random() - 0.5);
-            const z = 3000 * (Math.random() - 0.5);
-
-            vertices.push(x, y, z);
-        }
-
-        /* 形状データ作成 */
-        const geometry = new THREE.BufferGeometry();
-        geometry.setAttribute(
-            'position',
-            new THREE.Float32BufferAttribute(vertices, 3)
-        );
-
-        /* マテリアル作成 */
-        const material = new THREE.PointsMaterial({
-            size: 8,
-            color: 0xffffff,
-        });
-
-        /* 物体を作成 */
-        const stars = new THREE.Points(geometry, material);
-        scene.add(stars);
-    }
-
-    /* マウス座標はマウスが動いた時のみ取得 */
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.pageX;
-    });
-
-    // 毎フレーム時に実行されるループイベント
-    function tick() {
-        rot += 0.5; /* 角度 */
-
-        const radian = (rot * Math.PI) / 180; /* ラジアン変換 */
-
-        /* 角度に応じてカメラの位置を変更 */
-        camera.position.x = 1000 * Math.sin(radian);
-        camera.position.z = 2000 * Math.cos(radian);
-
-        /* 原点方向を見つめる */
-        camera.lookAt(new THREE.Vector3(0, 0, -400));
-
-        // ライトを周回させる
-        pointLight.position.set(
-            500 * Math.sin(Date.now() / 500),
-            500 * Math.sin(Date.now() / 1000),
-            500 * Math.cos(Date.now() / 500)
-        );
-
-        // レンダリング
-        renderer.render(scene, camera);
-        requestAnimationFrame(tick);
-    }
-
-    tick();
-    window.addEventListener('resize', onWindowResize);
-
-    /* ウィンドウ変更時にサイズを維持する処理 */
-    function onWindowResize() {
-        camera.aspect = window.innerWidth / window.innerHeight;
-        camera.updateProjectionMatrix();
-        renderer.setSize(window.innerWidth, window.innerHeight);
-    }
+  window.scrollTo({ top: 0, behavior: "smooth" });
 }

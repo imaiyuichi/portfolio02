@@ -1,250 +1,56 @@
 ---
-import { getTop, getBlogs } from '../libs/macrocms';
+import { getTop, getBlogs } from "../libs/macrocms";
 
 const MvData = await getTop({
-    fields: ['MvTitle', 'MvSubTitle', 'MvCatch'],
+  fields: ["MvTitle", "MvSubTitle", "MvCatch"],
 });
 ---
 
 <canvas id="webgl"></canvas>
 <span id="scrollProgress"></span>
 <section class="root">
-    <div class="inner">
-        <canvas id="myCanvas"></canvas>
-        <div class="hero">
-            <h2 class="title js-title"></h2>
-            <h2 class="title js-title2"></h2>
-        </div>
-    </div>
+  <div class="inner">
+    <h2 class="title js-title"></h2>
+    <h2 class="title js-title2"></h2>
+  </div>
 </section>
 
 <script>
-    import Typed from 'typed.js';
-    import * as THREE from 'three';
-
-    new Typed('.js-title', {
-        strings: ['Welcome to my website', 'I am a web developer'],
-        typeSpeed: 100,
-        backDelay: 1500,
-        backSpeed: 30,
-    });
-
-    /**
-     * 必須の3要素
-     */
-    // Canvas
-    const canvas = document.querySelector('#webgl');
-
-    //Sizes
-    const sizes = {
-        width: window.innerWidth,
-        height: window.innerHeight,
-    };
-
-    // Scene
-    const scene = new THREE.Scene();
-
-    /**
-     * GridHelperの設定
-     */
-    const gridHelper = new THREE.GridHelper(30, 30);
-    scene.add(gridHelper);
-
-    // Camera
-    const camera = new THREE.PerspectiveCamera(
-        75,
-        sizes.width / sizes.height,
-        0.1,
-        100
-    );
-    camera.position.z = 6;
-    scene.add(camera);
-
-    //Renderer
-    const renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
-    });
-    renderer.setSize(sizes.width, sizes.height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-    //オブジェクトの追加
-    const geometry = new THREE.BoxGeometry(5, 5, 5, 10);
-    const material = new THREE.MeshNormalMaterial();
-
-    const torus = new THREE.Mesh(geometry, material);
-    torus.position.set(0, 0.5, -15);
-    torus.rotation.set(1, 1, 0);
-    scene.add(torus);
-
-    /**
-     * 線形補間
-     * lerp(min, max, ratio)
-     * eg,
-     * lerp(20, 60, .5)) = 40
-     * lerp(-20, 60, .5)) = 20
-     * lerp(20, 60, .75)) = 50
-     * lerp(-20, -10, .1)) = -.19
-     */
-    function lerp(x, y, a) {
-        return (1 - a) * x + a * y;
-    }
-
-    /**
-     * 特定のスクロール率で開始、終了
-     **/
-    function scaleParcent(start, end) {
-        return (scrollPercent - start) / (end - start);
-    }
-
-    /**
-     * 関数用の空の配列を準備
-     */
-    const animationScripts = [];
-
-    /**
-     * スクロールアニメーション
-     */
-    animationScripts.push({
-        start: 0,
-        end: 40,
-        function() {
-            camera.lookAt(torus.position);
-            camera.position.set(0, 1, 10);
-            torus.position.z = lerp(-10, 2, scaleParcent(0, 40));
-            // console.log(torus.position.z);
-        },
-    });
-    // console.log(animationScripts);
-
-    animationScripts.push({
-        start: 40,
-        end: 60,
-        function() {
-            camera.lookAt(torus.position);
-            camera.position.set(0, 1, 10);
-            torus.rotation.z = lerp(0, Math.PI, scaleParcent(40, 60));
-            // console.log(torus.position.z);
-        },
-    });
-
-    animationScripts.push({
-        start: 60,
-        end: 80,
-        function() {
-            camera.lookAt(torus.position);
-            camera.position.x = lerp(0, 10, scaleParcent(60, 80));
-            camera.position.y = lerp(1, 12, scaleParcent(60, 80));
-            camera.position.z = lerp(10, 20, scaleParcent(60, 80));
-            // console.log(torus.position.z);
-        },
-    });
-
-    animationScripts.push({
-        start: 80,
-        end: 101,
-        function() {
-            camera.lookAt(torus.position);
-            torus.rotation.x += 0.02;
-            torus.rotation.y += 0.02;
-            // console.log(torus.position.z);
-        },
-    });
-
-    /**
-     * スクロールアニメーション開始
-     */
-    function playScrollAnimation() {
-        animationScripts.forEach((animation) => {
-            if (
-                scrollPercent >= animation.start &&
-                scrollPercent < animation.end
-            ) {
-                animation.function();
-            }
-        });
-    }
-
-    /**
-     * ブラウザのスクロール率を導出
-     */
-    let scrollPercent = 0;
-
-    document.body.onscroll = () => {
-        //現在のスクロールの進捗をパーセントで計算する
-        scrollPercent =
-            (document.documentElement.scrollTop /
-                (document.documentElement.scrollHeight -
-                    document.documentElement.clientHeight)) *
-            100;
-        console.log(document.documentElement.scrollTop); //一番上からの距離
-        console.log(document.documentElement.scrollHeight); //5029
-        console.log(document.documentElement.clientHeight); //927
-        console.log(scrollPercent); //0~100%で取得
-    };
-
-    //アニメーション
-    const tick = () => {
-        window.requestAnimationFrame(tick);
-        playScrollAnimation();
-        renderer.render(scene, camera);
-    };
-
-    tick();
-
-    //ブラウザのリサイズ操作
-    window.addEventListener('resize', () => {
-        sizes.width = window.innerWidth;
-        sizes.height = window.innerHeight;
-
-        camera.aspect = sizes.width / sizes.height;
-        camera.updateProjectionMatrix();
-
-        renderer.setSize(sizes.width, sizes.height);
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-    });
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+  import { startMyAnimation } from "../script/mv.js";
+  startMyAnimation();
 </script>
 
 <style lang="scss">
-    @import '../styles/_single.scss';
-    @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+  @import "../styles/_single.scss";
+  @import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
 
-    .root {
-        height: 200vh;
-    }
+  .root {
+    height: 200vh;
+  }
 
-    .title {
-        display: inline-block;
-        font-size: 4rem;
-        font-weight: 700;
-        line-height: 1;
-        text-align: center;
-        font-family: 'DotGothic16', sans-serif;
-    }
+  .inner {
+    padding: vw(300) 0 0;
+    text-align: center;
 
-    canvas {
-        position: fixed;
-        top: 0;
-        left: 0;
+    @include sp() {
+      padding: vw_sp(250) 0 0;
     }
+  }
 
-    .hero {
-        text-align: center;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 100%;
-        color: white;
-        transform: translate(-50%, -50%);
-    }
+  .title {
+    display: inline-block;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    font-family: "DotGothic16", sans-serif;
+    color: white;
+  }
 
-    .hero h1 {
-        font-size: 100px;
-        padding: 0px;
-    }
-
-    .hero p {
-        font-size: 30px;
-    }
+  canvas {
+    position: fixed;
+    z-index: -1;
+    top: 0;
+    left: 0;
+  }
 </style>
