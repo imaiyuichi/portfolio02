@@ -42,6 +42,11 @@ console.log(blog.content);
     .inner {
         width: vw(800);
         margin: 180px auto 0;
+
+        @include sp() {
+            width: vw_sp(250);
+            margin: vw_sp(100) auto 0;
+        }
     }
 
     .title {
