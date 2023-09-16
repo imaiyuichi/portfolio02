@@ -1,32 +1,32 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import BaseHeader from "./BaseHeader.astro";
-import Blogs from "./Blogs.astro";
-import IndexMv from "../partials/IndexMV.astro";
-import IndexAbout from "../partials/IndexAbout.astro";
-import IndexContact from "../partials/IndexAbout.astro";
-// import Indextest from '../partials/Indextest.astro';
+import Layout from '../layouts/Layout.astro';
+import BaseHeader from './BaseHeader.astro';
+import Blogs from './Blogs.astro';
+import IndexMv from '../partials/WorkParticle.astro';
+import IndexAbout from '../partials/IndexAbout.astro';
+import IndexContact from '../partials/IndexAbout.astro';
+import Indextest from '../partials/Indextest.astro';
 ---
 
 <Layout title="Welcome to Astro.">
-  <BaseHeader />
-  <main class="main">
-    <IndexMv />
-    <Blogs />
-    <IndexAbout />
-  </main>
+    <BaseHeader />
+    <main class="main">
+        <IndexMv />
+        <Blogs />
+        <IndexAbout />
+    </main>
 </Layout>
 
 <style lang="scss">
-  @import "../styles/_single.scss";
-  .main {
-    width: vw(1200);
-    margin: auto;
-    padding: vw(110) 0;
+    @import '../styles/_single.scss';
+    .main {
+        width: vw(1200);
+        margin: auto;
+        padding: vw(110) 0;
 
-    @include sp() {
-      width: 100%;
-      padding: 0 vw_sp(30);
+        @include sp() {
+            width: 100%;
+            padding: 0 vw_sp(30);
+        }
     }
-  }
 </style>

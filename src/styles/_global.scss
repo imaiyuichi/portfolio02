@@ -2,6 +2,13 @@
 @use 'functions' as *;
 @use 'mixins' as *;
 
+html {
+    // 1rem = 60分割のグリッドとする処理
+    // calc(100vw / 60)
+    // pc,sp共通
+    font-size: 1.6667vw;
+}
+
 body {
     overflow-x: clip;
     font-size: vw(16);

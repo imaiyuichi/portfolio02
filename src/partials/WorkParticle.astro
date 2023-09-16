@@ -9,14 +9,12 @@ const MvData = await getTop({
 <canvas id="webgl"></canvas>
 <span id="scrollProgress"></span>
 <section class="root">
-    <div class="inner">
-        <h2 class="title js-title"></h2>
-        <h2 class="title js-title2"></h2>
-    </div>
+    <div class="inner"></div>
 </section>
 
 <script>
-    import { startMyAnimation } from '../script/mv.js';
+    import { startMyAnimation } from '../script/particle.js';
+
     startMyAnimation();
 </script>
 
@@ -25,7 +23,7 @@ const MvData = await getTop({
     @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
     .root {
-        height: 200vh;
+        height: 100vh;
     }
 
     .inner {
@@ -39,12 +37,16 @@ const MvData = await getTop({
 
     .title {
         display: inline-block;
-        font-size: vw_sp(55);
+        font-size: vw(65);
         font-weight: 700;
         line-height: 1;
         text-align: center;
         font-family: 'DotGothic16', sans-serif;
         color: white;
+
+        @include sp() {
+            font-size: vw_sp(55);
+        }
     }
 
     canvas {
