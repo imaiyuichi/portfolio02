@@ -1,10 +1,15 @@
 ---
 import Nav from '../components/Nav.astro';
+import * as Variables from '../variables.astro';
+
+const topLInk = Variables.PAGES.index.url;
 ---
 
 <header class="header">
     <div class="inner">
-        <h1 class="title js-mouseAnimation">Blog</h1>
+        <h1 class="title js-mouseAnimation">
+            <a class="link" href={topLInk}>Blog</a>
+        </h1>
         <Nav />
     </div>
 </header>

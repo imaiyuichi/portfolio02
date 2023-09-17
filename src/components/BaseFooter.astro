@@ -1,0 +1,39 @@
+---
+import * as Variables from '../variables.astro';
+
+const topLInk = Variables.PAGES.index.url;
+---
+
+<footer class="footer">
+    <div class="inner">
+        <h2 class="title js-mouseAnimation">Footer</h2>
+    </div>
+</footer>
+
+<style lang="scss">
+    @import '../styles/_single.scss';
+
+    .root {
+        position: relative;
+    }
+
+    .footer {
+        position: relative;
+        width: 100%;
+        height: 7rem;
+        background-color: #d9d9d9;
+    }
+
+    .inner {
+        height: 100%;
+    }
+
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        align-items: center;
+        height: 100%;
+    }
+</style>

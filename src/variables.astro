@@ -1,84 +1,54 @@
 ---
 // NAME
-export const NAME_SITE = "セルソース株式会社";
+export const NAME_SITE = '';
 
 // URL
-export const URL_OGP = "/recruit/ogp.png";
-export const URL_FAVICON = "/recruit/favicon.ico";
-export const URL_TOUCH_ICON = "/recruit/apple-touch-icon.png";
+export const URL_OGP = '/recruit/ogp.png';
+export const URL_FAVICON = '/recruit/favicon.ico';
+export const URL_TOUCH_ICON = '/recruit/apple-touch-icon.png';
 
 // PAGE
 export const PAGES = {
-  index: {
-    url: "/recruit/",
-    name: {
-      ja: "トップ",
-      en: "TOP",
+    index: {
+        url: '/',
+        name: 'トップ',
     },
-  },
-  pmv: {
-    url: "/recruit/purpose_philosophy/",
-    name: {
-      ja: "経営理念 & パーパス",
-      en: "PURPOSE & PHILOSOPHY",
+    about: {
+        url: '/about',
+        name: 'about',
     },
-  },
-  business: {
-    url: "/recruit/business/",
-    name: {
-      ja: "セルソースの事業",
-      en: "BUSINESS",
+    work: {
+        url: '/work',
+        name: 'work',
     },
-  },
-  workstyle: {
-    url: "/recruit/workstyle/",
-    name: {
-      ja: "セルソースで働く",
-      en: "WORK at CellSource",
+    blog: {
+        url: '/blog',
+        name: 'blog',
     },
-  },
-  cultureCommunity: {
-    url: "/recruit/culture_community/",
-    name: {
-      ja: "カルチャー & コミュニティ",
-      en: "CULTURE & COMMUNITY",
-    },
-  },
-  recruitmentInterview: {
-    url: "/recruit/recruitment_interview/",
-    name: {
-      ja: "採用情報 & インタビュー",
-      en: "RECRUITMENT & INTERVIEW",
-    },
-  },
-  guidelines: {
-    url: "https://hrmos.co/pages/cellsource/",
-    name: "募集要項",
-  },
 };
 
 // 外部リンク
 export const EXTERNAL = {
-  corporate: {
-    url: "https://www.cellsource.co.jp/",
-    name: "コーポレートサイト",
-  },
-  interviews: {
-    url: "https://note.cellsource.co.jp/m/me89e12899e2b",
-    text: "すべてのインタビューを見る（noteへ）",
-  },
-  recruit: {
-    url: "https://hrmos.co/pages/cellsource",
-    name: "採用情報",
-  },
-  recruitOpen: {
-    url: "https://hrmos.co/pages/cellsource/jobs?category=1609407830523351040",
-    name: "オープンポジションを見る",
-  },
-  snsTwitter: { url: "https://www.cellsource.co.jp/", name: "twitter" },
-  snsFacebook: { url: "https://www.cellsource.co.jp/", name: "facebook" },
+    corporate: {
+        url: 'https://www.cellsource.co.jp/',
+        name: 'コーポレートサイト',
+    },
+    interviews: {
+        url: 'https://note.cellsource.co.jp/m/me89e12899e2b',
+        text: 'すべてのインタビューを見る（noteへ）',
+    },
+    recruit: {
+        url: 'https://hrmos.co/pages/cellsource',
+        name: '採用情報',
+    },
+    recruitOpen: {
+        url: 'https://hrmos.co/pages/cellsource/jobs?category=1609407830523351040',
+        name: 'オープンポジションを見る',
+    },
+    snsTwitter: { url: 'https://www.cellsource.co.jp/', name: 'twitter' },
+    snsFacebook: { url: 'https://www.cellsource.co.jp/', name: 'facebook' },
 };
 
 // development mode check
-export const IS_DEV = import.meta.env.MODE === "development" ? true : false;
+export const IS_DEV = import.meta.env.MODE === 'development' ? true : false;
 ---

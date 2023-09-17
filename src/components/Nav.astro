@@ -1,4 +1,5 @@
 ---
+import * as Variables from '../variables.astro';
 import navImage01 from '../images/navImage01.jpg';
 import navImage02 from '../images/navImage02.jpg';
 import navImage03 from '../images/navImage03.jpg';
@@ -6,20 +7,20 @@ import navImage03 from '../images/navImage03.jpg';
 const navList = [
     {
         image: navImage01,
-        text: '実績',
-        url: '#',
+        text: 'work',
+        url: Variables.PAGES.work.url,
         className: 'images image-01',
     },
     {
         image: navImage02,
         text: 'About',
-        url: '#',
+        url: Variables.PAGES.about.url,
         className: 'images image-02',
     },
     {
         image: navImage03,
         text: 'Blog',
-        url: '#',
+        url: Variables.PAGES.blog.url,
         className: 'images image-03',
     },
 ];
@@ -59,8 +60,9 @@ const navList = [
     let isOpen = false;
 
     card3.addEventListener('click', (e) => {
-        e.preventDefault();
         if (!isOpen) {
+            e.preventDefault();
+
             gsap.to(cards, {
                 top: 0,
                 direction: 1,
@@ -79,8 +81,6 @@ const navList = [
                 ease: 'power4.inOut',
             });
             isOpen = true;
-        } else {
-            window.location.href = card3.getAttribute('href');
         }
 
         button.addEventListener('click', () => {
@@ -133,12 +133,7 @@ const navList = [
 
     .list {
         position: relative;
-        width: 300px;
-        height: 100px;
-        display: flex;
-        align-items: flex-start;
         margin: 1rem 0;
-        padding: 0.625rem;
         color: #fff;
         background-color: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(16px);
@@ -160,16 +155,20 @@ const navList = [
         top: -200px;
     }
 
-    .text {
-        font-size: vw(20);
-        font-weight: bold;
-    }
-
     .link {
+        width: 300px;
+        height: 100px;
+        padding: 0.625rem;
+
         display: flex;
         align-items: center;
         gap: 1rem;
         height: 100%;
+    }
+
+    .text {
+        font-size: vw(20);
+        font-weight: bold;
     }
 
     .image {
@@ -193,8 +192,13 @@ const navList = [
         background-color: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(16px);
         border-radius: 8px;
-        transition: background-color 0.5s color 0.5s;
+        transition: 0.5s;
         cursor: pointer;
+    }
+
+    .button:hover {
+        background-color: #fff;
+        color: #2a2a2a;
     }
 </style>
 <style lang="scss" is:global>

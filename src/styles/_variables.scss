@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&display=swap');
+
 // breakpoints
 $breakpoints: (
     'sm': 640px,
@@ -60,6 +62,7 @@ $shadow-works-environment: 0 0 50px rgb(28 105 129 / 10%);
 // fonts
 $hiragino-ud-sans-w4: 'Hiragino UD Sans W4 JIS2004', 'sans-serif';
 $hiragino-ud-sans-w5: 'Hiragino UD Sans W5 JIS2004', 'sans-serif';
+$noto-sans: 'Noto Sans JP', sans-serif;
 
 // animations
 $duration-short: 0.3s;

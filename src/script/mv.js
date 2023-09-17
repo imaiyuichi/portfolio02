@@ -3,7 +3,7 @@ import * as THREE from 'three';
 
 export function startMyAnimation() {
     new Typed('.js-title', {
-        strings: ['Welcome to my website', 'I am a web developer'],
+        strings: ['work page'],
         typeSpeed: 100,
         backDelay: 1500,
         backSpeed: 30,

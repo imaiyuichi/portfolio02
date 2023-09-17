@@ -10,6 +10,7 @@ const BlogData = await getBlogs({
 ---
 
 <section class="root">
+    <h2 class="title">Blog Contents</h2>
     <div class="blogs">
         {
             BlogData.contents.map((item: any) => (
@@ -28,17 +29,20 @@ const BlogData = await getBlogs({
     @import '../styles/_single.scss';
     .root {
         position: relative;
-        padding: vw(80) 0 0;
+        padding: 5rem 0 0;
         color: white;
         font-size: 20px;
         line-height: 1.6;
     }
 
     .title {
-        font-size: 4rem;
+        font-size: 3rem;
         font-weight: 700;
         line-height: 1;
         text-align: center;
-        margin: 2em 0;
+    }
+
+    .blogs {
+        margin: 4rem 0 0;
     }
 </style>

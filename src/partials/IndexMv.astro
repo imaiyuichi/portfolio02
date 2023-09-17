@@ -1,0 +1,47 @@
+---
+import { getTop, getBlogs } from '../libs/macrocms';
+
+const MvData = await getTop({
+    fields: ['MvTitle', 'MvSubTitle', 'MvCatch'],
+});
+---
+
+<section class="root">
+    <div class="bg"></div>
+    <div class="inner">
+        <h2 class="title">MV</h2>
+    </div>
+</section>
+
+<style lang="scss">
+    @import '../styles/_single.scss';
+    .root {
+        position: relative;
+        padding: 6rem 0 0;
+    }
+
+    .bg {
+    }
+
+    .inner {
+        background-color: blanchedalmond;
+        position: relative;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100vw;
+        height: 500px;
+    }
+
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-size: 4rem;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        color: black;
+    }
+</style>
