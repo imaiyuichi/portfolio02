@@ -86,12 +86,12 @@ const navList = [
         button.addEventListener('click', () => {
             if (isOpen) {
                 gsap.to(card2, {
-                    top: '-100px',
+                    top: '-130px',
                     direction: 1,
                     ease: 'power4.inOut',
                 });
                 gsap.to(card3, {
-                    top: '-200px',
+                    top: '-260px',
                     direction: 1,
                     ease: 'power4.inOut',
                 });
@@ -148,11 +148,11 @@ const navList = [
     }
 
     .list:nth-child(2) {
-        top: -100px;
+        top: -130px;
     }
 
     .list:nth-child(3) {
-        top: -200px;
+        top: -260px;
     }
 
     .link {
@@ -184,14 +184,14 @@ const navList = [
         display: none;
         width: 7rem;
         height: 2rem;
-        margin: auto;
+        margin: 0 0 0 auto;
         text-align: center;
         color: #fff;
         font-size: vw(20);
         font-weight: bold;
         background-color: rgba(255, 255, 255, 0.2);
         backdrop-filter: blur(16px);
-        border-radius: 8px;
+        border-radius: 9999px;
         transition: 0.5s;
         cursor: pointer;
     }

@@ -7,20 +7,12 @@ const topLInk = Variables.PAGES.index.url;
 
 <header class="header">
     <div class="inner">
-        <h1 class="title js-mouseAnimation">
+        <h1 class="title">
             <a class="link" href={topLInk}>Blog</a>
         </h1>
         <Nav />
     </div>
 </header>
-
-<script>
-    import Menu from '../script/mouse.js';
-
-    addEventListener('load', (_) => {
-        new Menu(document.querySelector('.js-mouseAnimation'));
-    });
-</script>
 
 <style lang="scss">
     @import '../styles/_single.scss';

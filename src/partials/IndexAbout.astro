@@ -7,6 +7,7 @@ const MvData = await getTop({
 ---
 
 <section class="root">
+    <canvas></canvas>
     <div class="inner">
         <h2 class="title">About</h2>
         <p class="text">Web Developer</p>
@@ -20,6 +21,18 @@ const MvData = await getTop({
         position: relative;
         z-index: 10;
         padding: 4rem 0 0;
+    }
+
+    canvas {
+        canvas {
+            z-index: 100;
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100vw;
+            height: 500px;
+        }
     }
 
     .title {
