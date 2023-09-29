@@ -1,53 +1,40 @@
 ---
-import { getTop, getBlogs } from '../libs/macrocms';
+import { getTop, getBlogs } from "../libs/macrocms";
 
 const MvData = await getTop({
-    fields: ['MvTitle', 'MvSubTitle', 'MvCatch'],
+  fields: ["MvTitle", "MvSubTitle", "MvCatch"],
 });
 ---
 
 <section class="root">
-    <canvas></canvas>
-    <div class="inner">
-        <h2 class="title">About</h2>
-        <p class="text">Web Developer</p>
-        <p class="text">Front End Engineer</p>
-    </div>
+  <div class="inner">
+    <h2 class="title">About</h2>
+    <p class="text">Web Developer</p>
+    <p class="text">Front End Engineer</p>
+  </div>
 </section>
 
 <style lang="scss">
-    @import '../styles/_single.scss';
-    .root {
-        position: relative;
-        z-index: 10;
-        padding: 4rem 0 0;
-    }
+  @import "../styles/_single.scss";
+  .root {
+    position: relative;
+    z-index: 10;
+    padding: 4rem 0 0;
+  }
 
-    canvas {
-        canvas {
-            z-index: 100;
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100vw;
-            height: 500px;
-        }
-    }
+  .title {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    color: #fff;
+  }
 
-    .title {
-        font-size: 4rem;
-        font-weight: 700;
-        line-height: 1;
-        text-align: center;
-        color: #fff;
-    }
-
-    .text {
-        font-size: 2.5rem;
-        font-weight: 700;
-        line-height: 1;
-        text-align: center;
-        color: #fff;
-    }
+  .text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    color: #fff;
+  }
 </style>

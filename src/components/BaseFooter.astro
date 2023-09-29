@@ -1,61 +1,65 @@
 ---
-import * as Variables from '../variables.astro';
-import Icon from '../icon/toTopArrow.svg';
+import * as Variables from "../variables.astro";
+import { Icon } from "astro-icon";
+import Icons from "../icon/toTopArrow.svg";
 
 const topLInk = Variables.PAGES.index.url;
 ---
 
 <footer class="footer">
-    <div class="inner">
-        <h2 class="title">Footer</h2>
-        <div class="arrow js-mouseAnimation">
-            <img src={Icon} alt="" />
-        </div>
-    </div>
+  <div class="inner">
+    <h2 class="title">Footer</h2>
+    <a href="#top" class="arrow js-mouseAnimation js-anchor-link">
+      <Icon name={"toTopArrow"} />
+    </a>
+  </div>
 </footer>
 
 <script>
-    import Menu from '../script/mouse.js';
+  import Menu from "../script/module/mouse.js";
+  import { anchorLink } from "../script/module/anchor-link.js";
 
-    addEventListener('load', (_) => {
-        new Menu(document.querySelector('.js-mouseAnimation'));
-    });
+  addEventListener("load", () => {
+    new Menu(document.querySelector(".js-mouseAnimation"));
+  });
+
+  anchorLink();
 </script>
 
 <style lang="scss">
-    @import '../styles/_single.scss';
+  @import "../styles/_single.scss";
 
-    .root {
-        position: relative;
-    }
+  .root {
+    position: relative;
+  }
 
-    .footer {
-        position: relative;
-        width: 100%;
-        height: 7rem;
-        background-color: #d9d9d9;
-    }
+  .footer {
+    position: relative;
+    width: 100%;
+    height: 7rem;
+    background-color: #d9d9d9;
+  }
 
-    .inner {
-        height: 100%;
-        color: #fff;
-    }
+  .inner {
+    height: 100%;
+    color: #fff;
+  }
 
-    .title {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: #fff;
-        align-items: center;
-        height: 100%;
-    }
+  .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    align-items: center;
+    height: 100%;
+  }
 
-    .arrow {
-        position: fixed;
-        color: #fff;
-        bottom: 5rem;
-        right: 3rem;
-        width: 3.75rem;
-        height: 3.75rem;
-    }
+  .arrow {
+    position: fixed;
+    color: #fff;
+    bottom: 5rem;
+    right: 3rem;
+    width: 3.75rem;
+    height: 3.75rem;
+  }
 </style>

@@ -1,215 +1,168 @@
 ---
-import * as Variables from '../variables.astro';
-import navImage01 from '../images/navImage01.jpg';
-import navImage02 from '../images/navImage02.jpg';
-import navImage03 from '../images/navImage03.jpg';
+import * as Variables from "../variables.astro";
+import navImage01 from "../images/navImage01.jpg";
+import navImage02 from "../images/navImage02.jpg";
+import navImage03 from "../images/navImage03.jpg";
 
 const navList = [
-    {
-        image: navImage01,
-        text: 'work',
-        url: Variables.PAGES.work.url,
-        className: 'images image-01',
-    },
-    {
-        image: navImage02,
-        text: 'About',
-        url: Variables.PAGES.about.url,
-        className: 'images image-02',
-    },
-    {
-        image: navImage03,
-        text: 'Blog',
-        url: Variables.PAGES.blog.url,
-        className: 'images image-03',
-    },
+  {
+    image: navImage01,
+    text: "work",
+    url: Variables.PAGES.work.url,
+    className: "images image-01",
+  },
+  {
+    image: navImage02,
+    text: "About",
+    url: Variables.PAGES.about.url,
+    className: "images image-02",
+  },
+  {
+    image: navImage03,
+    text: "Blog",
+    url: Variables.PAGES.blog.url,
+    className: "images image-03",
+  },
 ];
 ---
 
 <div class="root">
-    <div class="bg"></div>
-    <nav class="nav">
-        <ul class="menu js-menu">
-            {
-                navList.map((item: any) => (
-                    <li class={`list js-list ${item.className}`}>
-                        <a href={item.url} class="link">
-                            <div class="image">
-                                <img src={item.image} alt="" />
-                            </div>
-                            <p class="text">{item.text}</p>
-                        </a>
-                    </li>
-                ))
-            }
-        </ul>
-        <button class="button js-button">show less</button>
-    </nav>
+  <div class="bg"></div>
+  <nav class="nav">
+    <ul class="menu js-menu">
+      {
+        navList.map((item: any) => (
+          <li class={`list js-list ${item.className}`}>
+            <a href={item.url} class="link">
+              <div class="image">
+                <img src={item.image} alt="" />
+              </div>
+              <p class="text">{item.text}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <button class="button js-button">show less</button>
+  </nav>
 </div>
 
 <script>
-    import gsap from 'gsap';
+  import { headerNav } from "../script/module/headerNav.js";
+  import { disableNativeScroll } from "../script/utility/disable-native-scroll";
 
-    const card1 = document.querySelector('.image-01');
-    const card2 = document.querySelector('.image-02');
-    const card3 = document.querySelector('.image-03');
-    const cards = document.querySelectorAll('.js-list');
-    const bg = document.querySelector('.bg');
-    const link = document.querySelectorAll('.link');
-    const button = document.querySelector('.js-button');
-    let isOpen = false;
+  const body = document.querySelector("body");
+  const hambuger = document.querySelector(".hamburger");
 
-    card3.addEventListener('click', (e) => {
-        if (!isOpen) {
-            e.preventDefault();
+  headerNav();
 
-            gsap.to(cards, {
-                top: 0,
-                direction: 1,
-                ease: 'power4.inOut',
-            });
-            gsap.to(button, {
-                delay: 0.4,
-                display: 'block',
-                opacity: 1,
-                direction: 0.4,
-                ease: 'power4.inOut',
-            });
-            gsap.to(bg, {
-                className: 'bg isBlur',
-                duration: 0.75,
-                ease: 'power4.inOut',
-            });
-            isOpen = true;
-        }
+  const clickEvent = () => {
+    body.classList.toggle("hamburger-active");
+    const isActive = body.classList.contains("hamburger-active");
+    disableNativeScroll(isActive);
+  };
 
-        button.addEventListener('click', () => {
-            if (isOpen) {
-                gsap.to(card2, {
-                    top: '-130px',
-                    direction: 1,
-                    ease: 'power4.inOut',
-                });
-                gsap.to(card3, {
-                    top: '-260px',
-                    direction: 1,
-                    ease: 'power4.inOut',
-                });
-                gsap.to(button, {
-                    delay: 0,
-                    display: 'none',
-                    opacity: 0,
-                    direction: 0.4,
-                    ease: 'power4.inOut',
-                });
-                gsap.to(bg, {
-                    className: 'bg',
-                });
-
-                isOpen = false;
-            }
-        });
-    });
+  card3.addEventListener("click", () => {
+    clickEvent();
+  });
+  button.addEventListener("click", () => {
+    clickEvent();
+  });
 </script>
 
 <style lang="scss">
-    @import '../styles/_single.scss';
+  @import "../styles/_single.scss";
 
-    .root {
-        position: relative;
+  .root {
+    position: relative;
+  }
+
+  .nav {
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    padding: 0 1rem;
+  }
+
+  .menu {
+    position: relative;
+  }
+
+  .list {
+    position: absolute;
+    right: 0;
+    margin: 1rem 0;
+    color: #fff;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(16px);
+    border-radius: 8px;
+    transition: 0.5s ease-out;
+    cursor: pointer;
+  }
+
+  .list:hover {
+    background-color: #fff;
+    color: #2a2a2a;
+  }
+
+  .link {
+    width: 300px;
+    height: 100px;
+    padding: 0.625rem;
+
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    height: 100%;
+  }
+
+  .text {
+    font-size: vw(20);
+    font-weight: bold;
+  }
+
+  .image {
+    width: 100px;
+    height: 80px;
+    img {
+      height: 100%;
+      object-fit: cover;
     }
+  }
 
-    .nav {
-        position: fixed;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        padding: 0 1rem;
-    }
+  .button {
+    opacity: 0;
+    position: absolute;
+    width: 7rem;
+    height: 2rem;
+    right: 1rem;
+    top: 400px;
+    text-align: center;
+    color: #fff;
+    font-size: vw(20);
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(16px);
+    border-radius: 9999px;
+    transition: 0.5s;
+    cursor: pointer;
+  }
 
-    .menu {
-        position: relative;
-    }
-
-    .list {
-        position: relative;
-        margin: 1rem 0;
-        color: #fff;
-        background-color: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(16px);
-        border-radius: 8px;
-        transition: 0.5s ease-out;
-        cursor: pointer;
-    }
-
-    .list:hover {
-        background-color: #fff;
-        color: #2a2a2a;
-    }
-
-    .list:nth-child(2) {
-        top: -130px;
-    }
-
-    .list:nth-child(3) {
-        top: -260px;
-    }
-
-    .link {
-        width: 300px;
-        height: 100px;
-        padding: 0.625rem;
-
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        height: 100%;
-    }
-
-    .text {
-        font-size: vw(20);
-        font-weight: bold;
-    }
-
-    .image {
-        width: 100px;
-        height: 80px;
-        img {
-            height: 100%;
-            object-fit: cover;
-        }
-    }
-
-    .button {
-        display: none;
-        width: 7rem;
-        height: 2rem;
-        margin: 0 0 0 auto;
-        text-align: center;
-        color: #fff;
-        font-size: vw(20);
-        font-weight: bold;
-        background-color: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(16px);
-        border-radius: 9999px;
-        transition: 0.5s;
-        cursor: pointer;
-    }
-
-    .button:hover {
-        background-color: #fff;
-        color: #2a2a2a;
-    }
+  .button:hover {
+    background-color: #fff;
+    color: #2a2a2a;
+  }
 </style>
 <style lang="scss" is:global>
-    .isBlur {
-        z-index: 1;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        backdrop-filter: blur(20px);
-        transition: 0.4s ease-out;
-    }
+  .isBlur {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(20px);
+    transition: 0.4s ease-out;
+  }
 </style>
