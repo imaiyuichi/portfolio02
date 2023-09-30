@@ -13,7 +13,7 @@ import type { GetStaticPathsOptions } from 'astro';
 
 export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
     const BlogData = await getBlogs({ limit: 1000 });
-    return paginate(BlogData.contents, { pageSize: 2 });
+    return paginate(BlogData.contents, { pageSize: 3 });
 };
 const { page } = Astro.props;
 ---
@@ -69,5 +69,6 @@ const { page } = Astro.props;
 
     .test {
         color: white;
+        transform: translate(-50% -50%) rotate(180deg);
     }
 </style>

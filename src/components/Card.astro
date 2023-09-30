@@ -13,37 +13,32 @@ interface Props {
 const { href, title, body, date, img } = Astro.props;
 ---
 
-<div class="root">
-    <ViewElement>
-        <AnimationBlur>
-            <div class="card">
-                <a href={href} class="link">
-                    <div class="inner">
-                        <div class="img">
-                            <img src={img} alt="" />
-                        </div>
-                        <div class="text">
-                            <h2 class="title">{title}</h2>
-                            <p class="date">
-                                公開日：{date}
-                            </p>
-                        </div>
-                    </div>
-                </a>
+<div class="root splide__slide">
+    <div class="card">
+        <a href={href} class="link">
+            <div class="inner">
+                <div class="img">
+                    <img src={img} alt="" />
+                </div>
+                <div class="text">
+                    <h2 class="title">{title}</h2>
+                    <p class="date">
+                        公開日：{date}
+                    </p>
+                </div>
             </div>
-        </AnimationBlur>
-    </ViewElement>
+        </a>
+    </div>
 </div>
 
 <style lang="scss">
     @import '../styles/_single.scss';
 
-    .root + .root {
-        margin: vw(30) 0 0;
+    .root {
+        width: 41rem;
     }
 
     .card {
-        list-style: none;
         display: flex;
         background-color: #23262d;
         background-size: 400%;
