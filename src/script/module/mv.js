@@ -1,14 +1,6 @@
-import Typed from 'typed.js';
 import * as THREE from 'three';
 
 export function startMyAnimation() {
-    new Typed('.js-title', {
-        strings: ['work page'],
-        typeSpeed: 100,
-        backDelay: 1500,
-        backSpeed: 30,
-    });
-
     /**
      * 必須の3要素
      */

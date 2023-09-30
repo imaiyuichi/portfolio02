@@ -1,58 +1,58 @@
 ---
-import { getTop, getBlogs } from "../libs/macrocms";
+import { getTop, getBlogs } from '../libs/macrocms';
 
 const MvData = await getTop({
-  fields: ["MvTitle", "MvSubTitle", "MvCatch"],
+    fields: ['MvTitle', 'MvSubTitle', 'MvCatch'],
 });
 ---
 
 <canvas id="webgl"></canvas>
 <span id="scrollProgress"></span>
 <section class="root">
-  <div class="inner"></div>
+    <div class="inner"></div>
 </section>
 
 <script>
-  import { startMyAnimation } from "../script/module/particle.js";
+    import { startMyAnimation } from '../script/module/particle.js';
 
-  startMyAnimation();
+    startMyAnimation();
 </script>
 
 <style lang="scss">
-  @import "../styles/_single.scss";
-  @import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
+    @import '../styles/_single.scss';
+    @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
-  .root {
-    height: 100vh;
-  }
-
-  .inner {
-    padding: vw(300) 0 0;
-    text-align: center;
-
-    @include sp() {
-      padding: vw_sp(250) 0 0;
+    .root {
+        height: 100vh;
     }
-  }
 
-  .title {
-    display: inline-block;
-    font-size: vw(65);
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    font-family: "DotGothic16", sans-serif;
-    color: white;
+    .inner {
+        padding: vw(300) 0 0;
+        text-align: center;
 
-    @include sp() {
-      font-size: vw_sp(55);
+        @include sp() {
+            padding: vw_sp(250) 0 0;
+        }
     }
-  }
 
-  canvas {
-    position: fixed;
-    z-index: -1;
-    top: 0;
-    left: 0;
-  }
+    .title {
+        display: inline-block;
+        font-size: vw(65);
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        font-family: 'DotGothic16', sans-serif;
+        color: white;
+
+        @include sp() {
+            font-size: vw_sp(55);
+        }
+    }
+
+    canvas {
+        position: fixed;
+        z-index: -1;
+        top: 0;
+        left: 0;
+    }
 </style>

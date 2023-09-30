@@ -1,7 +1,7 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { getBlogDetail, getBlogs } from '../libs/macrocms';
-import BaseHeader from '../components/BaseHeader.astro';
+import Layout from '../../layouts/Layout.astro';
+import { getBlogDetail, getBlogs } from '../../libs/macrocms';
+import BaseHeader from '../../components/BaseHeader.astro';
 
 export async function getStaticPaths() {
     const BlogData = await getBlogs({ fields: 'id' });
@@ -37,7 +37,7 @@ const blog = await getBlogDetail(blogId as string);
 </Layout>
 
 <style lang="scss">
-    @import '../styles/_single';
+    @import '../../styles/_single';
     .inner {
         width: vw(800);
         margin: 180px auto 0;
@@ -58,7 +58,7 @@ const blog = await getBlogDetail(blogId as string);
 </style>
 
 <style lang="scss" is:global>
-    @import '../styles/_single';
+    @import '../../styles/_single';
     img {
         width: 100%;
         height: auto;

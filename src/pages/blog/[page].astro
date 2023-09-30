@@ -1,0 +1,73 @@
+---
+import type { GetStaticPaths } from 'astro';
+import Layout from '../../layouts/Layout.astro';
+import BaseHeader from '../../components/BaseHeader.astro';
+import Blogs from '../../components/Blogs.astro';
+import IndexAbout from '../../partials/IndexAbout.astro';
+import { getBlogs } from '../../libs/macrocms';
+import Card from '../../components/Card.astro';
+import AnimationBlur from '../../components/AnimationBlur.astro';
+import ViewElement from '../../components/ViewElement.astro';
+
+import type { GetStaticPathsOptions } from 'astro';
+
+export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
+    const BlogData = await getBlogs({ limit: 1000 });
+    return paginate(BlogData.contents, { pageSize: 2 });
+};
+const { page } = Astro.props;
+---
+
+<Layout title="Welcome to Astro.">
+    <BaseHeader />
+    <main class="main">
+        {
+            page.data.map((item: any) => (
+                <Card
+                    title={item.title}
+                    href={item.id}
+                    img={item.eyecatch.url}
+                    date={new Date(item.category.publishedAt).toLocaleString()}
+                />
+            ))
+        }
+        <nav class="test">
+            <p>{page.currentPage}/{page.lastPage}</p>
+            <ul>
+                {
+                    page.url.prev && (
+                        <li>
+                            <a href={page.url.prev}>PREV</a>
+                        </li>
+                    )
+                }
+                {/* page.url.nextがある場合は次ページへのリンクを表示 */}
+                {
+                    page.url.next && (
+                        <li>
+                            <a href={page.url.next}>NEXT</a>
+                        </li>
+                    )
+                }
+            </ul>
+        </nav>
+    </main>
+</Layout>
+
+<style lang="scss">
+    @import '../../styles/_single.scss';
+    .main {
+        width: vw(1200);
+        margin: auto;
+        padding: vw(110) 0;
+
+        @include sp() {
+            width: 100%;
+            padding: 0 vw_sp(30);
+        }
+    }
+
+    .test {
+        color: white;
+    }
+</style>

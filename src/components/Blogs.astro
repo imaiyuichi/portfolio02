@@ -6,6 +6,7 @@ import ViewElement from './ViewElement.astro';
 
 const BlogData = await getBlogs({
     fields: ['id', 'title', 'eyecatch', 'category'],
+    limit: 5,
 });
 ---
 
@@ -16,7 +17,7 @@ const BlogData = await getBlogs({
             BlogData.contents.map((item: any) => (
                 <Card
                     title={item.title}
-                    href={item.id}
+                    href={`/blog/${item.id}`}
                     img={item.eyecatch.url}
                     date={new Date(item.category.publishedAt).toLocaleString()}
                 />
