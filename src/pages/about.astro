@@ -1,5 +1,26 @@
 ---
-import PageAbout from '../components/PageAbout.astro';
+import Layout from '../layouts/Layout.astro';
+import BaseHeader from '../components/BaseHeader.astro';
+import IndexAbout from '../partials/IndexAbout.astro';
 ---
 
-<PageAbout />
+<Layout title="Welcome to Astro.">
+    <BaseHeader />
+    <main class="main">
+        <IndexAbout />
+    </main>
+</Layout>
+
+<style lang="scss">
+    @import '../styles/_single.scss';
+    .main {
+        width: vw(1200);
+        margin: auto;
+        padding: vw(110) 0;
+
+        @include sp() {
+            width: 100%;
+            padding: 0 vw_sp(30);
+        }
+    }
+</style>

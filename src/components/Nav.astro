@@ -148,7 +148,7 @@ const navList = [
         right: 1rem;
         top: 420px;
         text-align: center;
-        color: #fff;
+        color: $color-base-white;
         font-size: vw(20);
         font-weight: bold;
         background-color: rgba(255, 255, 255, 0.2);
@@ -158,9 +158,11 @@ const navList = [
         cursor: pointer;
     }
 
-    .button:hover {
-        background-color: #fff;
-        color: #2a2a2a;
+    .button {
+        @include hover() {
+            background-color: $color-base-white;
+            color: $color-base-black;
+        }
     }
 </style>
 <style lang="scss" is:global>
