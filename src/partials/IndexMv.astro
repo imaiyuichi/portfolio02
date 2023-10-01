@@ -1,63 +1,49 @@
 ---
-import { getTop, getBlogs } from "../libs/macrocms";
+import { getTop, getBlogs } from '../libs/macrocms';
 
 const MvData = await getTop({
-  fields: ["MvTitle", "MvSubTitle", "MvCatch"],
+    fields: ['MvTitle', 'MvSubTitle', 'MvCatch'],
 });
 ---
 
 <section class="root">
-  <div class="canvas">
-    <canvas></canvas>
-  </div>
-  <div class="bg"></div>
+    <div class="bg"></div>
 
-  <div class="inner">
-    <h2 class="title">MV</h2>
-  </div>
+    <div class="inner">
+        <h2 class="title">MV</h2>
+    </div>
 </section>
-<script>
-  import { canvasAnimation } from "../script/module/canvasAnimation.js";
-  canvasAnimation();
-</script>
 
 <style lang="scss">
-  @import "../styles/_single.scss";
-  .canvas {
-    width: 100%;
-    height: 500px;
-  }
-  canvas {
-    border: 1px solid #fff;
-  }
+    @import '../styles/_single.scss';
 
-  .root {
-    position: relative;
-    padding: 6rem 0 0;
-  }
+    .root {
+        position: relative;
+        padding: 6rem 0 0;
+    }
 
-  .bg {
-  }
+    .bg {
+    }
 
-  .inner {
-    background-color: blanchedalmond;
-    position: relative;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100vw;
-    height: 500px;
-  }
+    .inner {
+        background-color: blanchedalmond;
+        position: relative;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100vw;
+        height: 500px;
+    }
 
-  .title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    color: black;
-  }
+    .title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        font-size: 4rem;
+        font-weight: 700;
+        line-height: 1;
+        text-align: center;
+        color: black;
+    }
 </style>

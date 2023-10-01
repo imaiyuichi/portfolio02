@@ -1,13 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import BaseHeader from '../components/BaseHeader.astro';
-import IndexAbout from '../partials/IndexAbout.astro';
+import AboutBg from '../partials/AboutBg.astro';
 ---
 
 <Layout title="Welcome to Astro.">
     <BaseHeader />
     <main class="main">
-        <IndexAbout />
+        <AboutBg />
     </main>
 </Layout>
 
@@ -22,5 +22,12 @@ import IndexAbout from '../partials/IndexAbout.astro';
             width: 100%;
             padding: 0 vw_sp(30);
         }
+    }
+
+    .test {
+        position: relative;
+        top: -35rem;
+        font-size: vw(80);
+        color: #fff;
     }
 </style>
