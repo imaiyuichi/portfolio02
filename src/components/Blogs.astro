@@ -1,200 +1,196 @@
 ---
-import { getBlogs } from '../libs/macrocms';
+import { getBlogs } from "../libs/macrocms";
 
 const BlogData = await getBlogs({
-    fields: ['id', 'title', 'eyecatch', 'category'],
-    limit: 5,
+  fields: ["id", "title", "eyecatch", "category"],
+  limit: 5,
 });
 ---
 
 <section class="root">
-    <h2 class="title">Blog Contents</h2>
-    <div class="blogs splide">
-        <div class="splide__track">
-            <ul class="splide__list">
-                {
-                    BlogData.contents.map((item: any) => (
-                        <li class="blog splide__slide">
-                            <a href={`/blog/${item.id}`} class="link">
-                                <div class="blog__inner">
-                                    <div class="blog__img">
-                                        <img src={item.eyecatch.url} alt="" />
-                                    </div>
-                                    <div class="blog__text-area">
-                                        <h2 class="blog__title">
-                                            {item.title}
-                                        </h2>
-                                        <p class="blog__date">
-                                            公開日：
-                                            {new Date(
-                                                item.category.publishedAt
-                                            ).toLocaleString()}
-                                        </p>
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                    ))
-                }
-            </ul>
-        </div>
+  <h2 class="title">Blog Contents</h2>
+  <div class="blogs splide">
+    <div class="splide__track">
+      <ul class="splide__list">
+        {
+          BlogData.contents.map((item: any) => (
+            <li class="blog splide__slide">
+              <a href={`/blog/${item.id}`} class="link">
+                <div class="blog__inner">
+                  <div class="blog__img">
+                    <img src={item.eyecatch.url} alt="" />
+                  </div>
+                  <div class="blog__text-area">
+                    <h2 class="blog__title">{item.title}</h2>
+                    <p class="blog__date">
+                      公開日：
+                      {new Date(item.category.publishedAt).toLocaleString()}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
     </div>
+  </div>
 </section>
 
 <script>
-    import Splide from '@splidejs/splide';
-    new Splide('.splide', {
-        // autoplay: true, // 自動再生
-        type: 'loop', // ループ
-        rewind: true, // スライダーの終わりまで行ったら先頭に巻き戻す
-        interval: 5000, // 自動再生の間隔
-        speed: 2000, // スライダーの移動時間
-        focus: 'center', // アクティブなスライドを中央にする
-        updateOnMove: true, // is-activeクラスを移動前に更新する
-        padding: '15%', // スライダーの左右の余白
-        gap: 100,
-        pagination: true,
-    }).mount();
+  import Splide from "@splidejs/splide";
+  new Splide(".splide", {
+    // autoplay: true, // 自動再生
+    type: "loop", // ループ
+    rewind: true, // スライダーの終わりまで行ったら先頭に巻き戻す
+    interval: 5000, // 自動再生の間隔
+    speed: 2000, // スライダーの移動時間
+    focus: "center", // アクティブなスライドを中央にする
+    updateOnMove: true, // is-activeクラスを移動前に更新する
+    padding: "20%", // スライダーの左右の余白
+    gap: 180,
+    pagination: true,
+  }).mount();
 </script>
 
 <style lang="scss">
-    @import '../styles/_single.scss';
-    @import '@splidejs/splide/css/core';
-    .root {
-        position: relative;
-        padding: 5rem 0 0;
-        color: white;
-        font-size: 20px;
-        line-height: 1.6;
-    }
+  @import "../styles/_single.scss";
+  @import "@splidejs/splide/css/core";
+  .root {
+    position: relative;
+    padding: 5rem 0 0;
+    color: white;
+    font-size: 20px;
+    line-height: 1.6;
+  }
 
-    .title {
-        font-size: 3rem;
-        font-weight: 700;
-        line-height: 1;
-        text-align: center;
-    }
+  .title {
+    font-size: 3rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+  }
 
-    .blogs {
-        position: relative;
-        margin: 4rem 0 0;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100vw;
-    }
-    .blog {
-        display: flex;
-        height: vw(424);
-        border-radius: vw(10);
-        overflow: hidden;
-        background-color: #6e7072;
-        backdrop-filter: blur(16px);
-        transition: 0.5s;
+  .blogs {
+    position: relative;
+    margin: 4rem 0 0;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100vw;
+  }
+  .blog {
+    display: flex;
+    height: vw(324);
+    border-radius: vw(10);
+    overflow: hidden;
+    background-color: #6e7072;
+    backdrop-filter: blur(16px);
+    transition: 0.5s;
 
-        @include hover() {
-            background-color: #a5a9ad;
-            color: $color-base-black;
-        }
+    @include hover() {
+      background-color: #a5a9ad;
+      color: $color-base-black;
     }
+  }
 
-    .link {
-        width: 100%;
+  .link {
+    width: 100%;
+  }
+
+  .blog__inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  .blog__img {
+    width: vw(533);
+    height: 100%;
+    opacity: 0.8;
+
+    img {
+      height: 100%;
+      object-fit: cover;
     }
+  }
 
-    .blog__inner {
-        display: flex;
-        align-items: center;
-        height: 100%;
-    }
+  .blog__text-area {
+    flex: 1;
+    padding: vw(24);
+  }
 
-    .blog__img {
-        width: vw(633);
-        height: 100%;
-        opacity: 0.8;
+  .blog__title {
+    font-size: vw(28);
+    @include line-clamp(3);
+  }
 
-        img {
-            height: 100%;
-            object-fit: cover;
-        }
-    }
-
-    .blog__text-area {
-        flex: 1;
-        padding: vw(24);
-    }
-
-    .blog__title {
-        font-size: vw(28);
-        @include line-clamp(3);
-    }
-
-    .blog__date {
-        margin: vw(20) 0 0;
-        font-size: vw(16);
-    }
+  .blog__date {
+    margin: vw(20) 0 0;
+    font-size: vw(16);
+  }
 </style>
 <style lang="scss" is:global>
-    .splide__arrows {
-        position: relative;
-        svg {
-            display: none;
-        }
+  .splide__arrows {
+    position: relative;
+    svg {
+      display: none;
     }
+  }
 
-    .splide__arrow--prev {
-        &::before {
-            position: absolute;
-            z-index: 100;
-            top: 9rem;
-            left: 5rem;
-            width: 3rem;
-            height: 3rem;
-            background: url(../icons/arrow.svg) no-repeat;
-            content: '';
-        }
+  .splide__arrow--prev {
+    &::before {
+      position: absolute;
+      z-index: 100;
+      top: 6.5rem;
+      left: 7rem;
+      width: 3rem;
+      height: 3rem;
+      background: url(../icons/arrow.svg) no-repeat;
+      content: "";
     }
+  }
 
-    .splide__arrow--next {
-        &::before {
-            position: absolute;
-            z-index: 100;
-            top: 9rem;
-            right: 5rem;
-            transform: rotate(180deg) !important;
-            width: 3rem;
-            height: 3rem;
-            background: url(../icons/arrow.svg) no-repeat;
-            content: '';
-        }
+  .splide__arrow--next {
+    &::before {
+      position: absolute;
+      z-index: 100;
+      top: 6.5rem;
+      right: 7rem;
+      transform: rotate(180deg) !important;
+      width: 3rem;
+      height: 3rem;
+      background: url(../icons/arrow.svg) no-repeat;
+      content: "";
     }
+  }
 
-    .splide__slide {
-        opacity: 0.3; /* 左右のスライドを薄くする */
-        transition: 0.7s; /* ゆっくり小さくさせる */
-    }
-    /* アクティブなスライドのスタイル */
-    .splide__slide.is-active {
-        opacity: 1; /* 中央のスライドは薄くしない */
-        transform: scale(1); /* 中央のスライドは小さくしない */
-    }
+  .splide__slide {
+    opacity: 0.3; /* 左右のスライドを薄くする */
+    transition: 0.7s; /* ゆっくり小さくさせる */
+  }
+  /* アクティブなスライドのスタイル */
+  .splide__slide.is-active {
+    opacity: 1; /* 中央のスライドは薄くしない */
+    transform: scale(1); /* 中央のスライドは小さくしない */
+  }
 
-    .splide__pagination {
-        gap: 0.5rem;
-        margin: 1rem 0 0 !important;
-    }
+  .splide__pagination {
+    gap: 0.5rem;
+    margin: 1rem 0 0 !important;
+  }
 
-    .splide__pagination__page {
-        width: 0.5rem;
-        height: 0.5rem;
-        background-color: gray;
-        border-radius: 9999px;
+  .splide__pagination__page {
+    width: 0.5rem;
+    height: 0.5rem;
+    background-color: gray;
+    border-radius: 9999px;
 
-        &is-active {
-        }
+    &is-active {
     }
+  }
 
-    .splide__pagination__page.is-active {
-        background-color: white;
-    }
+  .splide__pagination__page.is-active {
+    background-color: white;
+  }
 </style>

@@ -1,33 +1,33 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import BaseHeader from '../components/BaseHeader.astro';
-import AboutBg from '../partials/AboutBg.astro';
+import Layout from "../layouts/Layout.astro";
+import BaseHeader from "../components/BaseHeader.astro";
+import AboutBg from "../partials/AboutBg.astro";
 ---
 
 <Layout title="Welcome to Astro.">
-    <BaseHeader />
-    <main class="main">
-        <AboutBg />
-    </main>
+  <BaseHeader />
+  <main class="main">
+    <AboutBg />
+  </main>
 </Layout>
 
 <style lang="scss">
-    @import '../styles/_single.scss';
-    .main {
-        width: vw(1200);
-        margin: auto;
-        padding: vw(110) 0;
+  @import "../styles/_single.scss";
+  .main {
+    width: vw(1200);
+    margin: auto;
+    padding: vw(110) 0;
 
-        @include sp() {
-            width: 100%;
-            padding: 0 vw_sp(30);
-        }
+    @include sp() {
+      width: 100%;
+      padding: 0 vw_sp(30);
     }
+  }
 
-    .test {
-        position: relative;
-        top: -35rem;
-        font-size: vw(80);
-        color: #fff;
-    }
+  .test {
+    position: relative;
+    top: -35rem;
+    font-size: vw(80);
+    color: #fff;
+  }
 </style>

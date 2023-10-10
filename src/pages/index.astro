@@ -1,36 +1,36 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import BaseHeader from '../components/BaseHeader.astro';
-import Blogs from '../components/Blogs.astro';
-import IndexMv from '../partials/IndexMv.astro';
-import IndexAbout from '../partials/IndexAbout.astro';
-import IndexSlills from '../partials/IndexSlills.astro';
-import IndexContact from '../partials/IndexContact.astro';
-import BaseFooter from '../components/BaseFooter.astro';
+import Layout from "../layouts/Layout.astro";
+import BaseHeader from "../components/BaseHeader.astro";
+import Blogs from "../components/Blogs.astro";
+import IndexMv from "../partials/IndexMv.astro";
+import IndexAbout from "../partials/IndexAbout.astro";
+import IndexSlills from "../partials/IndexSlills.astro";
+import IndexContact from "../partials/IndexContact.astro";
+import BaseFooter from "../components/BaseFooter.astro";
 ---
 
 <Layout title="Welcome to Astro.">
-    <BaseHeader />
-    <main class="main">
-        <IndexMv />
-        <Blogs />
-        <IndexAbout />
+  <BaseHeader />
+  <main class="main">
+    <IndexMv />
+    <Blogs />
+    <!-- <IndexAbout />
         <IndexSlills />
-        <IndexContact />
-    </main>
-    <BaseFooter />
+        <IndexContact /> -->
+  </main>
+  <BaseFooter />
 </Layout>
 
 <style lang="scss">
-    @import '../styles/_single.scss';
-    .main {
-        width: vw(1200);
-        margin: auto;
-        padding: vw(110) 0;
+  @import "../styles/_single.scss";
+  .main {
+    width: vw(1200);
+    margin: auto;
+    padding: vw(110) 0;
 
-        @include sp() {
-            width: 100%;
-            padding: 0 vw_sp(30);
-        }
+    @include sp() {
+      width: 100%;
+      padding: 0 vw_sp(30);
     }
+  }
 </style>
