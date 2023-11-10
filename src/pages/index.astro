@@ -1,12 +1,12 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import BaseHeader from "../components/BaseHeader.astro";
-import Blogs from "../components/Blogs.astro";
-import IndexMv from "../partials/IndexMv.astro";
-import IndexAbout from "../partials/IndexAbout.astro";
-import IndexSlills from "../partials/IndexSlills.astro";
-import IndexContact from "../partials/IndexContact.astro";
-import BaseFooter from "../components/BaseFooter.astro";
+import Layout from '../layouts/Layout.astro';
+import BaseHeader from '../components/BaseHeader.astro';
+import Blogs from '../components/Blogs.astro';
+import IndexMv from '../partials/IndexMv.astro';
+import IndexAbout from '../partials/IndexAbout.astro';
+import IndexSlills from '../partials/IndexSlills.astro';
+import IndexContact from '../partials/IndexContact.astro';
+import BaseFooter from '../components/BaseFooter.astro';
 ---
 
 <Layout title="Welcome to Astro.">
@@ -14,15 +14,15 @@ import BaseFooter from "../components/BaseFooter.astro";
   <main class="main">
     <IndexMv />
     <Blogs />
-    <!-- <IndexAbout />
-        <IndexSlills />
-        <IndexContact /> -->
+    <IndexAbout />
+    <IndexSlills />
+    <IndexContact />
   </main>
   <BaseFooter />
 </Layout>
 
 <style lang="scss">
-  @import "../styles/_single.scss";
+  @import '../styles/_single.scss';
   .main {
     width: vw(1200);
     margin: auto;

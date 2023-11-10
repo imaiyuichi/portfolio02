@@ -1,8 +1,8 @@
 ---
-import { getTop, getBlogs } from "../libs/macrocms";
+import { getTop, getBlogs } from '../libs/macrocms';
 
 const MvData = await getTop({
-  fields: ["MvTitle", "MvSubTitle", "MvCatch"],
+  fields: ['MvTitle', 'MvSubTitle', 'MvCatch'],
 });
 ---
 
@@ -15,13 +15,13 @@ const MvData = await getTop({
 </section>
 
 <script>
-  import { startMyAnimation } from "../script/module/mv.js";
-  import Typed from "typed.js";
+  import { startMyAnimation } from '../script/module/mv.js';
+  import Typed from 'typed.js';
 
   startMyAnimation();
 
-  new Typed(".js-title", {
-    strings: ["Welcome to my website", "このコンテンツは<br>現在準備中です。"],
+  new Typed('.js-title', {
+    strings: ['Welcome to my website', 'このコンテンツは<br>現在準備中です。'],
     typeSpeed: 140,
     backDelay: 2000,
     backSpeed: 40,
@@ -29,8 +29,8 @@ const MvData = await getTop({
 </script>
 
 <style lang="scss">
-  @import "../styles/_single.scss";
-  @import url("https://fonts.googleapis.com/css2?family=DotGothic16&display=swap");
+  @import '../styles/_single.scss';
+  @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
 
   .root {
     height: 200vh;
@@ -51,7 +51,7 @@ const MvData = await getTop({
     font-weight: 700;
     line-height: 1.5;
     text-align: center;
-    font-family: "DotGothic16", sans-serif;
+    font-family: 'DotGothic16', sans-serif;
     color: white;
 
     @include sp() {
