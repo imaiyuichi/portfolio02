@@ -48,10 +48,10 @@ const mvImage = mv.topMvImage;
   }
 
   .bg {
-    z-index: -1;
     position: absolute;
     top: 0;
     left: 0;
+    z-index: -1;
     width: 100vw;
     height: 720px;
   }
@@ -59,8 +59,8 @@ const mvImage = mv.topMvImage;
   .inner {
     width: vw(1280);
     height: 720px;
-    margin: auto;
     padding: vw(200) 0 0;
+    margin: auto;
   }
 
   .title {
@@ -77,8 +77,8 @@ const mvImage = mv.topMvImage;
     font-size: vw(40);
     font-weight: 700;
     line-height: 1.6;
-    text-align: center;
     color: $color-base-white;
+    text-align: center;
     letter-spacing: 0.04em;
   }
 
@@ -87,8 +87,8 @@ const mvImage = mv.topMvImage;
     font-size: vw(40);
     font-weight: 700;
     line-height: 1.6;
-    text-align: center;
     color: $color-base-white;
+    text-align: center;
     letter-spacing: 0.04em;
   }
 
@@ -96,15 +96,15 @@ const mvImage = mv.topMvImage;
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    width: vw(800);
     z-index: 10;
+    width: vw(800);
+    transform: translate(-50%, -50%);
   }
 
   .marquee-container {
+    width: 100%;
     overflow: hidden;
     white-space: nowrap;
-    width: 100%;
   }
 
   .marquee-content {
@@ -116,6 +116,7 @@ const mvImage = mv.topMvImage;
     0% {
       transform: translateX(100%);
     }
+
     100% {
       transform: translateX(-100%);
     }
