@@ -3,153 +3,160 @@
 @use 'mixins' as *;
 
 html {
-    // 1rem = 60分割のグリッドとする処理
-    // calc(100vw / 60)
-    // pc,sp共通
-    font-size: 1.6667vw;
+  // 1rem = 60分割のグリッドとする処理
+  // calc(100vw / 60)
+  // pc,sp共通
+  font-size: 1.6667vw;
 }
 
 body {
-    overflow-x: clip;
-    font-size: vw(16);
-    line-height: 1.8;
-    letter-spacing: 0;
+  overflow-x: clip;
+  font-size: vw(16);
+  line-height: 1.8;
+  letter-spacing: 0;
 
-    @include sp() {
-        font-size: vw_sp(13);
-    }
+  @include sp() {
+    font-size: vw_sp(13);
+  }
 }
 
 img {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 svg {
-    display: flex;
-    width: 100%;
-    height: auto;
+  display: flex;
+  width: 100%;
+  height: auto;
 }
 
 h1 {
-    font-size: vw(50);
-    line-height: 1.37;
+  font-size: vw(50);
+  line-height: 1.37;
 
-    @include sp() {
-        font-size: vw_sp(60);
-    }
+  @include sp() {
+    font-size: vw_sp(60);
+  }
 }
 
 .primary-h2 {
-    font-size: vw(50);
-    line-height: 1.37;
-    letter-spacing: 0.1em;
+  font-size: vw(50);
+  line-height: 1.37;
+  letter-spacing: 0.1em;
 
-    @include sp() {
-        font-size: vw_sp(30);
-        line-height: 1.5;
-    }
+  @include sp() {
+    font-size: vw_sp(30);
+    line-height: 1.5;
+  }
 }
 
 h2 {
-    font-size: vw(46);
-    line-height: 1.37;
-    letter-spacing: 0.1em;
+  font-size: vw(46);
+  line-height: 1.37;
+  letter-spacing: 0.1em;
 
-    @include sp() {
-        font-size: vw_sp(30);
-        line-height: 1.5;
-    }
+  @include sp() {
+    font-size: vw_sp(30);
+    line-height: 1.5;
+  }
 }
 
 h3 {
-    font-size: vw(36);
-    line-height: 1.5;
-    letter-spacing: 0.05em;
+  font-size: vw(36);
+  line-height: 1.5;
+  letter-spacing: 0.05em;
 
-    @include sp() {
-        font-size: vw_sp(24);
-    }
+  @include sp() {
+    font-size: vw_sp(24);
+  }
 }
 
 h4 {
-    font-size: vw(24);
-    line-height: 1.5;
+  font-size: vw(24);
+  line-height: 1.5;
 
-    @include sp() {
-        font-size: vw_sp(18);
-    }
+  @include sp() {
+    font-size: vw_sp(18);
+  }
 }
 
 h5 {
-    font-size: vw(20);
-    line-height: 1.5;
+  font-size: vw(20);
+  line-height: 1.5;
 
-    @include sp() {
-        font-size: vw_sp(15);
-    }
+  @include sp() {
+    font-size: vw_sp(15);
+  }
 }
 
 .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
+  background-image: var(--accent-gradient);
+  background-position: 0%;
+  background-clip: text;
+  background-size: 400%;
+  -webkit-text-fill-color: transparent;
 }
+
 .instructions {
-    margin-bottom: 2rem;
-    border: 1px solid rgba(var(--accent-light), 25%);
-    background: linear-gradient(
-        rgba(var(--accent-dark), 66%),
-        rgba(var(--accent-dark), 33%)
-    );
-    padding: 1.5rem;
-    border-radius: 8px;
-    text-align: center;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  background: linear-gradient(
+    rgb(var(--accent-dark) 66%),
+    rgb(var(--accent-dark) 33%)
+  );
+  border: 1px solid rgb(var(--accent-light) 25%);
+  border-radius: 8px;
 }
 
 .instructions code {
-    font-size: 0.8em;
-    font-weight: bold;
-    background: rgba(var(--accent-light), 12%);
-    color: rgb(var(--accent-light));
-    border-radius: 4px;
-    padding: 0.3em 0.4em;
+  padding: 0.3em 0.4em;
+  font-size: 0.8em;
+  font-weight: bold;
+  color: rgb(var(--accent-light));
+  background: rgb(var(--accent-light) 12%);
+  border-radius: 4px;
 }
+
 .instructions strong {
-    color: rgb(var(--accent-light));
+  color: rgb(var(--accent-light));
 }
 
 .is-view .animation-blur {
-    filter: blur(0);
-    opacity: 1;
-    transform: scale(1) !important;
+  filter: blur(0);
+  opacity: 1;
+  transform: scale(1) !important;
 }
 
 /* カーソル */
 .typed-cursor {
-    font-size: 1em;
-    opacity: 1;
-    -webkit-animation: blink 0.3s infinite;
-    -moz-animation: blink 0.3s infinite;
-    animation: blink 0.3s infinite;
-    animation-direction: alternate;
-    color: #fff;
-    font-size: 40px;
+  font-size: 1em;
+  font-size: 40px;
+  color: #ffffff;
+  opacity: 1;
+  animation: blink 0.3s infinite;
+  animation-direction: alternate;
 }
+
 @keyframes blink {
-    100% {
-        opacity: 0;
-    }
+  100% {
+    opacity: 0;
+  }
 }
-@-webkit-keyframes blink {
-    100% {
-        opacity: 0;
-    }
+
+@keyframes blink {
+  100% {
+    opacity: 0;
+  }
 }
-@-moz-keyframes blink {
-    100% {
-        opacity: 0;
-    }
+
+@keyframes blink {
+  100% {
+    opacity: 0;
+  }
+}
+
+.top {
+  background-color: $color-base-black;
 }

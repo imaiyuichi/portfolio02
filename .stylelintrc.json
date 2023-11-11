@@ -18,9 +18,5 @@
     "selector-pseudo-element-no-unknown": null,
     "prettier/prettier": null
   },
-  "ignoreFiles": [
-    "node_modules/",
-    "src/styles/_destyle.scss",
-    "src/styles/_splide-core.min.scss"
-  ]
+  "ignoreFiles": ["node_modules/", "src/styles/base/_destyle.scss"]
 }

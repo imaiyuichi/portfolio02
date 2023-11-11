@@ -1,49 +1,123 @@
 ---
-import { getTop, getBlogs } from '../libs/macrocms';
+import { getTop } from '../libs/macrocms';
+import ImageWrapper from '../components/ImageWrapper.astro';
 
 const MvData = await getTop({
-    fields: ['MvTitle', 'MvSubTitle', 'MvCatch'],
+  fields: ['topMv'],
 });
+
+const mv = MvData.topMv;
+const mvBg = mv.topMvBg;
+const mvImage = mv.topMvImage;
 ---
 
 <section class="root">
-    <div class="bg"></div>
-
-    <div class="inner">
-        <h2 class="title">MV</h2>
+  <div class="bg">
+    <ImageWrapper
+      src={mvBg.url}
+      width={mvBg.width}
+      height={mvBg.height}
+      alt=""
+      classValue="image-cover"
+    />
+  </div>
+  <div class="inner">
+    <div class="image">
+      <ImageWrapper
+        src={mvImage.url}
+        width={mvImage.width}
+        height={mvImage.height}
+        alt=""
+      />
     </div>
+    <div class="marquee-container">
+      <div class="marquee-content">
+        <h2 class="title whitespace-pre">{mv.topMvTitle}</h2>
+        <p class="sub-title whitespace-pre">{mv.topMvSubTitle}</p>
+        <p class="catch whitespace-pre">{mv.topMvCatch}</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <style lang="scss">
-    @import '../styles/_single.scss';
+  @import '../styles/_single';
 
-    .root {
-        position: relative;
-        padding: 6rem 0 0;
-    }
+  .root {
+    position: relative;
+  }
 
-    .bg {
-    }
+  .bg {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 720px;
+  }
 
-    .inner {
-        background-color: blanchedalmond;
-        position: relative;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100vw;
-        height: 500px;
-    }
+  .inner {
+    width: vw(1280);
+    height: 720px;
+    margin: auto;
+    padding: vw(200) 0 0;
+  }
 
-    .title {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        font-size: 4rem;
-        font-weight: 700;
-        line-height: 1;
-        text-align: center;
-        color: black;
+  .title {
+    font-size: vw(40);
+    font-weight: 700;
+    line-height: 1.6;
+    color: $color-base-white;
+    text-align: center;
+    letter-spacing: 0.04em;
+  }
+
+  .sub-title {
+    margin: vw(50) 0 0;
+    font-size: vw(40);
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    color: $color-base-white;
+    letter-spacing: 0.04em;
+  }
+
+  .catch {
+    margin: vw(40) 0 0;
+    font-size: vw(40);
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    color: $color-base-white;
+    letter-spacing: 0.04em;
+  }
+
+  .image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: vw(800);
+    z-index: 10;
+  }
+
+  .marquee-container {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+  }
+
+  .marquee-content {
+    display: inline-block;
+    animation: marquee-slide 20s linear infinite;
+  }
+
+  @keyframes marquee-slide {
+    0% {
+      transform: translateX(100%);
     }
+    100% {
+      transform: translateX(-100%);
+    }
+  }
 </style>

@@ -1,24 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&display=swap');
+@import 'https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600&display=swap';
 
 // breakpoints
 $breakpoints: (
-    'sm': 640px,
-    'md': 768px,
-    'lg': 1024px,
-    'xl': 1420px,
+  'sm': 640px,
+  'md': 768px,
+  'lg': 1024px,
+  'xl': 1420px,
 );
 
 // design size
 $design-size: (
-    'pc-width': 1440,
-    'pc-height': 810,
-    'sp-width': 360,
-    'sp-height': 800,
+  'pc-width': 1440,
+  'pc-height': 810,
+  'sp-width': 360,
+  'sp-height': 800,
 );
 
 // colors
 $color-base-white: #ffffff;
-$color-base-black: #2a2a2a;
+$color-base-black: #000000;
 $color-base-blue: #498edf;
 $color-yellow-marker: #e9f651;
 $color-base-red: #e74c3c;
@@ -26,31 +26,31 @@ $color-bg-gray-light: #f8f8f8;
 $color-base-black-reverse: #413937;
 $color-base-sub-e: #e6e6e6;
 $color-base-sub-f: #595757;
-$color-base-gray: #9a9a9a;
+$color-base-gray: #eaeaea;
 $color-border-gray: #d2d2d2;
 $color-tag-yellow: #f6ac19;
 $color-cellsource-green: linear-gradient(
-    72.52deg,
-    #385e89 -1.03%,
-    #2d688f 6.14%,
-    #197c9c 22.51%,
-    #0a8aa5 40.94%,
-    #0292aa 63.46%,
-    #0095ac 101.33%
+  72.52deg,
+  #385e89 -1.03%,
+  #2d688f 6.14%,
+  #197c9c 22.51%,
+  #0a8aa5 40.94%,
+  #0292aa 63.46%,
+  #0095ac 101.33%
 );
 $color-logo-gradation: linear-gradient(
-    75.51deg,
-    #3a37a7 7.29%,
-    #0095ac 50%,
-    #c8dfe6 100%
+  75.51deg,
+  #3a37a7 7.29%,
+  #0095ac 50%,
+  #c8dfe6 100%
 );
 $color-infinity-blue: linear-gradient(
-    43deg,
-    #1d2088 0%,
-    #263392 8%,
-    #2f489d 19%,
-    #3554a4 30%,
-    #3759a7 40%
+  43deg,
+  #1d2088 0%,
+  #263392 8%,
+  #2f489d 19%,
+  #3554a4 30%,
+  #3759a7 40%
 );
 
 // shadow
@@ -63,6 +63,7 @@ $shadow-works-environment: 0 0 50px rgb(28 105 129 / 10%);
 $hiragino-ud-sans-w4: 'Hiragino UD Sans W4 JIS2004', 'sans-serif';
 $hiragino-ud-sans-w5: 'Hiragino UD Sans W5 JIS2004', 'sans-serif';
 $noto-sans: 'Noto Sans JP', sans-serif;
+$font-family-termina: 'termina', sans-serif;
 
 // animations
 $duration-short: 0.3s;

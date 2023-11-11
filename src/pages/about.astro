@@ -1,10 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import BaseHeader from "../components/BaseHeader.astro";
-import AboutBg from "../partials/AboutBg.astro";
+import Layout from '../layouts/Layout.astro';
+import BaseHeader from '../components/BaseHeader.astro';
+import AboutBg from '../partials/AboutBg.astro';
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Welcome to Astro." pageType="about">
   <BaseHeader />
   <main class="main">
     <AboutBg />
@@ -12,11 +12,12 @@ import AboutBg from "../partials/AboutBg.astro";
 </Layout>
 
 <style lang="scss">
-  @import "../styles/_single.scss";
+  @import '../styles/_single';
+
   .main {
     width: vw(1200);
-    margin: auto;
     padding: vw(110) 0;
+    margin: auto;
 
     @include sp() {
       width: 100%;
@@ -28,6 +29,6 @@ import AboutBg from "../partials/AboutBg.astro";
     position: relative;
     top: -35rem;
     font-size: vw(80);
-    color: #fff;
+    color: #ffffff;
   }
 </style>

@@ -1,10 +1,10 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import BaseHeader from "../components/BaseHeader.astro";
+import Layout from '../layouts/Layout.astro';
+import BaseHeader from '../components/BaseHeader.astro';
 // import IndexAbout from '../partials/IndexAbout.astro';
 ---
 
-<Layout title="Welcome to Astro.">
+<Layout title="Welcome to Astro." pageType="work">
   <BaseHeader />
   <main class="main">
     <section class="root">
@@ -18,13 +18,13 @@ import BaseHeader from "../components/BaseHeader.astro";
   </main>
 
   <script>
-    import { canvasAnimation } from "../script/module/canvasAnimation.js";
-    import Typed from "typed.js";
+    import { canvasAnimation } from '../script/module/canvasAnimation.js';
+    import Typed from 'typed.js';
 
     canvasAnimation();
 
-    new Typed(".js-title", {
-      strings: ["Welcome to my website", "このコンテンツは現在準備中です。"],
+    new Typed('.js-title', {
+      strings: ['Welcome to my website', 'このコンテンツは現在準備中です。'],
       typeSpeed: 140,
       backDelay: 2000,
       backSpeed: 40,
@@ -32,17 +32,19 @@ import BaseHeader from "../components/BaseHeader.astro";
   </script>
 
   <style lang="scss">
-    @import "../styles/_single.scss";
+    @import '../styles/_single';
+
     .main {
       width: vw(1200);
-      margin: auto;
       padding: vw(110) 0;
+      margin: auto;
 
       @include sp() {
         width: 100%;
         padding: 0 vw_sp(30);
       }
     }
+
     .inner {
       padding: vw(150) 0 0;
       text-align: center;
@@ -54,12 +56,12 @@ import BaseHeader from "../components/BaseHeader.astro";
 
     .title {
       display: inline-block;
+      font-family: 'DotGothic16', sans-serif;
       font-size: vw(55);
       font-weight: 700;
       line-height: 1.5;
-      text-align: center;
-      font-family: "DotGothic16", sans-serif;
       color: white;
+      text-align: center;
 
       @include sp() {
         font-size: vw_sp(55);
@@ -71,8 +73,9 @@ import BaseHeader from "../components/BaseHeader.astro";
       height: 500px;
       margin: vw(100) 0 0;
     }
+
     canvas {
-      border: 1px solid #fff;
+      border: 1px solid #ffffff;
     }
   </style>
 </Layout>

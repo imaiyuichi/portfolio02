@@ -1,179 +1,179 @@
 ---
-import * as Variables from '../variables.astro';
-import navImage01 from '../images/navImage01.jpg';
-import navImage02 from '../images/navImage02.jpg';
-import navImage03 from '../images/navImage03.jpg';
-import navImage04 from '../images/navImage04.jpg';
+import * as Variables from "../variables.astro";
+import navImage01 from "../images/navImage01.jpg";
+import navImage02 from "../images/navImage02.jpg";
+import navImage03 from "../images/navImage03.jpg";
+import navImage04 from "../images/navImage04.jpg";
 
 const navList = [
-    {
-        image: navImage01,
-        text: 'work',
-        url: Variables.PAGES.work.url,
-        className: 'images image-01',
-    },
-    {
-        image: navImage02,
-        text: 'About',
-        url: Variables.PAGES.about.url,
-        className: 'images image-02',
-    },
-    {
-        image: navImage03,
-        text: 'Blog',
-        url: Variables.PAGES.blog.url,
-        className: 'images image-03',
-    },
-    {
-        image: navImage04,
-        text: 'Menu',
-        url: Variables.PAGES.blog.url,
-        className: 'images image-04 js-open-button',
-    },
+  {
+    image: navImage01,
+    text: "work",
+    url: Variables.PAGES.work.url,
+    className: "images image-01",
+  },
+  {
+    image: navImage02,
+    text: "About",
+    url: Variables.PAGES.about.url,
+    className: "images image-02",
+  },
+  {
+    image: navImage03,
+    text: "Blog",
+    url: Variables.PAGES.blog.url,
+    className: "images image-03",
+  },
+  {
+    image: navImage04,
+    text: "Menu",
+    url: Variables.PAGES.blog.url,
+    className: "images image-04 js-open-button",
+  },
 ];
 ---
 
 <div class="root">
-    <div class="bg"></div>
-    <nav class="nav">
-        <ul class="menu js-menu">
-            {
-                navList.map((item, index) => (
-                    <li class={`list js-list ${item.className}`}>
-                        <a href={item.url} class="link">
-                            <div class="image">
-                                <img src={item.image} alt="" />
-                            </div>
-                            <p class="text">{item.text}</p>
-                        </a>
-                    </li>
-                ))
-            }
-        </ul>
-        <button class="button js-close-button">show less</button>
-    </nav>
+  <div class="bg"></div>
+  <nav class="nav">
+    <ul class="menu js-menu">
+      {
+        navList.map((item, index) => (
+          <li class={`list js-list ${item.className}`}>
+            <a href={item.url} class="link">
+              <div class="image">
+                <img src={item.image} alt="" />
+              </div>
+              <p class="text">{item.text}</p>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <button class="button js-close-button">show less</button>
+  </nav>
 </div>
 
 <script>
-    import { headerNav } from '../script/module/headerNav.js';
-    import { disableNativeScroll } from '../script/utility/disable-native-scroll';
+  import { headerNav } from "../script/module/headerNav.js";
+  import { disableNativeScroll } from "../script/utility/disable-native-scroll";
 
-    const body = document.querySelector('body');
-    const hambuger = document.querySelector('.hamburger');
-    const openButton = document.querySelector('.js-open-button');
-    const closeButton = document.querySelector('.js-close-button');
+  const body = document.querySelector("body");
+  const hambuger = document.querySelector(".hamburger");
+  const openButton = document.querySelector(".js-open-button");
+  const closeButton = document.querySelector(".js-close-button");
 
-    headerNav();
-    const clickEvent = () => {
-        body.classList.toggle('hamburger-active');
-        const isActive = body.classList.contains('hamburger-active');
-        disableNativeScroll(isActive);
-    };
+  headerNav();
+  const clickEvent = () => {
+    body.classList.toggle("hamburger-active");
+    const isActive = body.classList.contains("hamburger-active");
+    disableNativeScroll(isActive);
+  };
 
-    openButton.addEventListener('click', () => {
-        clickEvent();
-    });
-    closeButton.addEventListener('click', () => {
-        clickEvent();
-    });
+  openButton.addEventListener("click", () => {
+    clickEvent();
+  });
+  closeButton.addEventListener("click", () => {
+    clickEvent();
+  });
 </script>
 
 <style lang="scss">
-    @import '../styles/_single.scss';
+  @import "../styles/_single";
 
-    .root {
-        position: relative;
+  .root {
+    position: relative;
+  }
+
+  .nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 10;
+    padding: 0 1rem;
+  }
+
+  .menu {
+    position: relative;
+  }
+
+  .list {
+    position: absolute;
+    right: 0;
+    margin: 1rem 0;
+    color: #ffffff;
+    cursor: pointer;
+    background-color: rgb(255 255 255 / 20%);
+    backdrop-filter: blur(16px);
+    border-radius: 8px;
+    transition: 0.5s ease-out;
+  }
+
+  .list:hover {
+    color: #2a2a2a;
+    background-color: #ffffff;
+  }
+
+  .link {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: 300px;
+    height: 100px;
+    height: 100%;
+    padding: 0.625rem;
+  }
+
+  .text {
+    font-size: vw(20);
+    font-weight: bold;
+  }
+
+  .image {
+    width: 100px;
+    height: 80px;
+
+    img {
+      height: 100%;
+      object-fit: cover;
     }
+  }
 
-    .nav {
-        position: fixed;
-        z-index: 10;
-        top: 0;
-        right: 0;
-        padding: 0 1rem;
+  .button {
+    position: absolute;
+    top: 420px;
+    right: 1rem;
+    display: none;
+    width: 7rem;
+    height: 2rem;
+    font-size: vw(20);
+    font-weight: bold;
+    color: $color-base-white;
+    text-align: center;
+    cursor: pointer;
+    background-color: rgb(255 255 255 / 20%);
+    backdrop-filter: blur(16px);
+    border-radius: 9999px;
+    opacity: 0;
+    transition: 0.5s;
+  }
+
+  .button {
+    @include hover() {
+      color: $color-base-black;
+      background-color: $color-base-white;
     }
-
-    .menu {
-        position: relative;
-    }
-
-    .list {
-        position: absolute;
-        right: 0;
-        margin: 1rem 0;
-        color: #fff;
-        background-color: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(16px);
-        border-radius: 8px;
-        transition: 0.5s ease-out;
-        cursor: pointer;
-    }
-
-    .list:hover {
-        background-color: #fff;
-        color: #2a2a2a;
-    }
-
-    .link {
-        width: 300px;
-        height: 100px;
-        padding: 0.625rem;
-
-        display: flex;
-        align-items: center;
-        gap: 1rem;
-        height: 100%;
-    }
-
-    .text {
-        font-size: vw(20);
-        font-weight: bold;
-    }
-
-    .image {
-        width: 100px;
-        height: 80px;
-        img {
-            height: 100%;
-            object-fit: cover;
-        }
-    }
-
-    .button {
-        opacity: 0;
-        display: none;
-        position: absolute;
-        width: 7rem;
-        height: 2rem;
-        right: 1rem;
-        top: 420px;
-        text-align: center;
-        color: $color-base-white;
-        font-size: vw(20);
-        font-weight: bold;
-        background-color: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(16px);
-        border-radius: 9999px;
-        transition: 0.5s;
-        cursor: pointer;
-    }
-
-    .button {
-        @include hover() {
-            background-color: $color-base-white;
-            color: $color-base-black;
-        }
-    }
+  }
 </style>
 <style lang="scss" is:global>
-    .isBlur {
-        z-index: 1;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        backdrop-filter: blur(20px);
-        transition: 0.4s ease-out;
-    }
+  .isBlur {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(20px);
+    transition: 0.4s ease-out;
+  }
 </style>

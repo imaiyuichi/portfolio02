@@ -1,9 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro';
 import Layout from '../../layouts/Layout.astro';
-import BaseHeader from '../../components/BaseHeader.astro';
-import Blogs from '../../components/Blogs.astro';
-import IndexAbout from '../../partials/IndexAbout.astro';
 import { getBlogs } from '../../libs/macrocms';
 import Card from '../../components/Card.astro';
 import AnimationBlur from '../../components/AnimationBlur.astro';
@@ -11,64 +8,66 @@ import ViewElement from '../../components/ViewElement.astro';
 
 import type { GetStaticPathsOptions } from 'astro';
 
+const BlogData = await getBlogs({
+  fields: ['id', 'title', 'eyecatch', 'category'],
+  limit: 5,
+});
+
+const data = BlogData.contents;
+
 export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
-    const BlogData = await getBlogs({ limit: 1000 });
-    return paginate(BlogData.contents, { pageSize: 3 });
+  const BlogData = await getBlogs({ limit: 1000 });
+  return paginate(BlogData.contents, { pageSize: 3 });
 };
 const { page } = Astro.props;
 ---
 
-<Layout title="Welcome to Astro.">
-    <BaseHeader />
-    <main class="main">
+<Layout title="Welcome to Astro." pageType="blog">
+  <main class="main">
+    {
+      data.map((data: any) => {
+        return <Card BlogData={data} />;
+      })
+    }
+    <nav class="test">
+      <p>{page.currentPage}/{page.lastPage}</p>
+      <ul>
         {
-            page.data.map((item: any) => (
-                <Card
-                    title={item.title}
-                    href={item.id}
-                    img={item.eyecatch.url}
-                    date={new Date(item.category.publishedAt).toLocaleString()}
-                />
-            ))
+          page.url.prev && (
+            <li>
+              <a href={page.url.prev}>PREV</a>
+            </li>
+          )
         }
-        <nav class="test">
-            <p>{page.currentPage}/{page.lastPage}</p>
-            <ul>
-                {
-                    page.url.prev && (
-                        <li>
-                            <a href={page.url.prev}>PREV</a>
-                        </li>
-                    )
-                }
-                {/* page.url.nextがある場合は次ページへのリンクを表示 */}
-                {
-                    page.url.next && (
-                        <li>
-                            <a href={page.url.next}>NEXT</a>
-                        </li>
-                    )
-                }
-            </ul>
-        </nav>
-    </main>
+        {/* page.url.nextがある場合は次ページへのリンクを表示 */}
+        {
+          page.url.next && (
+            <li>
+              <a href={page.url.next}>NEXT</a>
+            </li>
+          )
+        }
+      </ul>
+    </nav>
+  </main>
 </Layout>
 
 <style lang="scss">
-    @import '../../styles/_single.scss';
-    .main {
-        width: vw(1200);
-        margin: auto;
-        padding: vw(110) 0;
+  @import '../../styles/_single';
 
-        @include sp() {
-            width: 100%;
-            padding: 0 vw_sp(30);
-        }
-    }
+  .main {
+    width: vw(1200);
+    padding: vw(110) 0;
+    margin: auto;
 
-    .test {
-        color: white;
-        transform: translate(-50% -50%) rotate(180deg);
+    @include sp() {
+      width: 100%;
+      padding: 0 vw_sp(30);
     }
+  }
+
+  .test {
+    color: #000;
+    transform: translate(-50% -50%) rotate(180deg);
+  }
 </style>

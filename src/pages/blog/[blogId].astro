@@ -4,417 +4,490 @@ import { getBlogDetail, getBlogs } from '../../libs/macrocms';
 import BaseHeader from '../../components/BaseHeader.astro';
 
 export async function getStaticPaths() {
-    const BlogData = await getBlogs({ fields: 'id' });
-    return BlogData.contents.map((blog) => ({
-        params: {
-            blogId: blog.id,
-        },
-    }));
+  const BlogData = await getBlogs({ fields: 'id' });
+  return BlogData.contents.map(blog => ({
+    params: {
+      blogId: blog.id,
+    },
+  }));
 }
 
 const { blogId } = Astro.params;
 const blog = await getBlogDetail(blogId as string);
 ---
 
-<Layout title="blogs">
-    <BaseHeader />
-    <main class="main">
-        <div class="bg"></div>
-        <div class="inner">
-            <h1 class="title">{blog.title}</h1>
-            <p>公開日：{new Date(blog.publishedAt).toLocaleString()}</p>
-            <div class="editor">
-                <div set:html={blog.content} />
-            </div>
-        </div>
-    </main>
+<Layout title="blogs" pageType="blogId">
+  <BaseHeader />
+  <main class="main">
+    <div class="bg"></div>
+    <div class="inner">
+      <h1 class="title">{blog.title}</h1>
+      <p>公開日：{new Date(blog.publishedAt).toLocaleString()}</p>
+      <div class="editor">
+        <div set:html={blog.content} />
+      </div>
+    </div>
+  </main>
 
-    <style>
-        main {
-            color: #fff;
-        }
-    </style>
+  <style>
+    main {
+      color: #ffffff;
+    }
+  </style>
 </Layout>
 
 <style lang="scss">
-    @import '../../styles/_single';
-    .inner {
-        width: vw(800);
-        margin: 180px auto 0;
+  @import '../../styles/_single';
 
-        @include sp() {
-            width: vw_sp(250);
-            margin: vw_sp(100) auto 0;
-        }
+  .inner {
+    width: vw(800);
+    margin: 180px auto 0;
+
+    @include sp() {
+      width: vw_sp(250);
+      margin: vw_sp(100) auto 0;
     }
+  }
 
-    .title {
-        font-size: 40px;
+  .title {
+    font-size: 40px;
 
-        @include sp() {
-            font-size: vw_sp(28);
-        }
+    @include sp() {
+      font-size: vw_sp(28);
     }
+  }
 </style>
 
 <style lang="scss" is:global>
-    @import '../../styles/_single';
-    img {
-        width: 100%;
-        height: auto;
+  @import '../../styles/_single';
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  .editor {
+    h2 {
+      position: relative;
+      width: fit-content;
+      margin: 2.5rem 0 0;
+      font-size: vw(28);
+      font-weight: 700;
+      line-height: 1.5;
+      letter-spacing: 0.05em;
+
+      @include sp() {
+        margin: 6.666rem 0 0;
+        font-size: vw_sp(24);
+      }
+
+      .border {
+        padding: 0 0 0.375rem;
+        background: linear-gradient(
+          transparent calc(100% - 0.166rem),
+          $color-base-black 0.166rem
+        );
+
+        @include sp() {
+          padding: 0 0 1rem;
+          background: linear-gradient(
+            transparent calc(100% - 0.5rem),
+            $color-base-black 0.5rem
+          );
+        }
+      }
     }
 
-    .editor {
-        h2 {
-            position: relative;
-            width: fit-content;
-            margin: 2.5rem 0 0;
-            font-size: vw(28);
-            font-weight: 700;
-            line-height: 1.5;
-            letter-spacing: 0.05em;
-            @include sp() {
-                margin: 6.666rem 0 0;
-                font-size: vw_sp(24);
-            }
-            .border {
-                padding: 0 0 0.375rem;
-                background: linear-gradient(
-                    transparent calc(100% - 0.166rem),
-                    $color-base-black 0.166rem
-                );
-                @include sp() {
-                    padding: 0 0 1rem;
-                    background: linear-gradient(
-                        transparent calc(100% - 0.5rem),
-                        $color-base-black 0.5rem
-                    );
-                }
-            }
+    h3 {
+      position: relative;
+      width: fit-content;
+      padding: 0 0 0 0.5rem;
+      margin: 2.083rem 0 0;
+      font-size: vw(24);
+      font-weight: 700;
+      line-height: 1.5;
+      letter-spacing: 0.05em;
+
+      &::after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: vw(4);
+        height: 100%;
+        content: '';
+        background-color: $color-base-black;
+
+        @include sp() {
+          width: vw_sp(3);
         }
-        h3 {
-            position: relative;
-            width: fit-content;
-            margin: 2.083rem 0 0;
-            padding: 0 0 0 0.5rem;
-            font-size: vw(24);
-            font-weight: 700;
-            line-height: 1.5;
-            letter-spacing: 0.05em;
-            &::after {
-                content: '';
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: vw(4);
-                height: 100%;
-                background-color: $color-base-black;
-                @include sp() {
-                    width: vw_sp(3);
-                }
-            }
-            @include sp() {
-                margin: 6.666rem 0 0;
-                padding: 0 0 0 1.833rem;
-                font-size: vw_sp(18);
-            }
-        }
-        h4 {
-            margin: 1.666rem 0 0;
-            font-size: vw(18);
-            font-weight: 700;
-            line-height: 1.5;
-            letter-spacing: 0.05em;
-            @include sp() {
-                margin: 6.333rem 0 0;
-                font-size: vw_sp(16);
-            }
-        }
-        p {
-            margin: 1.666rem 0 0;
-            font-size: vw(16);
-            font-weight: 400;
-            line-height: 1.875;
-            letter-spacing: 0;
-            @include sp() {
-                margin: 6rem 0 0;
-                font-size: vw_sp(12);
-            }
-            strong {
-                font-weight: 700;
-            }
-            a {
-                color: $color-base-blue;
-                border-bottom: vw(1) solid $color-base-blue;
-                text-decoration: none;
-            }
-            u {
-                border-bottom: vw(1) solid $color-base-black;
-                text-decoration: none;
-            }
-            .marker {
-                z-index: 1;
-                position: relative;
-                display: inline;
-                padding: 0 0 0.08rem;
-                word-break: break-all;
-                background: linear-gradient(
-                    transparent calc(100% - 0.25rem),
-                    $color-yellow-marker 0.25rem
-                );
-            }
-            .colorRed {
-                color: $color-base-red;
-            }
-        }
-        hr {
-            margin: 1.666rem 0 0;
-            @include sp() {
-                margin: 6rem 0 0;
-            }
-        }
-        blockquote {
-            position: relative;
-            padding: 0 0 0 1.1rem;
-            font-size: vw(16);
-            font-weight: 400;
-            line-height: 1.875;
-            letter-spacing: 0;
-            &::after {
-                content: '';
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: vw(3);
-                height: 100%;
-                background-color: $color-border-gray;
-                @include sp() {
-                    width: vw_sp(3);
-                }
-            }
-            @include sp() {
-                padding: 0 0 0 2.5rem;
-                font-size: vw_sp(13);
-            }
-        }
-        ol {
-            margin: 1.666rem 0 0;
-            padding: 0 0 0 0.765rem;
-            font-size: vw(16);
-            font-weight: 400;
-            line-height: 1.875;
-            letter-spacing: 0;
-            list-style: decimal;
-            @include sp() {
-                margin: 6rem 0 0;
-                padding: 0 0 0 2.666rem;
-                font-size: vw_sp(12);
-            }
-        }
-        ul {
-            margin: 1.666rem 0 0;
-            padding: 0 0 0 0.765rem;
-            font-size: vw(16);
-            font-weight: 400;
-            line-height: 1.875;
-            letter-spacing: 0;
-            list-style-type: disc;
-            @include sp() {
-                margin: 6rem 0 0;
-                padding: 0 0 0 2.666rem;
-                font-size: vw_sp(12);
-            }
-            ::marker {
-                font-size: vw(16);
-                @include sp() {
-                    font-size: vw_sp(12);
-                }
-            }
-        }
-        figure {
-            display: block;
-            width: 26.5rem;
-            margin: 1.666rem auto 0;
-            @include sp() {
-                width: 100%;
-                margin: 6rem auto 0;
-            }
-        }
-        figcaption {
-            margin: 0.333rem 0 0;
-            text-align: center;
-            font-size: vw(13);
-            font-weight: 400;
-            line-height: 2;
-            @include sp() {
-                margin: 1.833rem 0 0;
-                font-size: vw_sp(11);
-            }
-        }
-        img {
-            display: block;
-            height: auto;
-            width: auto;
-        }
-        .iframeWrapper {
-            width: 25rem;
-            margin: 2.5rem auto 0;
-            @include sp() {
-                width: 100%;
-                margin: 6.666rem auto 0;
-            }
-        }
-        table {
-            margin: 2.5rem 0 0;
-            @include sp() {
-                margin: 6.666rem 0 0;
-            }
-            th,
-            td {
-                padding: 1rem;
-                font-size: vw(16);
-                line-height: 1.875;
-                border: 1px solid $color-border-gray;
-                min-width: calc(29rem / 4);
-                @include sp() {
-                    font-size: vw_sp(16);
-                }
-            }
-            th {
-                background-color: $color-bg-gray-light;
-                p {
-                    font-weight: 700;
-                    text-align: center;
-                }
-            }
-            p {
-                margin: 0;
-            }
-        }
-        .cvSection {
-            margin: 1.666rem 0 0;
-            padding: 1.5rem 3.541rem;
-            border: 1px solid $color-base-gray;
-            border-radius: 0.416rem;
-            @include sp() {
-                margin: 6.666rem 0 0;
-                padding: 5rem 3rem;
-                border-radius: 1.666rem;
-            }
-            p {
-                margin: 0;
-            }
-        }
-        .buttonWrapper {
-            margin: 1rem auto 0;
-            min-width: 12.333rem;
-            width: fit-content;
-            height: 2.416rem;
-            text-align: center;
-            @include sp() {
-                margin: 3.333rem auto 0;
-                width: 45.666rem;
-                height: 13.333rem;
-            }
-        }
-        .colorSection {
-            margin: 1.666rem 0 0;
-            padding: 1.666rem 2rem;
-            text-align: center;
-            @include sp() {
-                margin: 6.666rem 0 0;
-                padding: 6.666rem 8rem;
-            }
-            p {
-                margin: 0;
-            }
-        }
-        .content2LeftImageWrapper,
-        .content2LeftTextWrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: auto auto;
-            margin: 2.5rem 0 0;
-            @include sp() {
-                display: flex;
-                flex-flow: column;
-                margin: 6.666rem 0 0;
-            }
-            h2,
-            h3,
-            h4 {
-                margin: 0;
-            }
-        }
-        .leftImage {
-            grid-column: 1 / 2;
-            grid-row: 1 / 3;
-        }
-        .rightHeading {
-            grid-column: 2 / 2;
-            grid-row: 1 / 2;
-            width: 16rem;
-        }
-        .rightText {
-            grid-column: 2 / 2;
-            grid-row: 2 / 3;
-        }
-        .leftHeading {
-            grid-column: 1 / 2;
-            grid-row: 1 / 2;
-        }
-        .leftText {
-            grid-column: 1 / 2;
-            grid-row: 2 / 3;
-        }
-        .rightImage {
-            grid-column: 2 / 2;
-            grid-row: 1 / 3;
-        }
-        .leftHeading,
-        .rightHeading {
-            width: 16rem;
-            @include sp() {
-                order: 1;
-                width: 100%;
-            }
-        }
-        .leftImage,
-        .rightImage {
-            width: 15.5rem !important;
-            @include sp() {
-                order: 2;
-                width: 100% !important;
-                margin: 6rem 0 0;
-            }
-        }
-        img {
-            width: 100%;
-        }
-        .rightText,
-        .leftText {
-            width: 16rem;
-            @include sp() {
-                order: 3;
-                width: 100%;
-            }
-            h3 {
-                margin: 0;
-                &:nth-child(n + 2) {
-                    width: 100%;
-                }
-            }
-            p {
-                margin: 0.866rem 0 0;
-                @include sp() {
-                    margin: 4.333rem 0 0;
-                }
-            }
-        }
-        .rightHeading,
-        .rightText,
-        .rightImage {
-            margin: 0 0 0 auto;
-        }
+      }
+
+      @include sp() {
+        padding: 0 0 0 1.833rem;
+        margin: 6.666rem 0 0;
+        font-size: vw_sp(18);
+      }
     }
+
+    h4 {
+      margin: 1.666rem 0 0;
+      font-size: vw(18);
+      font-weight: 700;
+      line-height: 1.5;
+      letter-spacing: 0.05em;
+
+      @include sp() {
+        margin: 6.333rem 0 0;
+        font-size: vw_sp(16);
+      }
+    }
+
+    p {
+      margin: 1.666rem 0 0;
+      font-size: vw(16);
+      font-weight: 400;
+      line-height: 1.875;
+      letter-spacing: 0;
+
+      @include sp() {
+        margin: 6rem 0 0;
+        font-size: vw_sp(12);
+      }
+
+      strong {
+        font-weight: 700;
+      }
+
+      a {
+        color: $color-base-blue;
+        text-decoration: none;
+        border-bottom: vw(1) solid $color-base-blue;
+      }
+
+      u {
+        text-decoration: none;
+        border-bottom: vw(1) solid $color-base-black;
+      }
+
+      .marker {
+        position: relative;
+        z-index: 1;
+        display: inline;
+        padding: 0 0 0.08rem;
+        word-break: break-all;
+        background: linear-gradient(
+          transparent calc(100% - 0.25rem),
+          $color-yellow-marker 0.25rem
+        );
+      }
+
+      .colorRed {
+        color: $color-base-red;
+      }
+    }
+
+    hr {
+      margin: 1.666rem 0 0;
+
+      @include sp() {
+        margin: 6rem 0 0;
+      }
+    }
+
+    blockquote {
+      position: relative;
+      padding: 0 0 0 1.1rem;
+      font-size: vw(16);
+      font-weight: 400;
+      line-height: 1.875;
+      letter-spacing: 0;
+
+      &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: vw(3);
+        height: 100%;
+        content: '';
+        background-color: $color-border-gray;
+
+        @include sp() {
+          width: vw_sp(3);
+        }
+      }
+
+      @include sp() {
+        padding: 0 0 0 2.5rem;
+        font-size: vw_sp(13);
+      }
+    }
+
+    ol {
+      padding: 0 0 0 0.765rem;
+      margin: 1.666rem 0 0;
+      font-size: vw(16);
+      font-weight: 400;
+      line-height: 1.875;
+      letter-spacing: 0;
+      list-style: decimal;
+
+      @include sp() {
+        padding: 0 0 0 2.666rem;
+        margin: 6rem 0 0;
+        font-size: vw_sp(12);
+      }
+    }
+
+    ul {
+      padding: 0 0 0 0.765rem;
+      margin: 1.666rem 0 0;
+      font-size: vw(16);
+      font-weight: 400;
+      line-height: 1.875;
+      letter-spacing: 0;
+      list-style-type: disc;
+
+      @include sp() {
+        padding: 0 0 0 2.666rem;
+        margin: 6rem 0 0;
+        font-size: vw_sp(12);
+      }
+
+      ::marker {
+        font-size: vw(16);
+
+        @include sp() {
+          font-size: vw_sp(12);
+        }
+      }
+    }
+
+    figure {
+      display: block;
+      width: 26.5rem;
+      margin: 1.666rem auto 0;
+
+      @include sp() {
+        width: 100%;
+        margin: 6rem auto 0;
+      }
+    }
+
+    figcaption {
+      margin: 0.333rem 0 0;
+      font-size: vw(13);
+      font-weight: 400;
+      line-height: 2;
+      text-align: center;
+
+      @include sp() {
+        margin: 1.833rem 0 0;
+        font-size: vw_sp(11);
+      }
+    }
+
+    img {
+      display: block;
+      width: auto;
+      height: auto;
+    }
+
+    .iframeWrapper {
+      width: 25rem;
+      margin: 2.5rem auto 0;
+
+      @include sp() {
+        width: 100%;
+        margin: 6.666rem auto 0;
+      }
+    }
+
+    table {
+      margin: 2.5rem 0 0;
+
+      @include sp() {
+        margin: 6.666rem 0 0;
+      }
+
+      th,
+      td {
+        min-width: calc(29rem / 4);
+        padding: 1rem;
+        font-size: vw(16);
+        line-height: 1.875;
+        border: 1px solid $color-border-gray;
+
+        @include sp() {
+          font-size: vw_sp(16);
+        }
+      }
+
+      th {
+        background-color: $color-bg-gray-light;
+
+        p {
+          font-weight: 700;
+          text-align: center;
+        }
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .cvSection {
+      padding: 1.5rem 3.541rem;
+      margin: 1.666rem 0 0;
+      border: 1px solid $color-base-gray;
+      border-radius: 0.416rem;
+
+      @include sp() {
+        padding: 5rem 3rem;
+        margin: 6.666rem 0 0;
+        border-radius: 1.666rem;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .buttonWrapper {
+      width: fit-content;
+      min-width: 12.333rem;
+      height: 2.416rem;
+      margin: 1rem auto 0;
+      text-align: center;
+
+      @include sp() {
+        width: 45.666rem;
+        height: 13.333rem;
+        margin: 3.333rem auto 0;
+      }
+    }
+
+    .colorSection {
+      padding: 1.666rem 2rem;
+      margin: 1.666rem 0 0;
+      text-align: center;
+
+      @include sp() {
+        padding: 6.666rem 8rem;
+        margin: 6.666rem 0 0;
+      }
+
+      p {
+        margin: 0;
+      }
+    }
+
+    .content2LeftImageWrapper,
+    .content2LeftTextWrapper {
+      display: grid;
+      grid-template-rows: auto auto;
+      grid-template-columns: 1fr 1fr;
+      margin: 2.5rem 0 0;
+
+      @include sp() {
+        display: flex;
+        flex-flow: column;
+        margin: 6.666rem 0 0;
+      }
+
+      h2,
+      h3,
+      h4 {
+        margin: 0;
+      }
+    }
+
+    .leftImage {
+      grid-row: 1 / 3;
+      grid-column: 1 / 2;
+    }
+
+    .rightHeading {
+      grid-row: 1 / 2;
+      grid-column: 2 / 2;
+      width: 16rem;
+    }
+
+    .rightText {
+      grid-row: 2 / 3;
+      grid-column: 2 / 2;
+    }
+
+    .leftHeading {
+      grid-row: 1 / 2;
+      grid-column: 1 / 2;
+    }
+
+    .leftText {
+      grid-row: 2 / 3;
+      grid-column: 1 / 2;
+    }
+
+    .rightImage {
+      grid-row: 1 / 3;
+      grid-column: 2 / 2;
+    }
+
+    .leftHeading,
+    .rightHeading {
+      width: 16rem;
+
+      @include sp() {
+        order: 1;
+        width: 100%;
+      }
+    }
+
+    .leftImage,
+    .rightImage {
+      width: 15.5rem !important;
+
+      @include sp() {
+        order: 2;
+        width: 100% !important;
+        margin: 6rem 0 0;
+      }
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .rightText,
+    .leftText {
+      width: 16rem;
+
+      @include sp() {
+        order: 3;
+        width: 100%;
+      }
+
+      h3 {
+        margin: 0;
+
+        &:nth-child(n + 2) {
+          width: 100%;
+        }
+      }
+
+      p {
+        margin: 0.866rem 0 0;
+
+        @include sp() {
+          margin: 4.333rem 0 0;
+        }
+      }
+    }
+
+    .rightHeading,
+    .rightText,
+    .rightImage {
+      margin: 0 0 0 auto;
+    }
+  }
 </style>
