@@ -1,88 +1,99 @@
 ---
-import { getBlogDetail, getBlogs } from '../libs/macrocms';
-import AnimationBlur from '../components/AnimationBlur.astro';
-import ViewElement from '../components/ViewElement.astro';
+import ImageWrapper from '../components/ImageWrapper.astro';
 
 interface Props {
-    title?: string;
-    body?: string;
-    href?: string;
-    date?: string;
-    img?: string;
+  BlogData: {
+    id: string;
+    eyecatch: {
+      url: string;
+      width: number;
+      height: number;
+    };
+    title: string;
+    category: {
+      publishedAt: string;
+    };
+  };
+  splide?: boolean;
 }
-const { href, title, body, date, img } = Astro.props;
+
+const { BlogData, splide } = Astro.props;
 ---
 
-<div class="root splide__slide">
-    <div class="card">
-        <a href={href} class="link">
-            <div class="inner">
-                <div class="img">
-                    <img src={img} alt="" />
-                </div>
-                <div class="text">
-                    <h2 class="title">{title}</h2>
-                    <p class="date">
-                        公開日：{date}
-                    </p>
-                </div>
-            </div>
-        </a>
+<article class:list=`blog ${splide && "splide__slide"}`>
+  <a href={`/blog/${BlogData.id}`} class="link">
+    <div class="blog__inner">
+      <div class="blog__img">
+        <ImageWrapper
+          src={BlogData.eyecatch.url}
+          width={BlogData.eyecatch.width}
+          height={BlogData.eyecatch.height}
+          alt=""
+          classValue="image-cover"
+        />
+      </div>
+      <div class="blog__text-area">
+        <h2 class="blog__title">{BlogData.title}</h2>
+        <p class="blog__date">
+          公開日：
+          {new Date(BlogData.category.publishedAt).toLocaleString()}
+        </p>
+      </div>
     </div>
-</div>
+  </a>
+</article>
 
 <style lang="scss">
-    @import '../styles/_single.scss';
+  @import '../styles/_single';
 
-    .root {
-        width: 41rem;
-    }
+  .blog {
+    height: vw(324);
+    background-color: #6e7072;
+    backdrop-filter: blur(16px);
+    border-radius: vw(10);
+    transition: 0.5s;
 
-    .card {
-        display: flex;
-        background-color: #23262d;
-        background-size: 400%;
-        border-radius: 7px;
-        background-position: 100%;
-        transition: background-position 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+    @include hover() {
+      color: $color-base-black;
+      background-color: #a5a9ad;
     }
+  }
 
-    .link {
-        width: 100%;
-        color: white;
-        background-color: #23262d;
-        opacity: 0.8;
-    }
+  .link {
+    width: 100%;
+  }
 
-    .title {
-        margin: vw(20) 0 0;
-        font-size: vw(20);
-        transition: color 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        @include line-clamp(1);
-    }
+  .blog__inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
 
-    .date {
-        margin: vw(20) 0 0;
-        font-size: vw(16);
-    }
-
-    .inner {
-        display: flex;
-        gap: vw(30);
-        padding: vw(10);
-    }
+  .blog__img {
+    position: relative;
+    width: vw(533);
+    height: 100%;
+    opacity: 0.8;
 
     .img {
-        width: 350px;
+      height: 100%;
+      object-fit: cover;
     }
+  }
 
-    .card:is(:hover, :focus-within) {
-        background-position: 0;
-        background-image: var(--accent-gradient);
-    }
+  .blog__text-area {
+    flex: 1;
+    padding: vw(24);
+  }
 
-    .card:is(:hover, :focus-within) h2 {
-        color: rgb(var(--accent-light));
-    }
+  .blog__title {
+    font-size: vw(28);
+
+    @include line-clamp(3);
+  }
+
+  .blog__date {
+    margin: vw(20) 0 0;
+    font-size: vw(16);
+  }
 </style>

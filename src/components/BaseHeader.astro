@@ -1,70 +1,63 @@
 ---
-import Nav from "../components/Nav.astro";
-import * as Variables from "../variables.astro";
+import ImageWrapper from './ImageWrapper.astro';
+import Nav from '../components/Nav.astro';
+import * as Variables from '../variables.astro';
+import { getTop } from '../libs/macrocms';
+
+const logData = await getTop({
+  fields: ['logo'],
+});
+
+const logo = logData.logo;
 
 const topLInk = Variables.PAGES.index.url;
 ---
 
 <header class="header">
-  <div class="inner">
-    <h1 class="title">
-      <a class="link" href={topLInk}>Blog</a>
-    </h1>
-    <Nav />
+  <div class="bg">
+    <div class="inner">
+      <h1 class="title">
+        <a class="link" href={topLInk}
+          ><img
+            src={logo.url}
+            alt=""
+            width={logo.width}
+            height={logo.height}
+          /></a
+        >
+      </h1>
+    </div>
   </div>
 </header>
+<!-- <Nav /> -->
 
 <style lang="scss">
-  @import "../styles/_single.scss";
+  @import '../styles/_single';
 
   .root {
     position: relative;
   }
 
-  .header {
-    position: relative;
-    width: 100%;
-    height: vw(110);
-    position: fixed;
-    top: 0;
-    // backdrop-filter: blur(10px);
-    z-index: 999;
-
-    @include sp() {
-      height: vw_sp(60);
-    }
-
-    //     &::before {
-    //         content: '';
-    //         position: absolute;
-    //         bottom: 0;
-    //         left: 0;
-    //         width: 100%;
-    //         height: 8px;
-    //         background: linear-gradient(
-    //             rgba(var(--accent-dark), 66%),
-    //             rgba(var(--accent-dark), 33%)
-    //         );
-    //         background-size: 400%;
-    //         background-position: 0%;
-    //         z-index: -1;
-    //     }
+  .bg {
+    background-color: $color-base-black;
   }
 
   .inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: vw(1200);
-    height: 100%;
-    margin: auto;
-
-    @include sp() {
-      width: vw(1400);
-    }
+    padding: vw(30) 0 vw(30) vw(30);
   }
 
   .title {
-    color: #fff;
+    display: inline-block;
+    height: 20px;
+  }
+
+  .link {
+    display: block;
+    height: 100%;
+  }
+
+  img {
+    display: block;
+    height: 100%;
   }
 </style>

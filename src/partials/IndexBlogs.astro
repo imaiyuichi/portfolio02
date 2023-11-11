@@ -1,0 +1,124 @@
+---
+import { getTop, getBlogs } from '../libs/macrocms';
+import * as Variables from '../variables.astro';
+
+import BaseLayout from '../components/BaseLayout.astro';
+import BaseTitle from '../components/BaseTitle.astro';
+import Card from '../components/Card.astro';
+import Button from '../components/Button.astro';
+
+const topData = await getTop({
+  fields: ['topBlogTitle'],
+});
+
+const BlogData = await getBlogs({
+  fields: ['id', 'title', 'eyecatch', 'category'],
+  limit: 5,
+});
+
+const title = topData.topBlogTitle;
+const data = BlogData.contents;
+---
+
+<BaseLayout background="gray">
+  <BaseTitle title={title} />
+  <div class="container">
+    <div class="blogs splide">
+      <div class="splide__track">
+        <div class="splide__list">
+          {
+            data.map((data: any) => {
+              return <Card BlogData={data} splide={true} />;
+            })
+          }
+        </div>
+      </div>
+    </div>
+    <div class="button">
+      <Button type="gray" link={Variables.PAGES.blog.url} text="READ MORE" />
+    </div>
+  </div>
+
+  <script>
+    import { SplideSlide } from '../script/module/splide';
+    SplideSlide();
+  </script>
+
+  <style lang="scss">
+    @import '../styles/_single';
+
+    .blogs {
+      margin: vw(55) 0 0;
+    }
+
+    .button {
+      margin: vw(65) 0 0;
+      text-align: center;
+    }
+  </style>
+  <style lang="scss" is:global>
+    .splide__arrows {
+      position: relative;
+
+      svg {
+        display: none;
+      }
+    }
+
+    .splide__arrow--prev {
+      &::before {
+        position: absolute;
+        top: 6.5rem;
+        left: 7rem;
+        z-index: 100;
+        width: 4rem;
+        height: 4rem;
+        content: '';
+        background: url('../icons/arrow.svg') no-repeat;
+        transform: rotate(180deg) !important;
+      }
+    }
+
+    .splide__arrow--next {
+      &::before {
+        position: absolute;
+        top: 6.5rem;
+        right: 7rem;
+        z-index: 100;
+        width: 4rem;
+        height: 4rem;
+        content: '';
+        background: url('../icons/arrow.svg') no-repeat;
+      }
+    }
+
+    // .splide__slide {
+    //   opacity: 0.3; /* 左右のスライドを薄くする */
+    //   transition: 0.7s; /* ゆっくり小さくさせる */
+    // }
+
+    // /* アクティブなスライドのスタイル */
+    // .splide__slide.is-active {
+    //   opacity: 1; /* 中央のスライドは薄くしない */
+    // }
+
+    // .splide__pagination {
+    //   gap: 0.5rem;
+    //   margin: 1rem 0 0 !important;
+    // }
+
+    // .splide__pagination__page {
+    //   width: 0.5rem;
+    //   height: 0.5rem;
+    //   background-color: gray;
+    //   border-radius: 9999px;
+
+    //   &is-active {
+    //   }
+    // }
+
+    // .splide__pagination__page.is-active {
+    //   background-color: white;
+    // }
+  </style>
+</BaseLayout>

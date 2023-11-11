@@ -29,8 +29,8 @@ const MvData = await getTop({
 </script>
 
 <style lang="scss">
-  @import '../styles/_single.scss';
-  @import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+  @import '../styles/_single';
+  @import 'https://fonts.googleapis.com/css2?family=DotGothic16&display=swap';
 
   .root {
     height: 200vh;
@@ -47,12 +47,12 @@ const MvData = await getTop({
 
   .title {
     display: inline-block;
+    font-family: 'DotGothic16', sans-serif;
     font-size: vw(55);
     font-weight: 700;
     line-height: 1.5;
-    text-align: center;
-    font-family: 'DotGothic16', sans-serif;
     color: white;
+    text-align: center;
 
     @include sp() {
       font-size: vw_sp(55);
@@ -61,8 +61,8 @@ const MvData = await getTop({
 
   canvas {
     position: fixed;
-    z-index: -1;
     top: 0;
     left: 0;
+    z-index: -1;
   }
 </style>

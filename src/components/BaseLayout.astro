@@ -1,0 +1,36 @@
+---
+interface Props {
+  background?: string;
+}
+
+const { background } = Astro.props;
+---
+
+<div class="root">
+  <div class="bg" data-background={background}>
+    <div class="inner">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<style lang="scss">
+  @import '../styles/_single';
+
+  .bg {
+    &[data-background='gray'] {
+      background-color: $color-base-gray;
+    }
+  }
+
+  .inner {
+    width: vw(1280);
+    padding: vw(80) 0 vw(100);
+    margin: auto;
+    border: 1px solid $color-base-white;
+
+    [data-background='gray'] & {
+      border: 1px solid $color-base-black;
+    }
+  }
+</style>
