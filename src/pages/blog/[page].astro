@@ -1,50 +1,43 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import { getBlogs } from '../../libs/macrocms';
-import Card from '../../components/Card.astro';
-
 import { GetStaticPathsOptions } from 'astro';
+import { getBlogs } from '../../libs/macrocms';
+import Layout from '../../layouts/Layout.astro';
+import Card from '../../components/Card.astro';
 
 const BlogData = await getBlogs({
   fields: ['id', 'title', 'eyecatch', 'category'],
-  limit: 5,
 });
 
 const data = BlogData.contents;
+const { page } = Astro.props;
 
 export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
-  const BlogData = await getBlogs({ limit: 1000 });
-  return paginate(BlogData.contents, { pageSize: 3 });
+  const BlogData = await getBlogs({ limit: 3 });
+  const totalCount = BlogData.totalCount;
+  const totallimit = BlogData.limit;
+  return paginate(BlogData.contents, { pageSize: totalCount / totallimit });
 };
-const { page } = Astro.props;
 ---
 
 <Layout title="Welcome to Astro." pageType="blog">
   <main class="main">
-    {
-      data.map((data: any) => {
-        return <Card BlogData={data} />;
-      })
-    }
-    <nav class="test">
-      <p>{page.currentPage}/{page.lastPage}</p>
-      <ul>
-        {
-          page.url.prev && (
-            <li>
-              <a href={page.url.prev}>PREV</a>
-            </li>
-          )
-        }
-        {/* page.url.nextがある場合は次ページへのリンクを表示 */}
-        {
-          page.url.next && (
-            <li>
-              <a href={page.url.next}>NEXT</a>
-            </li>
-          )
-        }
-      </ul>
+    <div class="blogs">
+      {
+        data.map((data: any) => {
+          return <Card BlogData={data} />;
+        })
+      }
+    </div>
+    <nav class="pagenation">
+      <div class="pagenation__wrapper">
+        <div>
+          <a href={page.url.prev}>PREV</a>
+        </div>
+        <p>{page.currentPage}/{page.lastPage}</p>
+        <div>
+          <a href={page.url.next}>NEXT</a>
+        </div>
+      </div>
     </nav>
   </main>
 </Layout>
@@ -63,8 +56,21 @@ const { page } = Astro.props;
     }
   }
 
-  .test {
-    color: #000000;
-    transform: translate(-50% -50%) rotate(180deg);
+  .blogs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: vw(50);
+    width: vw(1060);
+    margin: auto;
+  }
+
+  .pagenation {
+    margin: 60px 0 0;
+  }
+
+  .pagenation__wrapper {
+    display: flex;
+    gap: vw(100);
+    justify-content: center;
   }
 </style>
