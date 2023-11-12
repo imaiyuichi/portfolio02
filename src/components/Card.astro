@@ -12,6 +12,7 @@ interface Props {
     title: string;
     category: {
       publishedAt: string;
+      name: string;
     };
   };
   splide?: boolean;
@@ -20,7 +21,7 @@ interface Props {
 const { BlogData, splide } = Astro.props;
 ---
 
-<article class:list=`blog ${splide && "splide__slide"}`>
+<article class:list=`root blog ${splide && "splide__slide"}`>
   <a href={`/blog/${BlogData.id}`} class="link">
     <div class="blog__inner">
       <div class="blog__img">
@@ -33,10 +34,16 @@ const { BlogData, splide } = Astro.props;
         />
       </div>
       <div class="blog__text-area">
+        <p class="blog__category">{BlogData.category.name}</p>
         <h2 class="blog__title">{BlogData.title}</h2>
         <p class="blog__date">
-          公開日：
-          {new Date(BlogData.category.publishedAt).toLocaleString()}
+          {
+            new Date(BlogData.category.publishedAt).toLocaleString('ja-JP', {
+              year: 'numeric',
+              month: 'numeric',
+              day: 'numeric',
+            })
+          }
         </p>
       </div>
     </div>
@@ -47,32 +54,23 @@ const { BlogData, splide } = Astro.props;
   @import '../styles/_single';
 
   .blog {
-    height: vw(324);
-    background-color: #6e7072;
-    backdrop-filter: blur(16px);
-    border-radius: vw(10);
+    width: vw(318);
     transition: 0.5s;
-
-    @include hover() {
-      color: $color-base-black;
-      background-color: #a5a9ad;
-    }
   }
 
   .link {
+    display: block;
     width: 100%;
   }
 
   .blog__inner {
-    display: flex;
-    align-items: center;
     height: 100%;
   }
 
   .blog__img {
     position: relative;
-    width: vw(533);
-    height: 100%;
+    width: 100%;
+    height: vw(180);
     opacity: 0.8;
 
     .img {
@@ -82,18 +80,33 @@ const { BlogData, splide } = Astro.props;
   }
 
   .blog__text-area {
-    flex: 1;
-    padding: vw(24);
+    padding: 27px 0 0;
+    font-family: $noto-sans;
+  }
+
+  .blog__category {
+    display: inline-block;
+    padding: 5px vw(15);
+    font-family: $font-family-termina;
+    font-size: vw(18);
+    font-weight: 700;
+    color: $color-base-white;
+    background-color: $color-base-black;
+    border-radius: 9999px;
   }
 
   .blog__title {
-    font-size: vw(28);
+    height: vw(100);
+    margin: 15px 0 0;
+    font-size: vw(22);
+    font-weight: 700;
+    line-height: 1.5;
 
     @include line-clamp(3);
   }
 
   .blog__date {
-    margin: vw(20) 0 0;
+    margin: 15px 0 0;
     font-size: vw(16);
   }
 </style>

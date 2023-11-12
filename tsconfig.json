@@ -1,4 +1,3 @@
 {
-  "extends": "astro/tsconfigs/base",
-  "presets": ["@babel/preset-typescript"]
+  "extends": "astro/tsconfigs/base"
 }

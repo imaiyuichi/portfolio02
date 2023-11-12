@@ -9,8 +9,9 @@ export function SplideSlide() {
     speed: 2000, // スライダーの移動時間
     focus: 'center', // アクティブなスライドを中央にする
     updateOnMove: true, // is-activeクラスを移動前に更新する
-    padding: '20%', // スライダーの左右の余白
-    gap: 180,
+    // padding: '20%', // スライダーの左右の余白
+    gap: 40,
+    perPage: 3.5,
     pagination: true,
   }).mount();
 }
