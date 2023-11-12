@@ -27,10 +27,10 @@ const data = BlogData.contents;
       <BaseTitle title={title} />
     </AnimationBlur>
   </ViewElement>
-  <div class="container">
-    <div class="blogs splide">
-      <ViewElement ratio="-20%">
-        <AnimationBlur>
+  <ViewElement ratio="-20%">
+    <AnimationBlur>
+      <div class="container">
+        <div class="blogs splide">
           <div class="splide__track">
             <div class="splide__list">
               {
@@ -40,11 +40,7 @@ const data = BlogData.contents;
               }
             </div>
           </div>
-        </AnimationBlur>
-      </ViewElement>
-    </div>
-    <ViewElement ratio="-20%">
-      <AnimationBlur>
+        </div>
         <div class="button">
           <Button
             type="gray"
@@ -52,9 +48,9 @@ const data = BlogData.contents;
             text="READ MORE"
           />
         </div>
-      </AnimationBlur>
-    </ViewElement>
-  </div>
+      </div>
+    </AnimationBlur>
+  </ViewElement>
 </BaseLayout>
 
 <script>

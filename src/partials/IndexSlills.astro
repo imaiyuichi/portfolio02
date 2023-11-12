@@ -1,14 +1,21 @@
 ---
+import BaseLayout from '../components/BaseLayout.astro';
+import ViewElement from '../components/ViewElement.astro';
+import AnimationBlur from '../components/AnimationBlur.astro';
 ---
 
-<section class="root">
-  <div class="inner">
-    <h2 class="title">🚧作成中👷‍♂️<br />My Slills</h2>
-    <p class="text">HTML</p>
-    <p class="text">CSS</p>
-    <p class="text">JavaScript</p>
-  </div>
-</section>
+<BaseLayout background="black">
+  <ViewElement ratio="-20%" loop={true}>
+    <AnimationBlur>
+      <div class="inner">
+        <h2 class="title">🚧作成中👷‍♂️<br />My Slills</h2>
+        <p class="text">HTML</p>
+        <p class="text">CSS</p>
+        <p class="text">JavaScript</p>
+      </div>
+    </AnimationBlur>
+  </ViewElement>
+</BaseLayout>
 
 <style lang="scss">
   @import '../styles/_single';
