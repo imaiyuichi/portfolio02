@@ -16,7 +16,16 @@
   },
   "extends": ["eslint:recommended", "plugin:astro/recommended"],
   "rules": {
+    "no-console": "error",
     "no-irregular-whitespace": "off"
   },
+  "overrides": [
+    {
+      "files": ["src/script/**"],
+      "rules": {
+        "no-console": "off"
+      }
+    }
+  ],
   "ignorePatterns": ["/node_modules/", "/dist/"]
 }

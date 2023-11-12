@@ -1,5 +1,5 @@
 {
-  "name": "density-disk",
+  "name": "astro-microCMS",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -11,17 +11,19 @@
     "lint:check": "npm run lint:style && npm run lint:es",
     "lint:es": "eslint 'src/**/*.{js,astro,.ts}'",
     "lint:style": "stylelint 'src/**/*.{css,scss,astro}'",
-    "lint:fix": "stylelint --fix 'src/**/*.{css,scss,astro}'",
+    "lint:fix": "stylelint --fix 'src/**/*.{css,scss,astro}' && eslint --fix 'src/**/*.{js,astro}'",
     "format": "prettier --write 'src/**/*.{html,css,scss,js,json,astro}'",
     "prepare": "husky install"
   },
   "lint-staged": {
+    "*.{js,astro}": "eslint --fix",
     "*.{css,scss,astro}": "stylelint --fix",
     "*.{html,css,scss,js,json,astro}": "prettier --write"
   },
   "dependencies": {
     "@astrojs/image": "^0.18.0",
     "@splidejs/splide": "^4.1.4",
+    "@typescript-eslint/parser": "^5.60.0",
     "astro": "^2.10.15",
     "gsap": "^3.12.2",
     "microcms": "^0.0.6",
@@ -35,6 +37,9 @@
     "husky": "^8.0.0",
     "prettier": "^2.8.8",
     "prettier-plugin-astro": "^0.10.0",
+    "eslint": "^8.42.0",
+    "eslint-plugin-astro": "^0.27.1",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
     "stylelint": "^15.7.0",
     "stylelint-config-astro": "^1.0.4",
     "stylelint-config-recess-order": "^4.2.0",
