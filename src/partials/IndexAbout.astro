@@ -47,22 +47,18 @@ const about = [
 ---
 
 <BaseLayout background="black">
-  <ViewElement ratio="-20%">
-    <AnimationBlur>
-      <BaseTitle title={title} />
-    </AnimationBlur>
-  </ViewElement>
-  <ViewElement ratio="-20%">
-    <AnimationBlur>
-      <div class="contents">
-        <ul class="list">
-          {
-            about.map((data: any) => {
-              return (
-                <li class="item">
-                  {data.map((item: any) => {
-                    return (
-                      <div class="wrapper">
+  <BaseTitle title={title} />
+  <div class="contents">
+    <ul class="list">
+      {
+        about.map((data: any) => {
+          return (
+            <li class="item">
+              {data.map((item: any) => {
+                return (
+                  <div class="wrapper">
+                    <ViewElement ratio="-20%">
+                      <AnimationBlur>
                         <div class="image">
                           <ImageWrapper
                             src={item.image.url}
@@ -72,18 +68,22 @@ const about = [
                             classValue="image-cover"
                           />
                         </div>
+                      </AnimationBlur>
+                    </ViewElement>
+                    <ViewElement ratio="-20%">
+                      <AnimationBlur>
                         <p class="text whitespace-pre">{item.description}</p>
-                      </div>
-                    );
-                  })}
-                </li>
-              );
-            })
-          }
-        </ul>
-      </div>
-    </AnimationBlur>
-  </ViewElement>
+                      </AnimationBlur>
+                    </ViewElement>
+                  </div>
+                );
+              })}
+            </li>
+          );
+        })
+      }
+    </ul>
+  </div>
 </BaseLayout>
 
 <style lang="scss">
