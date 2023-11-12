@@ -1,36 +1,110 @@
 ---
+import { getTop } from '../libs/macrocms';
+import ImageWrapper from '../components/ImageWrapper.astro';
+import BaseLayout from '../components/BaseLayout.astro';
+import BaseTitle from '../components/BaseTitle.astro';
+
+const topData = await getTop({
+  fields: ['topAboutTitle', 'topAboutMe'],
+});
+
+const title = topData.topAboutTitle;
+const aboutData = topData.topAboutMe;
+const about = [
+  [
+    {
+      image: {
+        url: aboutData.image_imai.url,
+        width: aboutData.image_imai.width,
+        height: aboutData.image_imai.height,
+      },
+      description: aboutData.description_imai,
+    },
+  ],
+  [
+    {
+      image: {
+        url: aboutData.image_nakayama.url,
+        width: aboutData.image_nakayama.width,
+        height: aboutData.image_nakayama.height,
+      },
+      description: aboutData.description_nakayama,
+    },
+  ],
+  [
+    {
+      image: {
+        url: aboutData.image_shigeta.url,
+        width: aboutData.image_shigeta.width,
+        height: aboutData.image_shigeta.height,
+      },
+      description: aboutData.description_shigeta,
+    },
+  ],
+];
 ---
 
-<section class="root">
-  <div class="inner">
-    <h2 class="title">About</h2>
-    <p class="text">Web Developer</p>
-    <p class="text">Front End Engineer</p>
+<BaseLayout background="black">
+  <BaseTitle title={title} />
+  <div class="contents">
+    <ul class="list">
+      {
+        about.map((data: any) => {
+          return (
+            <li class="item">
+              {data.map((item: any) => {
+                return (
+                  <div class="wrapper">
+                    <div class="image">
+                      <ImageWrapper
+                        src={item.image.url}
+                        width={item.image.width}
+                        height={item.image.height}
+                        alt=""
+                        classValue="image-cover"
+                      />
+                    </div>
+                    <p class="text whitespace-pre">{item.description}</p>
+                  </div>
+                );
+              })}
+            </li>
+          );
+        })
+      }
+    </ul>
   </div>
-</section>
+</BaseLayout>
 
 <style lang="scss">
   @import '../styles/_single';
 
-  .root {
-    position: relative;
-    z-index: 10;
-    padding: 4rem 0 0;
+  .contents {
+    margin: 60px 0 0;
   }
 
-  .title {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    color: #ffffff;
-    text-align: center;
+  .list {
+    display: flex;
+    gap: vw(45);
+    align-items: flex-start;
+    justify-content: center;
+  }
+
+  .item {
+    width: vw(318);
+    font-family: $noto-sans;
+  }
+
+  .image {
+    position: relative;
+    width: 100%;
+    height: vw(260);
   }
 
   .text {
-    font-size: 2.5rem;
-    font-weight: 700;
-    line-height: 1;
-    color: #ffffff;
-    text-align: center;
+    margin: 30px 0 0;
+    font-size: vw(14);
+    line-height: 1.4;
+    color: white;
   }
 </style>
