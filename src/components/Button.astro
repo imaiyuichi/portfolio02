@@ -1,5 +1,8 @@
 ---
 import { Icon } from 'astro-icon';
+import ViewElement from '../components/ViewElement.astro';
+import AnimationBlur from '../components/AnimationBlur.astro';
+
 interface Props {
   type: string;
   link: string;
@@ -9,54 +12,58 @@ interface Props {
 const { type, link, text } = Astro.props;
 ---
 
-<button class="root" data-type={type}>
-  <a href={link} class="link">
-    <div class="inner">
-      <p class="text">{text}</p>
-      <div class="image">
-        <Icon name="arrow" />
-      </div>
-    </div>
-  </a>
+<ViewElement ratio="-20%">
+  <AnimationBlur>
+    <button class="root" data-type={type}>
+      <a href={link} class="link">
+        <div class="inner">
+          <p class="text">{text}</p>
+          <div class="image">
+            <Icon name="arrow" />
+          </div>
+        </div>
+      </a>
+    </button>
+  </AnimationBlur>
+</ViewElement>
 
-  <style lang="scss">
-    @import '../styles/_single';
+<style lang="scss">
+  @import '../styles/_single';
 
-    .root {
-      position: relative;
-      width: vw(330);
-      height: vw(76);
+  .root {
+    position: relative;
+    width: 100%;
+    height: vw(76);
 
-      &[data-type='gray'] {
-        color: $color-base-black;
-        border: 2px solid $color-base-black;
-      }
+    &[data-type='gray'] {
+      color: $color-base-black;
+      border: 2px solid $color-base-black;
     }
+  }
 
-    .link {
-      display: block;
-      height: 100%;
-    }
+  .link {
+    display: block;
+    height: 100%;
+  }
 
-    .inner {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-    }
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
 
-    .text {
-      font-size: vw(16);
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
+  .text {
+    font-size: vw(16);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
 
-    .image {
-      position: absolute;
-      top: 50%;
-      right: vw(30);
-      width: vw(21);
-      transform: translateY(-50%);
-    }
-  </style>
-</button>
+  .image {
+    position: absolute;
+    top: 50%;
+    right: vw(30);
+    width: vw(21);
+    transform: translateY(-50%);
+  }
+</style>

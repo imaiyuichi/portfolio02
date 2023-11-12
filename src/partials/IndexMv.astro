@@ -30,13 +30,13 @@ const mvImage = mv.topMvImage;
         alt=""
       />
     </div>
-    <div class="marquee-container">
-      <div class="marquee-content">
-        <h2 class="title whitespace-pre">{mv.topMvTitle}</h2>
+    {mv.topMvTitle && <h2 class="title whitespace-pre">{mv.topMvTitle}</h2>}
+    {
+      mv.topMvSubTitle && (
         <p class="sub-title whitespace-pre">{mv.topMvSubTitle}</p>
-        <p class="catch whitespace-pre">{mv.topMvCatch}</p>
-      </div>
-    </div>
+      )
+    }
+    {mv.topMvCatch && <p class="catch whitespace-pre">{mv.topMvCatch}</p>}
   </div>
 </section>
 
@@ -99,26 +99,5 @@ const mvImage = mv.topMvImage;
     z-index: 10;
     width: vw(800);
     transform: translate(-50%, -50%);
-  }
-
-  .marquee-container {
-    width: 100%;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  .marquee-content {
-    display: inline-block;
-    animation: marquee-slide 20s linear infinite;
-  }
-
-  @keyframes marquee-slide {
-    0% {
-      transform: translateX(100%);
-    }
-
-    100% {
-      transform: translateX(-100%);
-    }
   }
 </style>

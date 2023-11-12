@@ -1,5 +1,8 @@
 ---
 import ImageWrapper from '../components/ImageWrapper.astro';
+import ViewElement from '../components/ViewElement.astro';
+import AnimationBlur from '../components/AnimationBlur.astro';
+
 interface Props {
   title: {
     url: string;
@@ -11,15 +14,19 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<h2 class="title">
-  <ImageWrapper
-    src={title.url}
-    width={title.width}
-    height={title.height}
-    alt=""
-    classValue="h-100"
-  />
-</h2>
+<ViewElement ratio="-20%">
+  <AnimationBlur>
+    <h2 class="title">
+      <ImageWrapper
+        src={title.url}
+        width={title.width}
+        height={title.height}
+        alt=""
+        classValue="h-100"
+      />
+    </h2>
+  </AnimationBlur>
+</ViewElement>
 
 <style lang="scss">
   @import '../styles/_single';

@@ -22,14 +22,10 @@ const data = BlogData.contents;
 ---
 
 <BaseLayout background="gray">
-  <ViewElement ratio="-20%">
-    <AnimationBlur>
-      <BaseTitle title={title} />
-    </AnimationBlur>
-  </ViewElement>
-  <ViewElement ratio="-20%">
-    <AnimationBlur>
-      <div class="container">
+  <BaseTitle title={title} />
+  <div class="container">
+    <ViewElement ratio="-20%">
+      <AnimationBlur>
         <div class="blogs splide">
           <div class="splide__track">
             <div class="splide__list">
@@ -41,16 +37,12 @@ const data = BlogData.contents;
             </div>
           </div>
         </div>
-        <div class="button">
-          <Button
-            type="gray"
-            link={Variables.PAGES.blog.url}
-            text="READ MORE"
-          />
-        </div>
-      </div>
-    </AnimationBlur>
-  </ViewElement>
+      </AnimationBlur>
+    </ViewElement>
+    <div class="button">
+      <Button type="gray" link={Variables.PAGES.blog.url} text="READ MORE" />
+    </div>
+  </div>
 </BaseLayout>
 
 <script>
@@ -61,16 +53,13 @@ const data = BlogData.contents;
 <style lang="scss">
   @import '../styles/_single';
 
-  .container {
-    position: relative;
-  }
-
   .blogs {
     margin: vw(30) 0 0;
   }
 
   .button {
-    margin: vw(65) 0 0;
+    width: vw(330);
+    margin: vw(65) auto 0;
     text-align: center;
   }
 </style>
