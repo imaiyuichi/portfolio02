@@ -3,6 +3,8 @@ import { getTop } from '../libs/macrocms';
 import ImageWrapper from '../components/ImageWrapper.astro';
 import BaseLayout from '../components/BaseLayout.astro';
 import BaseTitle from '../components/BaseTitle.astro';
+import ViewElement from '../components/ViewElement.astro';
+import AnimationBlur from '../components/AnimationBlur.astro';
 
 const topData = await getTop({
   fields: ['topAboutTitle', 'topAboutMe'],
@@ -45,35 +47,43 @@ const about = [
 ---
 
 <BaseLayout background="black">
-  <BaseTitle title={title} />
-  <div class="contents">
-    <ul class="list">
-      {
-        about.map((data: any) => {
-          return (
-            <li class="item">
-              {data.map((item: any) => {
-                return (
-                  <div class="wrapper">
-                    <div class="image">
-                      <ImageWrapper
-                        src={item.image.url}
-                        width={item.image.width}
-                        height={item.image.height}
-                        alt=""
-                        classValue="image-cover"
-                      />
-                    </div>
-                    <p class="text whitespace-pre">{item.description}</p>
-                  </div>
-                );
-              })}
-            </li>
-          );
-        })
-      }
-    </ul>
-  </div>
+  <ViewElement ratio="-20%">
+    <AnimationBlur>
+      <BaseTitle title={title} />
+    </AnimationBlur>
+  </ViewElement>
+  <ViewElement ratio="-20%">
+    <AnimationBlur>
+      <div class="contents">
+        <ul class="list">
+          {
+            about.map((data: any) => {
+              return (
+                <li class="item">
+                  {data.map((item: any) => {
+                    return (
+                      <div class="wrapper">
+                        <div class="image">
+                          <ImageWrapper
+                            src={item.image.url}
+                            width={item.image.width}
+                            height={item.image.height}
+                            alt=""
+                            classValue="image-cover"
+                          />
+                        </div>
+                        <p class="text whitespace-pre">{item.description}</p>
+                      </div>
+                    );
+                  })}
+                </li>
+              );
+            })
+          }
+        </ul>
+      </div>
+    </AnimationBlur>
+  </ViewElement>
 </BaseLayout>
 
 <style lang="scss">

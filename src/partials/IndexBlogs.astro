@@ -1,11 +1,12 @@
 ---
 import { getTop, getBlogs } from '../libs/macrocms';
 import * as Variables from '../variables.astro';
-
 import BaseLayout from '../components/BaseLayout.astro';
 import BaseTitle from '../components/BaseTitle.astro';
 import Card from '../components/Card.astro';
 import Button from '../components/Button.astro';
+import ViewElement from '../components/ViewElement.astro';
+import AnimationBlur from '../components/AnimationBlur.astro';
 
 const topData = await getTop({
   fields: ['topBlogTitle'],
@@ -21,22 +22,38 @@ const data = BlogData.contents;
 ---
 
 <BaseLayout background="gray">
-  <BaseTitle title={title} />
+  <ViewElement ratio="-20%">
+    <AnimationBlur>
+      <BaseTitle title={title} />
+    </AnimationBlur>
+  </ViewElement>
   <div class="container">
     <div class="blogs splide">
-      <div class="splide__track">
-        <div class="splide__list">
-          {
-            data.map((data: any) => {
-              return <Card BlogData={data} splide={true} />;
-            })
-          }
+      <ViewElement ratio="-20%">
+        <AnimationBlur>
+          <div class="splide__track">
+            <div class="splide__list">
+              {
+                data.map((data: any) => {
+                  return <Card BlogData={data} splide={true} />;
+                })
+              }
+            </div>
+          </div>
+        </AnimationBlur>
+      </ViewElement>
+    </div>
+    <ViewElement ratio="-20%">
+      <AnimationBlur>
+        <div class="button">
+          <Button
+            type="gray"
+            link={Variables.PAGES.blog.url}
+            text="READ MORE"
+          />
         </div>
-      </div>
-    </div>
-    <div class="button">
-      <Button type="gray" link={Variables.PAGES.blog.url} text="READ MORE" />
-    </div>
+      </AnimationBlur>
+    </ViewElement>
   </div>
 </BaseLayout>
 
