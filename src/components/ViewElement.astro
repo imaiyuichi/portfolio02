@@ -12,34 +12,34 @@ export interface Props {
   loop?: boolean;
 }
 
-const { ratio = "-30%", loop = false, classValue = "is-view" } = Astro.props;
+const { ratio = '-30%', loop = false, classValue = 'is-view' } = Astro.props;
 ---
 
 <div
   class="view-element"
   data-class={classValue}
   data-ratio={ratio}
-  data-loop={loop ? "true" : "false"}
+  data-loop={loop ? 'true' : 'false'}
 >
   <slot />
 </div>
 
 <script>
-  const targets = document.querySelectorAll(".view-element");
+  const targets = document.querySelectorAll('.view-element');
 
-  targets.forEach((target) => {
+  targets.forEach(target => {
     const isLoop = target.dataset.loop;
     const classValue = target.dataset.class;
 
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
+      entries => {
+        entries.forEach(entry => {
           if (entry.isIntersecting) {
             const target = entry.target;
 
             target.classList.add(`${classValue}`);
-            if (isLoop === "false") observer.unobserve(target);
-          } else if (isLoop === "true") {
+            if (isLoop === 'false') observer.unobserve(target);
+          } else if (isLoop === 'true') {
             const target = entry.target;
 
             target.classList.remove(`${classValue}`);

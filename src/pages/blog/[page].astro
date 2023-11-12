@@ -1,12 +1,9 @@
 ---
-import type { GetStaticPaths } from 'astro';
 import Layout from '../../layouts/Layout.astro';
 import { getBlogs } from '../../libs/macrocms';
 import Card from '../../components/Card.astro';
-import AnimationBlur from '../../components/AnimationBlur.astro';
-import ViewElement from '../../components/ViewElement.astro';
 
-import type { GetStaticPathsOptions } from 'astro';
+import { GetStaticPathsOptions } from 'astro';
 
 const BlogData = await getBlogs({
   fields: ['id', 'title', 'eyecatch', 'category'],

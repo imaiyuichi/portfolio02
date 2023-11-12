@@ -1,40 +1,35 @@
 ---
-import { getTop, getBlogs } from '../libs/macrocms';
-
-const MvData = await getTop({
-    fields: ['MvTitle', 'MvSubTitle', 'MvCatch'],
-});
 ---
 
 <section class="root">
-    <div class="inner">
-        <h2 class="title">Contact</h2>
-        <p class="text">お問い合わせはこちら</p>
-    </div>
+  <div class="inner">
+    <h2 class="title">Contact</h2>
+    <p class="text">お問い合わせはこちら</p>
+  </div>
 </section>
 
 <style lang="scss">
-    @import '../styles/_single';
+  @import '../styles/_single';
 
-    .root {
-        position: relative;
-        z-index: 10;
-        padding: 4rem 0 0;
-    }
+  .root {
+    position: relative;
+    z-index: 10;
+    padding: 4rem 0 0;
+  }
 
-    .title {
-        font-size: 4rem;
-        font-weight: 700;
-        line-height: 1;
-        color: #ffffff;
-        text-align: center;
-    }
+  .title {
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #ffffff;
+    text-align: center;
+  }
 
-    .text {
-        font-size: 2.5rem;
-        font-weight: 700;
-        line-height: 1;
-        color: #ffffff;
-        text-align: center;
-    }
+  .text {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #ffffff;
+    text-align: center;
+  }
 </style>

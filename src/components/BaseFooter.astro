@@ -1,33 +1,32 @@
 ---
-import * as Variables from "../variables.astro";
-import { Icon } from "astro-icon";
-import Icons from "../icon/toTopArrow.svg";
+// import * as Variables from '../variables.astro';
+import { Icon } from 'astro-icon';
 
-const topLInk = Variables.PAGES.index.url;
+// const topLInk = Variables.PAGES.index.url;
 ---
 
 <footer class="footer">
   <div class="inner">
     <h2 class="title">Footer</h2>
     <a href="#top" class="arrow js-mouseAnimation js-anchor-link">
-      <Icon name={"toTopArrow"} />
+      <Icon name={'toTopArrow'} />
     </a>
   </div>
 </footer>
 
 <script>
-  import Menu from "../script/module/mouse.js";
-  import { anchorLink } from "../script/module/anchor-link.js";
+  import Menu from '../script/module/mouse.js';
+  import { anchorLink } from '../script/module/anchor-link.js';
 
-  addEventListener("load", () => {
-    new Menu(document.querySelector(".js-mouseAnimation"));
+  addEventListener('load', () => {
+    new Menu(document.querySelector('.js-mouseAnimation'));
   });
 
   anchorLink();
 </script>
 
 <style lang="scss">
-  @import "../styles/_single";
+  @import '../styles/_single';
 
   .root {
     position: relative;

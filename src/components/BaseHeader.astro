@@ -1,6 +1,4 @@
 ---
-import ImageWrapper from './ImageWrapper.astro';
-import Nav from '../components/Nav.astro';
 import * as Variables from '../variables.astro';
 import { getTop } from '../libs/macrocms';
 
@@ -29,7 +27,6 @@ const topLInk = Variables.PAGES.index.url;
     </div>
   </div>
 </header>
-<!-- <Nav /> -->
 
 <style lang="scss">
   @import '../styles/_single';
@@ -43,6 +40,8 @@ const topLInk = Variables.PAGES.index.url;
   }
 
   .inner {
+    display: flex;
+    align-items: center;
     padding: vw(30) 0 vw(30) vw(30);
   }
 

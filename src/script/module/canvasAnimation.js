@@ -1,23 +1,22 @@
 export const canvasAnimation = () => {
-  const canvas = document.querySelector("canvas");
-  const ctx = canvas.getContext("2d");
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
 
-  canvas.style.width = "100%"; // 例: 幅を500pxに設定
-  canvas.style.height = "100%"; // 例: 高さを300pxに設定
+  canvas.style.width = '100%'; // 例: 幅を500pxに設定
+  canvas.style.height = '100%'; // 例: 高さを300pxに設定
 
   canvas.width = canvas.clientWidth;
   canvas.height = canvas.clientHeight;
 
-  ctx.strokeStyle = "#BADA55";
-  ctx.lineJoin = "round";
-  ctx.lineCap = "round";
+  ctx.strokeStyle = '#BADA55';
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
   ctx.lineWidth = 10;
 
   let isDrawing = false;
   let lastX = 0;
   let lastY = 0;
   let hue = 0;
-  let direction = true;
 
   function draw(e) {
     if (!isDrawing) return;
@@ -43,7 +42,7 @@ export const canvasAnimation = () => {
     isDrawing = false;
   }
 
-  canvas.addEventListener("mousedown", (e) => {
+  canvas.addEventListener('mousedown', e => {
     if (e.button === 0) {
       // 左クリックの場合のみ描画を開始
       isDrawing = true;
@@ -51,16 +50,16 @@ export const canvasAnimation = () => {
     }
   });
 
-  canvas.addEventListener("mousemove", draw);
+  canvas.addEventListener('mousemove', draw);
 
-  canvas.addEventListener("mouseup", (e) => {
+  canvas.addEventListener('mouseup', e => {
     if (e.button === 0) {
       // 左クリックの場合のみ描画を停止
       isDrawing = false;
     }
   });
 
-  canvas.addEventListener("mouseout", () => {
+  canvas.addEventListener('mouseout', () => {
     if (isDrawing) {
       // マウスがキャンバス外に移動しても描画を続行
       clearCanvas();
@@ -68,8 +67,8 @@ export const canvasAnimation = () => {
   });
 
   // リセットボタンを追加
-  const resetButton = document.createElement("button");
-  resetButton.textContent = "リセット";
-  resetButton.addEventListener("click", resetCanvas);
+  const resetButton = document.createElement('button');
+  resetButton.textContent = 'リセット';
+  resetButton.addEventListener('click', resetCanvas);
   document.body.appendChild(resetButton);
 };
