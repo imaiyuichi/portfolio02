@@ -1,0 +1,77 @@
+---
+import ImageWrapper from './ImageWrapper.astro';
+
+interface Props {
+  data: {
+    skill: {
+      url: string;
+      width: number;
+      height: number;
+    };
+    name: string;
+    level: number;
+  };
+}
+
+const { data } = Astro.props;
+---
+
+<div class="root">
+  <div class="image">
+    <ImageWrapper
+      src={data.skill.url}
+      width={data.skill.width}
+      height={data.skill.height}
+      alt=""
+    />
+  </div>
+  <p class="name">{data.name}</p>
+  <div class="level">
+    <span class="level__gauge" style={{ width: `${data.level}0%` }}></span>
+  </div>
+</div>
+
+<style lang="scss">
+  @import '../styles/_single';
+
+  .root {
+    display: flex;
+    gap: vw(18);
+    align-items: center;
+  }
+
+  .image {
+    position: relative;
+    width: vw(30);
+    height: vw(30);
+  }
+
+  .name {
+    font-size: vw(16);
+    font-weight: 700;
+  }
+
+  .level {
+    width: vw(100);
+    height: vw(10);
+    margin: 0 0 0 auto;
+    border: 1px solid $color-base-white;
+  }
+
+  .level__gauge {
+    position: relative;
+    display: block;
+    height: 100%;
+    background-color: $color-base-white;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: vw(98);
+      height: 98%;
+      content: '';
+      border: 1px solid $color-base-black;
+    }
+  }
+</style>

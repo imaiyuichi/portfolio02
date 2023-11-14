@@ -3,6 +3,7 @@ import { getTop } from '../libs/macrocms';
 import ImageWrapper from '../components/ImageWrapper.astro';
 import BaseLayout from '../components/BaseLayout.astro';
 import BaseTitle from '../components/BaseTitle.astro';
+import SkillBar from '../components/SkillBar.astro';
 import ViewElement from '../components/ViewElement.astro';
 import AnimationBlur from '../components/AnimationBlur.astro';
 
@@ -15,7 +16,7 @@ const title = topData.topSkillTitle;
 const skills = [
   {
     name: topData.topSkills.skill_name_imai,
-    worke: topData.topSkills.skill_work_imai,
+    work: topData.topSkills.skill_work_imai,
     icon: {
       url: topData.topSkills.skill_icon_imai.url,
       width: topData.topSkills.skill_icon_imai.width,
@@ -25,7 +26,7 @@ const skills = [
   },
   {
     name: topData.topSkills.skill_name_nakayama,
-    worke: topData.topSkills.skill_work_nakayama,
+    work: topData.topSkills.skill_work_nakayama,
     icon: {
       url: topData.topSkills.skill_icon_nakayama.url,
       width: topData.topSkills.skill_icon_nakayama.width,
@@ -35,7 +36,7 @@ const skills = [
   },
   {
     name: topData.topSkills.skill_name_shigeta,
-    worke: topData.topSkills.skill_work_shigeta,
+    work: topData.topSkills.skill_work_shigeta,
     icon: {
       url: topData.topSkills.skill_icon_shigeta.url,
       width: topData.topSkills.skill_icon_shigeta.width,
@@ -52,76 +53,54 @@ const skills = [
       <BaseTitle title={title} />
     </AnimationBlur>
   </ViewElement>
-  <div class="contents">
-    <ul class="list">
-      {
-        skills.map((data: any) => {
-          return (
-            <li class="item">
-              <div class="bg">
-                <div class="inner">
-                  <ViewElement ratio="-20%">
-                    <AnimationBlur>
-                      <div class="icon">
-                        <ImageWrapper
-                          src={data.icon.url}
-                          width={data.icon.width}
-                          height={data.icon.height}
-                          classValue="image-cover"
-                          alt=""
-                        />
-                      </div>
-                      <h3 class="name">{data.name}</h3>
-                      <p class="worke">{data.worke}</p>
-                    </AnimationBlur>
-                  </ViewElement>
-                  {data.skills && (
-                    <ul class="skils">
-                      {data.skills.map((item: any) => {
-                        return (
-                          <li class="skill">
-                            <ViewElement ratio="-20%">
-                              <AnimationBlur>
-                                <div class="skill__wrapper">
-                                  <div class="skill__image">
-                                    <ImageWrapper
-                                      src={item.skill.url}
-                                      width={item.skill.width}
-                                      height={item.skill.height}
-                                      alt=""
-                                    />
-                                  </div>
-                                  <p class="skill__name">{item.name}</p>
-                                  <div class="skill__level">
-                                    <span
-                                      class="skill__level-gauge"
-                                      style={{ width: `${item.level}0%` }}
-                                    />
-                                  </div>
-                                </div>
-                              </AnimationBlur>
-                            </ViewElement>
-                          </li>
-                        );
-                      })}
-                    </ul>
-                  )}
-                </div>
+  <ul class="list">
+    {
+      skills.map((data: any) => {
+        return (
+          <li class="item">
+            <div class="bg">
+              <div class="inner">
+                <ViewElement ratio="-20%">
+                  <AnimationBlur>
+                    <div class="icon">
+                      <ImageWrapper
+                        src={data.icon.url}
+                        width={data.icon.width}
+                        height={data.icon.height}
+                        classValue="image-cover"
+                        alt=""
+                      />
+                    </div>
+                    <h3 class="name">{data.name}</h3>
+                    <p class="work">{data.work}</p>
+                  </AnimationBlur>
+                </ViewElement>
+                {data.skills && (
+                  <ul class="skils">
+                    {data.skills.map((item: any) => {
+                      return (
+                        <li class="skill">
+                          <ViewElement ratio="-20%">
+                            <AnimationBlur>
+                              <SkillBar data={item} />
+                            </AnimationBlur>
+                          </ViewElement>
+                        </li>
+                      );
+                    })}
+                  </ul>
+                )}
               </div>
-            </li>
-          );
-        })
-      }
-    </ul>
-  </div>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
 </BaseLayout>
 
 <style lang="scss">
   @import '../styles/_single';
-
-  .contents {
-    color: $color-base-white;
-  }
 
   .list {
     display: flex;
@@ -129,6 +108,7 @@ const skills = [
     justify-content: center;
     height: 100%;
     margin: 55px 0 0;
+    color: $color-base-white;
   }
 
   .item {
@@ -161,7 +141,7 @@ const skills = [
     text-align: center;
   }
 
-  .worke {
+  .work {
     font-size: vw(20);
     font-weight: 700;
     text-align: center;
@@ -173,46 +153,5 @@ const skills = [
 
   .skill + .skill {
     margin: vw(40) 0 0;
-  }
-
-  .skill__wrapper {
-    display: flex;
-    gap: vw(18);
-    align-items: center;
-  }
-
-  .skill__image {
-    position: relative;
-    width: vw(30);
-    height: vw(30);
-  }
-
-  .skill__name {
-    font-size: vw(16);
-    font-weight: 700;
-  }
-
-  .skill__level {
-    width: vw(100);
-    height: vw(10);
-    margin: 0 0 0 auto;
-    border: 1px solid $color-base-white;
-  }
-
-  .skill__level-gauge {
-    position: relative;
-    display: block;
-    height: 100%;
-    background-color: $color-base-white;
-
-    &::before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: vw(98);
-      height: 98%;
-      content: '';
-      border: 1px solid $color-base-black;
-    }
   }
 </style>
