@@ -39,6 +39,11 @@ const { type, link, text } = Astro.props;
       color: $color-base-black;
       border: 2px solid $color-base-black;
     }
+
+    &[data-type='black'] {
+      color: $color-base-white;
+      border: 2px solid $color-base-white;
+    }
   }
 
   .link {

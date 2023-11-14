@@ -1,8 +1,10 @@
 ---
 import { getTop } from '../libs/macrocms';
+import * as Variables from '../variables.astro';
 import ImageWrapper from '../components/ImageWrapper.astro';
 import BaseLayout from '../components/BaseLayout.astro';
 import BaseTitle from '../components/BaseTitle.astro';
+import Button from '../components/Button.astro';
 import ViewElement from '../components/ViewElement.astro';
 import AnimationBlur from '../components/AnimationBlur.astro';
 
@@ -83,6 +85,9 @@ const about = [
         })
       }
     </ul>
+    <div class="button">
+      <Button type="black" link={Variables.PAGES.about.url} text="VIEW MORE" />
+    </div>
   </div>
 </BaseLayout>
 
@@ -116,5 +121,11 @@ const about = [
     font-size: vw(14);
     line-height: 1.4;
     color: white;
+  }
+
+  .button {
+    width: vw(330);
+    margin: vw(65) auto 0;
+    text-align: center;
   }
 </style>
