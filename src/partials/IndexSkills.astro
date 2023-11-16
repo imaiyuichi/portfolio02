@@ -8,10 +8,10 @@ import ViewElement from '../components/ViewElement.astro';
 import AnimationBlur from '../components/AnimationBlur.astro';
 
 const topData = await getTop({
-  fields: ['topSkillTitle', 'topSkills'],
+  fields: ['topTitles', 'topSkills'],
 });
 
-const title = topData.topSkillTitle;
+const title = topData.topTitles.skillTitle;
 
 const skills = [
   {

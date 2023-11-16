@@ -9,10 +9,10 @@ import ViewElement from '../components/ViewElement.astro';
 import AnimationBlur from '../components/AnimationBlur.astro';
 
 const topData = await getTop({
-  fields: ['topAboutTitle', 'topAboutMe'],
+  fields: ['topTitles', 'topAboutMe'],
 });
 
-const title = topData.topAboutTitle;
+const title = topData.topTitles.aboutTitle;
 const aboutData = topData.topAboutMe;
 const about = [
   [

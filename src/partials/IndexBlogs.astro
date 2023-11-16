@@ -9,7 +9,7 @@ import ViewElement from '../components/ViewElement.astro';
 import AnimationBlur from '../components/AnimationBlur.astro';
 
 const topData = await getTop({
-  fields: ['topBlogTitle'],
+  fields: ['topTitles'],
 });
 
 const BlogData = await getBlogs({
@@ -17,7 +17,7 @@ const BlogData = await getBlogs({
   limit: 5,
 });
 
-const title = topData.topBlogTitle;
+const title = topData.topTitles.blogTitle;
 const data = BlogData.contents;
 ---
 

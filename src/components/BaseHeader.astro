@@ -3,11 +3,10 @@ import * as Variables from '../variables.astro';
 import { getTop } from '../libs/macrocms';
 
 const logData = await getTop({
-  fields: ['logo'],
+  fields: ['topTitles'],
 });
 
-const logo = logData.logo;
-
+const logo = logData.topTitles.logo;
 const topLInk = Variables.PAGES.index.url;
 ---
 
