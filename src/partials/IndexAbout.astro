@@ -46,6 +46,10 @@ const about = [
     },
   ],
 ];
+console.log(
+  // topData,
+  aboutData
+)
 ---
 
 <BaseLayout background="black">
@@ -96,6 +100,10 @@ const about = [
 
   .contents {
     margin: 60px 0 0;
+
+    @include sp(){
+      margin: vw_sp(30) 0 0;
+    }
   }
 
   .list {
@@ -103,17 +111,31 @@ const about = [
     gap: vw(45);
     align-items: flex-start;
     justify-content: center;
+
+    @include sp(){
+      flex-direction: column;
+      gap: vw_sp(50);
+    }
   }
 
   .item {
     width: vw(318);
     font-family: $noto-sans;
+
+    @include sp(){
+      width: vw_sp(210);
+      margin: 0 auto;
+    }
   }
 
   .image {
     position: relative;
     width: 100%;
     height: vw(260);
+
+    @include sp(){
+      height: vw_sp(135);
+    }
   }
 
   .text {
@@ -121,11 +143,21 @@ const about = [
     font-size: vw(14);
     line-height: 1.4;
     color: white;
+
+    @include sp(){
+      margin: vw_sp(20) 0 0;
+      font-size: vw_sp(14);
+    }
   }
 
   .button {
     width: vw(330);
     margin: vw(65) auto 0;
     text-align: center;
+
+    @include sp(){
+      width: vw_sp(240);
+      margin: vw_sp(26) auto 0;
+    }
   }
 </style>
