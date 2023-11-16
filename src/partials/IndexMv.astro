@@ -22,14 +22,18 @@ const mvImage = mv.topMvImage;
     />
   </div>
   <div class="inner">
-    <div class="image">
-      <ImageWrapper
-        src={mvImage.url}
-        width={mvImage.width}
-        height={mvImage.height}
-        alt=""
-      />
-    </div>
+    {
+      mvImage && (
+        <div class="image">
+          <ImageWrapper
+            src={mvImage.url}
+            width={mvImage.width}
+            height={mvImage.height}
+            alt=""
+          />
+        </div>
+      )
+    }
     {mv.topMvTitle && <h2 class="title whitespace-pre">{mv.topMvTitle}</h2>}
     {
       mv.topMvSubTitle && (
