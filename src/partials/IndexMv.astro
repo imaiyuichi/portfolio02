@@ -1,6 +1,7 @@
 ---
 import { getTop } from '../libs/macrocms';
 import ImageWrapper from '../components/ImageWrapper.astro';
+import PageNumber from '../components/PageNumber.astro';
 
 const MvData = await getTop({
   fields: ['topMv'],
@@ -42,6 +43,9 @@ const mvImage = mv.topMvImage;
     }
     {mv.topMvCatch && <p class="catch whitespace-pre">{mv.topMvCatch}</p>}
   </div>
+  <div class="pageNumber">
+    <PageNumber current={1} total={4} />
+  </div>
 </section>
 
 <style lang="scss">
@@ -49,6 +53,7 @@ const mvImage = mv.topMvImage;
 
   .root {
     position: relative;
+    border-top: 1px solid $color-base-white;
   }
 
   .bg {
@@ -65,6 +70,8 @@ const mvImage = mv.topMvImage;
     height: 720px;
     padding: vw(200) 0 0;
     margin: auto;
+    border-right: 1px solid $color-base-white;
+    border-left: 1px solid $color-base-white;
   }
 
   .title {
@@ -103,5 +110,12 @@ const mvImage = mv.topMvImage;
     z-index: 10;
     width: vw(800);
     transform: translate(-50%, -50%);
+  }
+
+  .pageNumber {
+    position: absolute;
+    top: 50%;
+    left: vw(5);
+    transform: translateY(-50%);
   }
 </style>

@@ -1,9 +1,14 @@
 ---
+import PageNumber from './PageNumber.astro';
+
 interface Props {
   background?: string;
+  color?: string;
+  current: number;
+  total: number;
 }
 
-const { background } = Astro.props;
+const { background, color, current, total } = Astro.props;
 ---
 
 <section class="root">
@@ -12,10 +17,21 @@ const { background } = Astro.props;
       <slot />
     </div>
   </div>
+  {
+    current && (
+      <div class="pageNumber">
+        <PageNumber color={color} current={current} total={total} />
+      </div>
+    )
+  }
 </section>
 
 <style lang="scss">
   @import '../styles/_single';
+
+  .root {
+    position: relative;
+  }
 
   .bg {
     &[data-background='gray'] {
@@ -34,5 +50,12 @@ const { background } = Astro.props;
       border-right: 1px solid $color-base-black;
       border-left: 1px solid $color-base-black;
     }
+  }
+
+  .pageNumber {
+    position: absolute;
+    top: 50%;
+    left: vw(5);
+    transform: translateY(-50%);
   }
 </style>
