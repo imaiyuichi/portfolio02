@@ -25,9 +25,11 @@ const { data } = Astro.props;
       alt=""
     />
   </div>
-  <p class="name">{data.name}</p>
-  <div class="level">
-    <span class="level__gauge" style={{ width: `${data.level}0%` }}></span>
+  <div class="description">
+    <p class="name">{data.name}</p>
+    <div class="level">
+      <span class="level__gauge" style={{ width: `${data.level}0%` }}></span>
+    </div>
   </div>
 </div>
 
@@ -37,24 +39,30 @@ const { data } = Astro.props;
   .root {
     display: flex;
     gap: vw(18);
-    align-items: center;
+    justify-content: center;
   }
 
   .image {
     position: relative;
-    width: vw(30);
-    height: vw(30);
+    width: vw(40);
+    height: vw(40);
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .name {
     font-size: vw(16);
     font-weight: 700;
+    line-height: 1;
   }
 
   .level {
-    width: vw(100);
+    width: vw(200);
     height: vw(10);
-    margin: 0 0 0 auto;
     border: 1px solid $color-base-white;
   }
 
@@ -68,7 +76,7 @@ const { data } = Astro.props;
       position: absolute;
       top: 0;
       left: 0;
-      width: vw(98);
+      width: vw(198);
       height: 98%;
       content: '';
       border: 1px solid $color-base-black;

@@ -1,41 +1,52 @@
 ---
-import BaseLayout from '../components/BaseLayout.astro';
+import { getTop } from '../libs/macrocms';
+import BaseTitle from '../components/BaseTitle.astro';
 import ViewElement from '../components/ViewElement.astro';
 import AnimationBlur from '../components/AnimationBlur.astro';
+
+const topData = await getTop({
+  fields: ['topTitles'],
+});
+
+const contactTitle = topData.topTitles.contactTitle;
+const toTopTitle = topData.topTitles.toTopTitle;
+
+console.log(topData);
 ---
 
-<BaseLayout background="black">
-  <ViewElement ratio="-20%" loop={true}>
-    <AnimationBlur>
-      <div class="inner">
-        <h2 class="title">🚧作成中👷‍♂️<br />Contact</h2>
-      </div>
-    </AnimationBlur>
-  </ViewElement>
-</BaseLayout>
+<div class="root">
+  <div class="bg">
+    <ViewElement ratio="-20%" loop={true}>
+      <AnimationBlur>
+        <div class="inner">
+          <div class="contact">
+            <BaseTitle title={contactTitle} />
+          </div>
+          <div class="toTop">
+            <BaseTitle title={toTopTitle} />
+          </div>
+        </div>
+      </AnimationBlur>
+    </ViewElement>
+  </div>
+</div>
 
 <style lang="scss">
   @import '../styles/_single';
 
   .root {
-    position: relative;
-    z-index: 10;
-    padding: 4rem 0 0;
   }
 
-  .title {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    color: #ffffff;
-    text-align: center;
+  .bg {
+    background-color: $color-base-white;
   }
 
-  .text {
-    font-size: 2.5rem;
-    font-weight: 700;
-    line-height: 1;
-    color: #ffffff;
+  .inner {
+    width: vw(1348);
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    color: $color-base-black;
     text-align: center;
   }
 </style>

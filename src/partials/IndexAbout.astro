@@ -48,7 +48,7 @@ const about = [
 ];
 ---
 
-<BaseLayout background="black">
+<BaseLayout background="black" current={4} total={4}>
   <BaseTitle title={title} />
   <div class="contents">
     <ul class="list">
@@ -97,7 +97,7 @@ const about = [
   .contents {
     margin: 60px 0 0;
 
-    @include sp(){
+    @include sp() {
       margin: vw_sp(30) 0 0;
     }
   }
@@ -108,7 +108,7 @@ const about = [
     align-items: flex-start;
     justify-content: center;
 
-    @include sp(){
+    @include sp() {
       flex-direction: column;
       gap: vw_sp(50);
     }
@@ -118,7 +118,7 @@ const about = [
     width: vw(318);
     font-family: $noto-sans;
 
-    @include sp(){
+    @include sp() {
       width: vw_sp(210);
       margin: 0 auto;
     }
@@ -129,7 +129,7 @@ const about = [
     width: 100%;
     height: vw(260);
 
-    @include sp(){
+    @include sp() {
       height: vw_sp(135);
     }
   }
@@ -138,9 +138,9 @@ const about = [
     margin: 30px 0 0;
     font-size: vw(14);
     line-height: 1.4;
-    color: white;
+    color: $color-base-white;
 
-    @include sp(){
+    @include sp() {
       margin: vw_sp(20) 0 0;
       font-size: vw_sp(14);
     }
@@ -151,7 +151,7 @@ const about = [
     margin: vw(65) auto 0;
     text-align: center;
 
-    @include sp(){
+    @include sp() {
       width: vw_sp(240);
       margin: vw_sp(26) auto 0;
     }
