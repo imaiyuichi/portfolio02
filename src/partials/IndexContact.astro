@@ -10,8 +10,6 @@ const topData = await getTop({
 
 const contactTitle = topData.topTitles.contactTitle;
 const toTopTitle = topData.topTitles.toTopTitle;
-
-console.log(topData);
 ---
 
 <div class="root">
@@ -34,18 +32,15 @@ console.log(topData);
 <style lang="scss">
   @import '../styles/_single';
 
-  .root {
-  }
-
   .bg {
     background-color: $color-base-white;
   }
 
   .inner {
-    width: vw(1348);
-    margin: auto;
     display: flex;
     justify-content: space-between;
+    width: vw(1348);
+    margin: auto;
     color: $color-base-black;
     text-align: center;
   }

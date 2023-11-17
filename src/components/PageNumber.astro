@@ -1,0 +1,58 @@
+---
+interface Props {
+  color?: string;
+  current: number;
+  total: number;
+}
+
+const { color, current, total } = Astro.props;
+---
+
+<div class="root" data-color={color}>
+  <div class="heading">
+    <p class="current">{current}</p>
+    <span class="border">|</span>
+    <p class="total">{total}</p>
+  </div>
+  <p class="text">PAGES</p>
+</div>
+
+<style lang="scss">
+  @import '../styles/_single';
+
+  .root {
+    color: $color-base-white;
+
+    &[data-color='black'] {
+      color: $color-base-black;
+    }
+  }
+
+  .heading {
+    display: flex;
+    gap: vw(4);
+    align-items: baseline;
+    justify-content: center;
+    line-height: 1;
+  }
+
+  .current {
+    font-size: vw(30);
+    font-weight: 700;
+  }
+
+  .border {
+    font-size: vw(30);
+  }
+
+  .total {
+    font-size: vw(16);
+    font-weight: 700;
+  }
+
+  .text {
+    font-size: vw(16);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+</style>
