@@ -73,10 +73,27 @@ const data = BlogData.contents;
   }
 
   .splide__arrow--prev {
+    position: relative;
+    bottom: vw(-565);
+    left: vw(60);
+    z-index: 100;
+    width: vw(76);
+    height: vw(76);
+    border-radius: 50%;
+    transition: 0.3s;
+
+    @include hover() {
+      background-color: $color-base-black;
+
+      &::before {
+        background: url('../icons/arrow-slider.svg') no-repeat center;
+      }
+    }
+
     &::before {
       position: absolute;
-      bottom: vw(-135);
-      left: vw(70);
+      bottom: 0;
+      left: 0;
       z-index: 100;
       width: vw(76);
       height: vw(76);
@@ -84,13 +101,14 @@ const data = BlogData.contents;
       background: url('../icons/arrow.svg') no-repeat center;
       border: 1px solid $color-base-black;
       border-radius: 50%;
+      transition: 0.3s;
       transform: rotate(180deg) !important;
     }
 
     &::after {
       position: absolute;
-      bottom: vw(-210);
-      left: vw(84);
+      bottom: vw(-74);
+      left: vw(15);
       z-index: 100;
       width: vw(76);
       height: vw(76);
@@ -100,10 +118,27 @@ const data = BlogData.contents;
   }
 
   .splide__arrow--next {
+    position: relative;
+    bottom: vw(-565);
+    left: vw(85);
+    z-index: 100;
+    width: vw(76);
+    height: vw(76);
+    border-radius: 50%;
+    transition: 0.3s;
+
+    @include hover() {
+      background-color: $color-base-black;
+
+      &::before {
+        background: url('../icons/arrow-slider.svg') no-repeat center;
+      }
+    }
+
     &::before {
       position: absolute;
-      bottom: vw(-135);
-      left: vw(164);
+      bottom: 0;
+      left: 0;
       z-index: 100;
       width: vw(76);
       height: vw(76);
@@ -111,12 +146,13 @@ const data = BlogData.contents;
       background: url('../icons/arrow.svg') no-repeat center;
       border: 1px solid $color-base-black;
       border-radius: 50%;
+      transition: 0.3s;
     }
 
     &::after {
       position: absolute;
-      bottom: vw(-210);
-      left: vw(177);
+      bottom: vw(-74);
+      left: vw(15);
       z-index: 100;
       width: vw(76);
       height: vw(76);

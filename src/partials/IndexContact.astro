@@ -21,7 +21,7 @@ const toTopTitle = topData.topTitles.toTopTitle;
           <a class="contact" href="contact">
             <BaseTitle title={contactTitle} />
             <p class="text">お問い合わせ</p>
-            <div class="icon">
+            <div class="icon icon--contact">
               <Icon name="arrow" />
             </div>
           </a>
@@ -39,7 +39,8 @@ const toTopTitle = topData.topTitles.toTopTitle;
 </div>
 
 <script>
-  import { anchorLink } from '../script/module/anchor-link';
+  import { anchorLink } from '../script/module/anchor-link.js';
+
   anchorLink();
 </script>
 
@@ -92,6 +93,12 @@ const toTopTitle = topData.topTitles.toTopTitle;
     margin: 40px 0 0 auto;
     border: 1px solid $color-base-black;
     border-radius: 50%;
+    transition: 0.3s;
+
+    @include hover() {
+      color: $color-base-white;
+      background-color: $color-base-black;
+    }
   }
 
   .icon--top {
