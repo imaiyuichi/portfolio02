@@ -34,15 +34,36 @@ const { type, link, text } = Astro.props;
     position: relative;
     width: 100%;
     height: vw(76);
+    transition: 0.3s;
 
     &[data-type='gray'] {
       color: $color-base-black;
       border: 2px solid $color-base-black;
+
+      @include hover() {
+        color: $color-base-white;
+        background-color: $color-base-black;
+        border: 2px solid $color-base-white;
+
+        .image {
+          right: vw(25);
+        }
+      }
     }
 
     &[data-type='black'] {
       color: $color-base-white;
       border: 2px solid $color-base-white;
+
+      @include hover() {
+        color: $color-base-black;
+        background-color: $color-base-white;
+        border: 2px solid $color-base-black;
+
+        .image {
+          right: vw(25);
+        }
+      }
     }
   }
 
@@ -67,8 +88,9 @@ const { type, link, text } = Astro.props;
   .image {
     position: absolute;
     top: 50%;
-    right: vw(30);
+    right: vw(35);
     width: vw(21);
+    transition: right 0.3s;
     transform: translateY(-50%);
   }
 </style>

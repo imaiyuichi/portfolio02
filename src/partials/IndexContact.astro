@@ -1,5 +1,6 @@
 ---
 import { getTop } from '../libs/macrocms';
+import { Icon } from 'astro-icon';
 import BaseTitle from '../components/BaseTitle.astro';
 import ViewElement from '../components/ViewElement.astro';
 import AnimationBlur from '../components/AnimationBlur.astro';
@@ -17,17 +18,31 @@ const toTopTitle = topData.topTitles.toTopTitle;
     <ViewElement ratio="-20%" loop={true}>
       <AnimationBlur>
         <div class="inner">
-          <div class="contact">
+          <a class="contact" href="contact">
             <BaseTitle title={contactTitle} />
-          </div>
-          <div class="toTop">
+            <p class="text">お問い合わせ</p>
+            <div class="icon icon--contact">
+              <Icon name="arrow" />
+            </div>
+          </a>
+          <a class="toTop js-anchor-link" href="#top">
             <BaseTitle title={toTopTitle} />
-          </div>
+            <p class="text">トップへ戻る</p>
+            <div class="icon icon--top">
+              <Icon name="arrow" />
+            </div>
+          </a>
         </div>
       </AnimationBlur>
     </ViewElement>
   </div>
 </div>
+
+<script>
+  import { anchorLink } from '../script/module/anchor-link.js';
+
+  anchorLink();
+</script>
 
 <style lang="scss">
   @import '../styles/_single';
@@ -37,11 +52,56 @@ const toTopTitle = topData.topTitles.toTopTitle;
   }
 
   .inner {
+    position: relative;
     display: flex;
     justify-content: space-between;
     width: vw(1348);
     margin: auto;
     color: $color-base-black;
     text-align: center;
+
+    &::before {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1px;
+      height: 100%;
+      content: '';
+      background-color: $color-base-black;
+      transform: translateX(-50%);
+    }
+  }
+
+  .contact,
+  .toTop {
+    width: 50%;
+    padding: 35px vw(45);
+  }
+
+  .text {
+    margin: 7px 0 0;
+    font-size: vw(20);
+  }
+
+  .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: vw(76);
+    height: vw(76);
+    padding: vw(23);
+    margin: 40px 0 0 auto;
+    border: 1px solid $color-base-black;
+    border-radius: 50%;
+    transition: 0.3s;
+
+    @include hover() {
+      color: $color-base-white;
+      background-color: $color-base-black;
+    }
+  }
+
+  .icon--top {
+    transform: rotate(-90deg);
   }
 </style>
