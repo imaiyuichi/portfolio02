@@ -85,7 +85,7 @@ export function startMyAnimation() {
   // ブラウザのリサイズ操作
   window.addEventListener('resize', () => {
     sizes.width = window.innerWidth;
-    sizes.height = window.innerHeight;
+    sizes.height = webGlHeight.offsetHeight;
 
     camera.aspect = sizes.width / sizes.height;
     camera.updateProjectionMatrix();
