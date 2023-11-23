@@ -1,15 +1,109 @@
 ---
-// import * as Variables from '../variables.astro';
-// import { Icon } from 'astro-icon';
+import * as Variables from '../variables.astro';
+import { getTop } from '../libs/macrocms';
 
-// const topLInk = Variables.PAGES.index.url;
+const logData = await getTop({
+  fields: ['topTitles'],
+});
+
+const logo = logData.topTitles.logo;
+const topLInk = Variables.PAGES.index.url;
+const footerDescription = logData.topTitles.footerDescription;
+const footerCopy = logData.topTitles.copyright;
+
+const navData = [
+  [
+    {
+      primary: true,
+      page: 'HOME',
+    },
+    {
+      page: 'New Topics',
+      link: '#NewTopics',
+    },
+    {
+      page: 'Our Skills',
+      link: '#OurSkills',
+    },
+    {
+      page: 'About',
+      link: '#About',
+    },
+    {
+      page: 'Contact',
+      link: '#Contact',
+    },
+  ],
+  [
+    {
+      primary: true,
+      page: 'CATEGORIES',
+    },
+    {
+      page: 'Engineer',
+      link: '',
+    },
+    {
+      page: 'Designer',
+      link: '',
+    },
+    {
+      page: 'Others',
+      link: '',
+    },
+  ],
+];
 ---
 
 <footer class="footer">
-  <div class="inner">
-    <h2 class="title">Footer</h2>
+  <div class="bg">
+    <div class="inner">
+      <div class="heding">
+        <h1 class="title">
+          <a class="link" href={topLInk}
+            ><img
+              src={logo.url}
+              alt=""
+              width={logo.width}
+              height={logo.height}
+            /></a
+          >
+        </h1>
+        <p class="description">{footerDescription}</p>
+      </div>
+      <nav class="nav">
+        {
+          navData.map((data: any) => {
+            return (
+              <ul class="list">
+                {data.map((item: any) => {
+                  return (
+                    <li class="item" data-primary={item.primary && 'ture'}>
+                      {item.link ? (
+                        <a href={item.link} class="js-anchor-link">
+                          <p>{item.page}</p>
+                        </a>
+                      ) : (
+                        <p>{item.page}</p>
+                      )}
+                    </li>
+                  );
+                })}
+              </ul>
+            );
+          })
+        }
+      </nav>
+      <div class="copyright">{footerCopy}</div>
+    </div>
   </div>
 </footer>
+
+<script>
+  import { anchorLink } from '../script/module/anchor-link.js';
+
+  anchorLink();
+</script>
 
 <style lang="scss">
   @import '../styles/_single';
@@ -18,32 +112,73 @@
     position: relative;
   }
 
-  .footer {
-    position: relative;
-    width: 100%;
-    height: 7rem;
-    background-color: #d9d9d9;
+  .bg {
+    background-color: $color-base-black;
   }
 
   .inner {
-    height: 100%;
-    color: #ffffff;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    padding: 93px vw(80);
   }
 
   .title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    color: #ffffff;
+    display: inline-block;
+    height: 20px;
   }
 
-  .arrow {
-    position: fixed;
-    right: 3rem;
-    bottom: 5rem;
-    width: 3.75rem;
-    height: 3.75rem;
-    color: #ffffff;
+  .link {
+    display: block;
+    height: 100%;
+  }
+
+  img {
+    display: block;
+    height: 100%;
+  }
+
+  .description {
+    font-size: vw(14);
+    font-weight: 400;
+    color: $color-base-white;
+  }
+
+  .nav {
+    display: flex;
+    margin: 0 0 0 vw(300);
+    color: $color-footer-gray;
+  }
+
+  .list + .list {
+    margin: 0 0 0 vw(70);
+  }
+
+  .item {
+    font-size: vw(12);
+    font-weight: 600;
+
+    &[data-primary='ture'] {
+      font-size: vw(16);
+    }
+  }
+
+  .item + .item {
+    transition: 0.3s;
+
+    @include hover() {
+      color: $color-base-white;
+    }
+  }
+
+  .item:nth-child(2) {
+    margin: 8px 0 0;
+  }
+
+  .copyright {
+    grid-column: span 2;
+    font-size: vw(10);
+    font-weight: 400;
+    color: $color-footer-copy;
+    text-align: right;
   }
 </style>

@@ -2,16 +2,17 @@
 import PageNumber from './PageNumber.astro';
 
 interface Props {
+  id?: string;
   background?: string;
   color?: string;
   current: number;
   total: number;
 }
 
-const { background, color, current, total } = Astro.props;
+const { id, background, color, current, total } = Astro.props;
 ---
 
-<section class="root">
+<section class="root" id={id}>
   <div class="bg" data-background={background}>
     <div class="inner">
       <slot />

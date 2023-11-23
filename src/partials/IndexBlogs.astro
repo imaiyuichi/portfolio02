@@ -21,7 +21,13 @@ const title = topData.topTitles.blogTitle;
 const data = BlogData.contents;
 ---
 
-<BaseLayout background="gray" color="black" current={2} total={4}>
+<BaseLayout
+  background="gray"
+  id="NewTopics"
+  color="black"
+  current={2}
+  total={4}
+>
   <BaseTitle title={title} />
   <div class="container">
     <ViewElement ratio="-20%">
