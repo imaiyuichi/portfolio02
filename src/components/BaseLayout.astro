@@ -50,6 +50,10 @@ const { background, color, current, total } = Astro.props;
       border-right: 1px solid $color-base-black;
       border-left: 1px solid $color-base-black;
     }
+
+    @include sp() {
+      width: 100%;
+    }
   }
 
   .pageNumber {
