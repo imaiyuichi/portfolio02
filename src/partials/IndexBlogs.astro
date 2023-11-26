@@ -14,7 +14,7 @@ const topData = await getTop({
 
 const BlogData = await getBlogs({
   fields: ['id', 'title', 'eyecatch', 'category'],
-  limit: 5,
+  limit: 10,
 });
 
 export async function getStaticPaths() {
@@ -35,9 +35,8 @@ const blogData = data.map((obj, index) => ({
   ...obj,
   publishedAt: blog.contents[index].publishedAt,
   updatedAt: blog.contents[index].updatedAt,
+  writer: blog.contents[index].writer,
 }));
-
-console.log(blogData);
 ---
 
 <BaseLayout

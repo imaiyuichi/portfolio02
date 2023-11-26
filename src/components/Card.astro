@@ -10,11 +10,13 @@ interface Props {
       height: number;
     };
     title: string;
-    publishedAt: string;
-    updatedAt: string;
+    publishedAt?: string;
+    updatedAt?: string;
     category: {
+      image: { url: string; width: number; height: number };
       name: string;
     };
+    writer?: string;
   };
   splide?: boolean;
 }
@@ -35,15 +37,38 @@ const { BlogData, splide } = Astro.props;
         />
       </div>
       <div class="blog__text-area">
-        <p class="blog__category">{BlogData.category.name}</p>
+        {
+          BlogData.writer ? (
+            <div class="blog__category">
+              <div class="blog__category__inner">
+                <div class="blog__category__image">
+                  <ImageWrapper
+                    src={BlogData.category.image.url}
+                    width={BlogData.category.image.width}
+                    height={BlogData.category.image.height}
+                    alt=""
+                  />
+                </div>
+                <p class="blog__category__text">{BlogData.category.name}</p>
+                <span>|</span>
+                <p class="blog__category__text">{BlogData.writer[0]}</p>
+              </div>
+            </div>
+          ) : (
+            <div class="blog__category blog__category--modify">
+              <p class="blog__category__text">{BlogData.category.name}</p>
+            </div>
+          )
+        }
         <h2 class="blog__title">{BlogData.title}</h2>
         <p class="blog__date">
           {
-            new Date(BlogData.publishedAt).toLocaleString('ja-JP', {
-              year: 'numeric',
-              month: 'numeric',
-              day: 'numeric',
-            })
+            BlogData.publishedAt &&
+              new Date(BlogData.publishedAt).toLocaleString('ja-JP', {
+                year: 'numeric',
+                month: 'numeric',
+                day: 'numeric',
+              })
           }
         </p>
       </div>
@@ -87,13 +112,36 @@ const { BlogData, splide } = Astro.props;
 
   .blog__category {
     display: inline-block;
-    padding: 5px vw(15);
+    padding: 3px vw(15) 3px vw(2);
     font-family: $font-family-termina;
-    font-size: vw(18);
+    font-size: vw(16);
     font-weight: 700;
     color: $color-base-white;
     background-color: $color-base-black;
     border-radius: 9999px;
+  }
+
+  .blog__category--modify {
+    padding: 10px vw(20);
+  }
+
+  .blog__category__inner {
+    display: flex;
+    gap: vw(10);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .blog__category__image {
+    position: relative;
+    width: vw(33);
+    height: vw(33);
+    background-color: $color-base-white;
+    border-radius: 50%;
+  }
+
+  .blog__category__text {
+    line-height: 1;
   }
 
   .blog__title {
@@ -109,5 +157,18 @@ const { BlogData, splide } = Astro.props;
   .blog__date {
     margin: 15px 0 0;
     font-size: vw(16);
+  }
+</style>
+<style lang="scss" is:global>
+  @import '../styles/_single';
+
+  .blog__category__image {
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: vw(25);
+      transform: translate(-50%, -50%);
+    }
   }
 </style>

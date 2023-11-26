@@ -19,14 +19,11 @@ const publishedAt = new Date(blog.publishedAt).toLocaleString('ja-JP', {
   month: 'numeric',
   day: 'numeric',
 });
-const updatedAt = new Date(blog.updatedAt).toLocaleString('ja-JP', {
-  year: 'numeric',
-  month: 'numeric',
-  day: 'numeric',
-});
-
-console.log(updatedAt);
-console.log(publishedAt);
+// const updatedAt = new Date(blog.updatedAt).toLocaleString('ja-JP', {
+//   year: 'numeric',
+//   month: 'numeric',
+//   day: 'numeric',
+// });
 ---
 
 <Layout title="blogs" pageType="blogId">
@@ -98,6 +95,7 @@ console.log(publishedAt);
 
   .editor {
     margin: 80px 0 0;
+
     h2 {
       position: relative;
       width: fit-content;
