@@ -13,6 +13,16 @@ export async function getStaticPaths() {
 
 const { blogId } = Astro.params;
 const blog = await getBlogDetail(blogId as string);
+const publishedAt = new Date(blog.publishedAt).toLocaleString('ja-JP', {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+});
+const updatedAt = new Date(blog.updatedAt).toLocaleString('ja-JP', {
+  year: 'numeric',
+  month: 'numeric',
+  day: 'numeric',
+});
 ---
 
 <Layout title="blogs" pageType="blogId">
@@ -20,7 +30,11 @@ const blog = await getBlogDetail(blogId as string);
     <div class="bg"></div>
     <div class="inner">
       <h1 class="title">{blog.title}</h1>
-      <p class="date">公開日：{new Date(blog.publishedAt).toLocaleString()}</p>
+      <p class="date">
+        公開日：{publishedAt}
+      </p>
+      {(<p class="date">更新日：{updatedAt}</p>)}
+
       <div class="editor">
         <div set:html={blog.content} />
       </div>
@@ -52,6 +66,10 @@ const blog = await getBlogDetail(blogId as string);
 
   .date {
     margin: 30px 0 0;
+  }
+
+  .date + .date {
+    margin: 0;
   }
 </style>
 

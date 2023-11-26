@@ -1,5 +1,5 @@
 ---
-import { getTop, getBlogs } from '../libs/macrocms';
+import { getTop, getBlogs, getBlogDetail } from '../libs/macrocms';
 import * as Variables from '../variables.astro';
 import BaseLayout from '../components/BaseLayout.astro';
 import BaseTitle from '../components/BaseTitle.astro';
@@ -17,8 +17,27 @@ const BlogData = await getBlogs({
   limit: 5,
 });
 
+export async function getStaticPaths() {
+  const BlogData = await getBlogs({ fields: 'id' });
+  return BlogData.contents.map(blog => ({
+    params: {
+      blogId: blog.id,
+    },
+  }));
+}
+
+const { blogId } = Astro.params;
+const blog = await getBlogDetail(blogId as string);
 const title = topData.topTitles.blogTitle;
 const data = BlogData.contents;
+
+const blogData = data.map((obj, index) => ({
+  ...obj,
+  publishedAt: blog.contents[index].publishedAt,
+  updatedAt: blog.contents[index].updatedAt,
+}));
+
+console.log(blogData);
 ---
 
 <BaseLayout
@@ -36,7 +55,7 @@ const data = BlogData.contents;
           <div class="splide__track">
             <div class="splide__list">
               {
-                data.map((data: any) => {
+                blogData.map((data: any) => {
                   return <Card BlogData={data} splide={true} />;
                 })
               }

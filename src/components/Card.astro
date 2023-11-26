@@ -10,8 +10,9 @@ interface Props {
       height: number;
     };
     title: string;
+    publishedAt: string;
+    updatedAt: string;
     category: {
-      publishedAt: string;
       name: string;
     };
   };
@@ -38,7 +39,7 @@ const { BlogData, splide } = Astro.props;
         <h2 class="blog__title">{BlogData.title}</h2>
         <p class="blog__date">
           {
-            new Date(BlogData.category.publishedAt).toLocaleString('ja-JP', {
+            new Date(BlogData.publishedAt).toLocaleString('ja-JP', {
               year: 'numeric',
               month: 'numeric',
               day: 'numeric',
