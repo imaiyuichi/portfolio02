@@ -13,7 +13,7 @@ const topData = await getTop({
 });
 
 const BlogData = await getBlogs({
-  fields: ['id', 'title', 'eyecatch', 'category'],
+  fields: ['id', 'title', 'eyecatch', 'category', 'publishedAt', 'writer'],
   limit: 10,
 });
 
@@ -26,17 +26,8 @@ export async function getStaticPaths() {
   }));
 }
 
-const { blogId } = Astro.params;
-const blog = await getBlogDetail(blogId as string);
 const title = topData.topTitles.blogTitle;
 const data = BlogData.contents;
-
-const blogData = data.map((obj, index) => ({
-  ...obj,
-  publishedAt: blog.contents[index].publishedAt,
-  updatedAt: blog.contents[index].updatedAt,
-  writer: blog.contents[index].writer,
-}));
 ---
 
 <BaseLayout
@@ -54,7 +45,7 @@ const blogData = data.map((obj, index) => ({
           <div class="splide__track">
             <div class="splide__list">
               {
-                blogData.map((data: any) => {
+                data.map((data: any) => {
                   return <Card BlogData={data} splide={true} />;
                 })
               }
