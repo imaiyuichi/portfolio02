@@ -1,0 +1,42 @@
+---
+interface Props {
+  lowerTitel: string;
+}
+
+const { lowerTitel } = Astro.props;
+---
+
+<div class="root">
+  <div class="inner">
+    <p class="page">TOP</p>
+    <span>&gt</span>
+    <p class="lower">{lowerTitel}</p>
+  </div>
+</div>
+
+<style lang="scss">
+  @import '../styles/_single';
+
+  .root {
+    border-bottom: 1px solid $color-base-black;
+  }
+
+  .inner {
+    display: flex;
+    gap: vw(11);
+    align-items: baseline;
+    padding: vw(17) vw(30);
+  }
+
+  .page {
+    font-size: vw(12);
+    line-height: 1;
+    border-bottom: 1px solid $color-base-black;
+  }
+
+  .lower {
+    font-size: vw(12);
+    font-weight: 700;
+    line-height: 1;
+  }
+</style>
