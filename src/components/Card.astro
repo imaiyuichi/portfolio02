@@ -37,29 +37,21 @@ const { BlogData, splide } = Astro.props;
         />
       </div>
       <div class="blog__text-area">
-        {
-          BlogData.writer ? (
-            <div class="blog__category">
-              <div class="blog__category__inner">
-                <div class="blog__category__image">
-                  <ImageWrapper
-                    src={BlogData.category.image.url}
-                    width={BlogData.category.image.width}
-                    height={BlogData.category.image.height}
-                    alt=""
-                  />
-                </div>
-                <p class="blog__category__text">{BlogData.category.name}</p>
-                <span class="blog__category__border">|</span>
-                <p class="blog__category__text">{BlogData.writer[0]}</p>
-              </div>
+        <div class="blog__category">
+          <div class="blog__category__inner">
+            <div class="blog__category__image">
+              <ImageWrapper
+                src={BlogData.category.image.url}
+                width={BlogData.category.image.width}
+                height={BlogData.category.image.height}
+                alt=""
+              />
             </div>
-          ) : (
-            <div class="blog__category blog__category--modify">
-              <p class="blog__category__text">{BlogData.category.name}</p>
-            </div>
-          )
-        }
+            <p class="blog__category__text">{BlogData.category.name}</p>
+            <span>|</span>
+            <p class="blog__category__text">{BlogData.writer[0]}</p>
+          </div>
+        </div>
         <h2 class="blog__title">{BlogData.title}</h2>
         <p class="blog__date">
           {
@@ -142,10 +134,6 @@ const { BlogData, splide } = Astro.props;
 
   .blog__category__text {
     line-height: 1;
-  }
-
-  .blog__category__border {
-    font-weight: 100;
   }
 
   .blog__title {
