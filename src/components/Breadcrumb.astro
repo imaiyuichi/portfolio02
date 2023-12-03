@@ -1,0 +1,45 @@
+---
+import ImageWrapper from './ImageWrapper.astro';
+import ViewElement from './ViewElement.astro';
+import AnimationBlur from './AnimationBlur.astro';
+
+interface Props {
+  lowerTitel: string;
+}
+
+const { lowerTitel } = Astro.props;
+---
+
+<div class="root">
+  <div class="inner">
+    <p class="page">TOP</p>
+    <span>></span>
+    <p class="lower">{lowerTitel}</p>
+  </div>
+</div>
+
+<style lang="scss">
+  @import '../styles/_single';
+  .root {
+    border-bottom: 1px solid $color-base-black;
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    padding: vw(17) vw(30);
+    gap: vw(11);
+  }
+
+  .page {
+    line-height: 1;
+    font-size: vw(12);
+    border-bottom: 1px solid $color-base-black;
+  }
+
+  .lower {
+    line-height: 1;
+    font-size: vw(12);
+    font-weight: 700;
+  }
+</style>

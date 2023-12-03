@@ -2,7 +2,10 @@
 import { GetStaticPathsOptions } from 'astro';
 import { getBlogs } from '../../libs/macrocms';
 import Layout from '../../layouts/Layout.astro';
+import { getTop } from '../../libs/macrocms';
+import BaseTitle from '../../components/BaseTitle.astro';
 import Card from '../../components/Card.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 
 const BlogData = await getBlogs({
   fields: ['id', 'title', 'eyecatch', 'category'],
@@ -17,10 +20,19 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
   const totallimit = BlogData.limit;
   return paginate(BlogData.contents, { pageSize: totalCount / totallimit });
 };
+
+const lowerData = await getTop({
+  fields: ['lowerTItle'],
+});
+
+const title = lowerData.lowerTItle.articleTitle;
+console.log(title);
 ---
 
 <Layout title="Welcome to Astro." pageType="blog">
+  <Breadcrumb lowerTitel="Articles" />
   <main class="main">
+    <BaseTitle title={title} />
     <div class="blogs">
       {
         data.map((data: any) => {
@@ -48,6 +60,8 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
   .main {
     width: vw(1200);
     padding: vw(110) 0;
+    border-right: 1px solid $color-base-black;
+    border-left: 1px solid $color-base-black;
     margin: auto;
 
     @include sp() {
@@ -61,7 +75,7 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
     flex-wrap: wrap;
     gap: vw(50);
     width: vw(1060);
-    margin: auto;
+    margin: vw(50) auto 0;
   }
 
   .pagenation {
