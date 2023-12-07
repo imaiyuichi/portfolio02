@@ -1,5 +1,6 @@
 ---
 import ImageWrapper from '../components/ImageWrapper.astro';
+import SampleImage from '../images/thumbnail_de.jpg';
 
 interface Props {
   BlogData: {
@@ -28,13 +29,25 @@ const { BlogData, splide } = Astro.props;
   <a href={`/blog/${BlogData.id}`} class="link">
     <div class="blog__inner">
       <div class="blog__img">
-        <ImageWrapper
-          src={BlogData.eyecatch.url}
-          width={BlogData.eyecatch.width}
-          height={BlogData.eyecatch.height}
-          alt=""
-          classValue="image-cover"
-        />
+        {
+          BlogData.eyecatch ? (
+            <ImageWrapper
+              src={BlogData.eyecatch.url}
+              width={BlogData.eyecatch.width}
+              height={BlogData.eyecatch.height}
+              alt=""
+              classValue="image-cover"
+            />
+          ) : (
+            <ImageWrapper
+              src={SampleImage}
+              width={350}
+              height={190}
+              alt=""
+              classValue="image-cover"
+            />
+          )
+        }
       </div>
       <div class="blog__text-area">
         <div class="blog__category">
