@@ -42,11 +42,19 @@ const topLInk = Variables.PAGES.index.url;
     display: flex;
     align-items: center;
     padding: vw(30) 0 vw(30) vw(30);
+
+    @include sp() {
+      padding: vw_sp(15) 0 vw_sp(15) vw_sp(15);
+    }
   }
 
   .title {
     display: inline-block;
     height: 20px;
+
+    @include sp() {
+      height: vw_sp(15);
+    } 
   }
 
   .link {
