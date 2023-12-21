@@ -120,6 +120,11 @@ const navData = [
     display: grid;
     grid-template-columns: auto 1fr;
     padding: 93px vw(80);
+
+    @include sp() {
+      display: block;
+      width: 100%;
+    }
   }
 
   .title {
@@ -130,6 +135,10 @@ const navData = [
   .link {
     display: block;
     height: 100%;
+
+    @include sp() {
+      width: vw_sp(221);
+    }
   }
 
   img {
@@ -141,16 +150,30 @@ const navData = [
     font-size: vw(14);
     font-weight: 400;
     color: $color-base-white;
+
+    @include sp() {
+      margin: vw_sp(5) 0 0;
+      font-size: vw_sp(10);
+    }
   }
 
   .nav {
     display: flex;
     margin: 0 0 0 vw(300);
     color: $color-footer-gray;
+
+    @include sp() {
+      flex-direction: column;
+      margin: vw_sp(43) 0 0;
+    }
   }
 
   .list + .list {
     margin: 0 0 0 vw(70);
+
+    @include sp() {
+      margin: vw_sp(60) 0 0;
+    }
   }
 
   .item {
@@ -159,6 +182,15 @@ const navData = [
 
     &[data-primary='ture'] {
       font-size: vw(16);
+
+      @include sp() {
+        font-size: vw_sp(10);
+        font-weight: 400;
+      }
+    }
+
+    @include sp() {
+      font-size: vw_sp(13);
     }
   }
 
