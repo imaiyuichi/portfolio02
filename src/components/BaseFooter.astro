@@ -1,7 +1,6 @@
 ---
 import * as Variables from '../variables.astro';
 import { getTop } from '../libs/macrocms';
-import ImageWrapper from '../components/ImageWrapper.astro';
 
 const logData = await getTop({
   fields: ['topTitles'],
@@ -197,8 +196,8 @@ const navData = [
   }
 
   .item + .item {
-    transition: 0.3s;
     margin: 20px 0 0;
+    transition: 0.3s;
 
     @include hover() {
       color: $color-base-white;

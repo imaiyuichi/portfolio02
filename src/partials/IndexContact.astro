@@ -63,8 +63,8 @@ const toTopTitle = topData.topTitles.toTopTitle;
     text-align: center;
 
     @include sp() {
-      width: 100%;
       flex-direction: column;
+      width: 100%;
     }
 
     &::before {
@@ -78,9 +78,9 @@ const toTopTitle = topData.topTitles.toTopTitle;
       transform: translateX(-50%);
 
       @include sp() {
+        top: vw_sp(160);
         width: 100vw;
         height: 1px;
-        top: vw_sp(160);
       }
     }
   }
