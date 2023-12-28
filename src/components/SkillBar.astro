@@ -40,12 +40,21 @@ const { data } = Astro.props;
     display: flex;
     gap: vw(18);
     justify-content: center;
+
+    @include sp() {
+      gap: vw_sp(20);
+    }
   }
 
   .image {
     position: relative;
     width: vw(40);
     height: vw(40);
+
+    @include sp() {
+      width: vw_sp(40);
+      height: vw_sp(40);
+    }
   }
 
   .description {
@@ -58,12 +67,21 @@ const { data } = Astro.props;
     font-size: vw(16);
     font-weight: 700;
     line-height: 1;
+
+    @include sp() {
+      font-size: vw_sp(14);
+    }
   }
 
   .level {
     width: vw(200);
     height: vw(10);
     border: 1px solid $color-base-white;
+
+    @include sp() {
+      width: vw_sp(170);
+      height: vw_sp(10);
+    }
   }
 
   .level__gauge {
@@ -80,6 +98,10 @@ const { data } = Astro.props;
       height: 98%;
       content: '';
       border: 1px solid $color-base-black;
+
+      @include sp() {
+        width: vw_sp(168);
+      }
     }
   }
 </style>
