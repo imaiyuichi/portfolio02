@@ -70,12 +70,21 @@ const data = BlogData.contents;
 
   .blogs {
     margin: vw(30) 0 0;
+
+    @include sp() {
+      margin: vw_sp(-20) 0 0;
+    }
   }
 
   .button {
     width: vw(330);
     margin: vw(65) auto 0;
     text-align: center;
+
+    @include sp() {
+      width: vw_sp(230);
+      margin: vw_sp(105) auto 0;
+    }
   }
 </style>
 <style lang="scss" is:global>
@@ -105,6 +114,13 @@ const data = BlogData.contents;
       }
     }
 
+    @include sp() {
+      bottom: vw_sp(-350);
+      left: vw_sp(100);
+      width: vw_sp(55);
+      height: vw_sp(55);
+    }
+
     &::before {
       position: absolute;
       bottom: 0;
@@ -118,6 +134,12 @@ const data = BlogData.contents;
       border-radius: 50%;
       transition: 0.3s;
       transform: rotate(180deg) !important;
+
+      @include sp() {
+        width: vw_sp(55);
+        height: vw_sp(55);
+        border: 1px solid $color-base-black;
+      }
     }
 
     &::after {
@@ -129,6 +151,14 @@ const data = BlogData.contents;
       height: vw(20);
       font-weight: 700;
       content: 'Prev';
+
+      @include sp() {
+        bottom: vw_sp(-14);
+        left: vw_sp(9);
+        width: vw_sp(30);
+        height: vw_sp(10);
+        font-size: vw_sp(12);
+      }
     }
   }
 
@@ -150,6 +180,13 @@ const data = BlogData.contents;
       }
     }
 
+    @include sp() {
+      bottom: vw_sp(-350);
+      left: vw_sp(110);
+      width: vw_sp(55);
+      height: vw_sp(55);
+    }
+
     &::before {
       position: absolute;
       bottom: 0;
@@ -162,6 +199,12 @@ const data = BlogData.contents;
       border: 2px solid $color-base-black;
       border-radius: 50%;
       transition: 0.3s;
+
+      @include sp() {
+        width: vw_sp(55);
+        height: vw_sp(55);
+        border: 1px solid $color-base-black;
+      }
     }
 
     &::after {
@@ -174,6 +217,14 @@ const data = BlogData.contents;
       font-weight: 700;
       letter-spacing: 0.02em;
       content: 'Next';
+
+      @include sp() {
+        bottom: vw_sp(-14);
+        left: vw_sp(11);
+        width: vw_sp(30);
+        height: vw_sp(10);
+        font-size: vw_sp(12);
+      }
     }
   }
 

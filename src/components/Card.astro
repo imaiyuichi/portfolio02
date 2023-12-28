@@ -74,6 +74,10 @@ const { BlogData, splide } = Astro.props;
   .blog {
     width: vw(318);
     transition: 0.5s;
+
+    @include sp() {
+      width: vw_sp(210);
+    }
   }
 
   .link {
@@ -88,8 +92,12 @@ const { BlogData, splide } = Astro.props;
   .blog__img {
     position: relative;
     width: 100%;
-    height: vw(180);
+    height: vw(170);
     opacity: 0.8;
+
+    @include sp() {
+      height: vw_sp(110);
+    }
 
     .img {
       height: 100%;
@@ -100,6 +108,10 @@ const { BlogData, splide } = Astro.props;
   .blog__text-area {
     padding: 27px 0 0;
     font-family: $noto-sans;
+
+    @include sp() {
+      padding: vw_sp(20) 0 0;
+    }
   }
 
   .blog__category {
@@ -111,10 +123,19 @@ const { BlogData, splide } = Astro.props;
     color: $color-base-white;
     background-color: $color-base-black;
     border-radius: 9999px;
+
+    @include sp() {
+      padding: vw_sp(2) vw_sp(10) vw_sp(2) vw_sp(2);
+      font-size: vw_sp(10);
+    }
   }
 
   .blog__category--modify {
     padding: 10px vw(20);
+
+    @include sp() {
+      padding: 10px vw_sp(10);
+    }
   }
 
   .blog__category__inner {
@@ -130,6 +151,11 @@ const { BlogData, splide } = Astro.props;
     height: vw(33);
     background-color: $color-base-white;
     border-radius: 50%;
+
+    @include sp() {
+      width: vw_sp(20);
+      height: vw_sp(20);
+    }
   }
 
   .blog__category__text {
@@ -144,11 +170,22 @@ const { BlogData, splide } = Astro.props;
     line-height: 1.5;
 
     @include line-clamp(3);
+
+    @include sp() {
+      height: vw_sp(80);
+      margin: vw_sp(10) 0 0;
+      font-size: vw_sp(17);
+    }
   }
 
   .blog__date {
     margin: 15px 0 0;
     font-size: vw(16);
+
+    @include sp() {
+      margin: vw_sp(10) 0 0;
+      font-size: vw_sp(10);
+    }
   }
 </style>
 <style lang="scss" is:global>
@@ -161,6 +198,10 @@ const { BlogData, splide } = Astro.props;
       left: 50%;
       width: vw(25);
       transform: translate(-50%, -50%);
+
+      @include sp() {
+        width: vw_sp(15);
+      }
     }
   }
 </style>
