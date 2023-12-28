@@ -13,5 +13,11 @@ export function SplideSlide() {
     gap: 50,
     perPage: 3.5,
     pagination: true,
+    breakpoints: {
+      768: {
+        perPage: 1.5,
+        gap: 30,
+      },
+    },
   }).mount();
 }

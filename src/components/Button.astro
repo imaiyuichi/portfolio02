@@ -36,14 +36,25 @@ const { type, link, text } = Astro.props;
     height: vw(76);
     transition: 0.3s;
 
+    @include sp() {
+      height: vw_sp(55);
+    }
+
     &[data-type='gray'] {
       color: $color-base-black;
       border: 2px solid $color-base-black;
+      @include sp() {
+        border: 1px solid $color-base-black;
+      }
 
       @include hover() {
         color: $color-base-white;
         background-color: $color-base-black;
         border: 2px solid $color-base-white;
+
+        @include sp() {
+          border: 1px solid $color-base-white;
+        }
 
         .image {
           right: vw(25);
@@ -55,10 +66,18 @@ const { type, link, text } = Astro.props;
       color: $color-base-white;
       border: 2px solid $color-base-white;
 
+      @include sp() {
+        border: 1px solid $color-base-white;
+      }
+
       @include hover() {
         color: $color-base-black;
         background-color: $color-base-white;
         border: 2px solid $color-base-black;
+
+        @include sp() {
+          border: 1px solid $color-base-black;
+        }
 
         .image {
           right: vw(25);
@@ -83,6 +102,10 @@ const { type, link, text } = Astro.props;
     font-size: vw(16);
     font-weight: 700;
     letter-spacing: 0.02em;
+
+    @include sp() {
+      font-size: vw_sp(12);
+    }
   }
 
   .image {
@@ -92,5 +115,10 @@ const { type, link, text } = Astro.props;
     width: vw(21);
     transition: right 0.3s;
     transform: translateY(-50%);
+
+    @include sp() {
+      width: vw_sp(13);
+      right: vw_sp(25);
+    }
   }
 </style>

@@ -48,7 +48,7 @@ const { id, background, color, current, total } = Astro.props;
     border-left: 1px solid $color-base-white;
 
     @include sp() {
-      width: 100%;
+      width: vw_sp(320);
       padding: vw_sp(40) 0 vw_sp(40);
     }
 
@@ -58,7 +58,7 @@ const { id, background, color, current, total } = Astro.props;
     }
 
     @include sp() {
-      width: 100%;
+      width: vw_sp(320);
     }
   }
 
@@ -69,7 +69,7 @@ const { id, background, color, current, total } = Astro.props;
     transform: translateY(-50%);
 
     @include sp() {
-      left: vw_sp(-27);
+      left: vw_sp(4);
     }
   }
 </style>
