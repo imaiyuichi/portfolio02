@@ -1,9 +1,16 @@
 ---
+import { getTop } from '../libs/macrocms';
 import Layout from '../layouts/Layout.astro';
 import AboutBg from '../partials/AboutBg.astro';
+
+const topData = await getTop({
+  fields: ['metaInfo'],
+});
+
+const { metaInfo } = topData;
 ---
 
-<Layout title="Welcome to Astro." pageType="about">
+<Layout {...metaInfo} pageType="about">
   <main class="main">
     <AboutBg />
   </main>
