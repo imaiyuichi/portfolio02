@@ -39,20 +39,36 @@ const { color, current, total } = Astro.props;
   .current {
     font-size: vw(30);
     font-weight: 700;
+
+    @include sp() {
+      font-size: vw_sp(15);
+    }
   }
 
   .border {
     font-size: vw(30);
+
+    @include sp() {
+      font-size: vw_sp(15);
+    }
   }
 
   .total {
     font-size: vw(16);
     font-weight: 700;
+
+    @include sp() {
+      font-size: vw_sp(8);
+    }
   }
 
   .text {
     font-size: vw(16);
     font-weight: 700;
     letter-spacing: -0.04em;
+
+    @include sp() {
+      font-size: vw_sp(6);
+    }
   }
 </style>

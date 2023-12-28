@@ -66,6 +66,7 @@ const mvImage = mv.topMvImage;
 
     @include sp(){
       width: 100%;
+      height: vw_sp(400);
     }
   }
 
@@ -76,6 +77,12 @@ const mvImage = mv.topMvImage;
     margin: auto;
     border-right: 1px solid $color-base-white;
     border-left: 1px solid $color-base-white;
+
+    @include sp() {
+      width: 100%;
+      height: vw_sp(400);
+      padding: vw_sp(100) 0 0;
+    }
   }
 
   .title {
@@ -85,6 +92,10 @@ const mvImage = mv.topMvImage;
     color: $color-base-white;
     text-align: center;
     letter-spacing: 0.04em;
+
+    @include sp() {
+      font-size: vw_sp(30);
+    }
   }
 
   .sub-title {
@@ -95,6 +106,11 @@ const mvImage = mv.topMvImage;
     color: $color-base-white;
     text-align: center;
     letter-spacing: 0.04em;
+
+    @include sp() {
+      margin: vw_sp(20) 0 0;
+      font-size: vw_sp(25);
+    }
   }
 
   .catch {
@@ -105,6 +121,11 @@ const mvImage = mv.topMvImage;
     color: $color-base-white;
     text-align: center;
     letter-spacing: 0.04em;
+
+    @include sp() {
+      margin: vw_sp(20) 0 0;
+      font-size: vw_sp(30);
+    }
   }
 
   .image {
@@ -121,5 +142,9 @@ const mvImage = mv.topMvImage;
     top: 50%;
     left: vw(5);
     transform: translateY(-50%);
+
+    @include sp() {
+      left: vw_sp(-27);
+    }
   }
 </style>
