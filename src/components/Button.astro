@@ -43,6 +43,7 @@ const { type, link, text } = Astro.props;
     &[data-type='gray'] {
       color: $color-base-black;
       border: 2px solid $color-base-black;
+
       @include sp() {
         border: 1px solid $color-base-black;
       }
@@ -117,8 +118,8 @@ const { type, link, text } = Astro.props;
     transform: translateY(-50%);
 
     @include sp() {
-      width: vw_sp(13);
       right: vw_sp(25);
+      width: vw_sp(13);
     }
   }
 </style>
