@@ -1,7 +1,13 @@
 ---
-import { getBlogDetail, getBlogs } from '../../libs/macrocms';
+import { getTop, getBlogDetail, getBlogs } from '../../libs/macrocms';
 import Layout from '../../layouts/Layout.astro';
 import ImageWrapper from '../../components/ImageWrapper.astro';
+
+const topData = await getTop({
+  fields: ['metaInfo'],
+});
+
+const { metaInfo } = topData;
 
 export async function getStaticPaths() {
   const BlogData = await getBlogs({ fields: 'id' });
@@ -21,7 +27,7 @@ const publishedAt = new Date(blog.publishedAt).toLocaleString('ja-JP', {
 });
 ---
 
-<Layout title="blogs" pageType="blogId">
+<Layout {...metaInfo} pageType="blogId">
   <main class="main">
     <div class="bg"></div>
     <div class="inner">

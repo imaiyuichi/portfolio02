@@ -8,7 +8,15 @@ import Card from '../../components/Card.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 
 const BlogData = await getBlogs({
-  fields: ['id', 'title', 'eyecatch', 'category', 'publishedAt', 'writer'],
+  fields: [
+    'metaInfo',
+    'id',
+    'title',
+    'eyecatch',
+    'category',
+    'publishedAt',
+    'writer',
+  ],
 });
 
 const data = BlogData.contents;
@@ -21,6 +29,12 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
   return paginate(BlogData.contents, { pageSize: totalCount / totallimit });
 };
 
+const topData = await getTop({
+  fields: ['metaInfo'],
+});
+
+const { metaInfo } = topData;
+
 const lowerData = await getTop({
   fields: ['lowerTItle'],
 });
@@ -28,7 +42,7 @@ const lowerData = await getTop({
 const title = lowerData.lowerTItle.articleTitle;
 ---
 
-<Layout title="Welcome to Astro." pageType="blog">
+<Layout {...metaInfo} pageType="blog">
   <Breadcrumb lowerTitel="Articles" />
   <main class="main">
     <BaseTitle title={title} />
