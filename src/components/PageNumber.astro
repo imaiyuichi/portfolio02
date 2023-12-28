@@ -34,6 +34,12 @@ const { color, current, total } = Astro.props;
     align-items: baseline;
     justify-content: center;
     line-height: 1;
+
+    @include sp() {
+      flex-direction: column;
+      gap: 0;
+      align-items: center;
+    }
   }
 
   .current {
@@ -41,7 +47,8 @@ const { color, current, total } = Astro.props;
     font-weight: 700;
 
     @include sp() {
-      font-size: vw_sp(15);
+      font-size: vw_sp(18);
+      line-height: 1;
     }
   }
 
@@ -49,16 +56,19 @@ const { color, current, total } = Astro.props;
     font-size: vw(30);
 
     @include sp() {
-      font-size: vw_sp(15);
+      font-size: vw_sp(10);
+      line-height: 1;
+      transform: rotate(90deg);
     }
   }
 
   .total {
-    font-size: vw(16);
+    font-size: vw(14);
     font-weight: 700;
 
     @include sp() {
       font-size: vw_sp(8);
+      line-height: 1;
     }
   }
 
@@ -68,7 +78,11 @@ const { color, current, total } = Astro.props;
     letter-spacing: -0.04em;
 
     @include sp() {
-      font-size: vw_sp(6);
+      margin-top: vw_sp(7);
+      font-size: vw_sp(5);
+      line-height: 1.65;
+      writing-mode: vertical-rl;
+      text-orientation: upright;
     }
   }
 </style>
