@@ -1,5 +1,5 @@
 ---
-import { getTop, getBlogDetail, getBlogs } from '../../libs/macrocms';
+import { getTop, getBlogDetail, getBlogsAll } from '../../libs/macrocms';
 import Layout from '../../layouts/Layout.astro';
 import ImageWrapper from '../../components/ImageWrapper.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
@@ -12,8 +12,8 @@ const topData = await getTop({
 const { metaInfo } = topData;
 
 export async function getStaticPaths() {
-  const BlogData = await getBlogs({ fields: 'id' });
-  return BlogData.contents.map(blog => ({
+  const BlogData = await getBlogsAll({ fields: 'id' });
+  return BlogData.map(blog => ({
     params: {
       blogId: blog.id,
     },

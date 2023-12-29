@@ -21,8 +21,8 @@ const { page } = Astro.props;
 const title = lowerData.lowerTItle.articleTitle;
 
 export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
-  const BlogDataall = await getBlogsAll();
-  return paginate(BlogDataall, { pageSize: Variables.pageSize });
+  const BlogDataAll = await getBlogsAll();
+  return paginate(BlogDataAll, { pageSize: Variables.pageSize });
 };
 ---
 
