@@ -53,6 +53,8 @@ const navData = [
     },
   ],
 ];
+
+const { pageType } = Astro.props;
 ---
 
 <footer class="footer">
@@ -80,7 +82,12 @@ const navData = [
                   return (
                     <li class="item" data-primary={item.primary && 'ture'}>
                       {item.link ? (
-                        <a href={item.link} class="js-anchor-link">
+                        <a
+                          href={
+                            pageType === 'top' ? item.link : `/${item.link}`
+                          }
+                          class={pageType === 'top' ? 'js-anchor-link' : ''}
+                        >
                           <p>{item.page}</p>
                         </a>
                       ) : (
