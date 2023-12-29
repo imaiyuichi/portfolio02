@@ -55,9 +55,148 @@ console.log(page);
             )
           }
           <div class="current">
-            <span class="currentPage">{page.currentPage}</span>
-            <span class="border">/</span>
-            <span class="lastPage">{page.lastPage}</span>
+            {
+              // 1ページ目の時
+              page.currentPage === 1 && (
+                <>
+                  <a
+                    class="currentPage"
+                    href={page.url.current}
+                    data-pageActive="true"
+                  >
+                    {page.currentPage}
+                  </a>
+                  {page.currentPage + 1 <= page.lastPage && (
+                    <a
+                      class="currentPage"
+                      href={`${Variables.PAGES.article.nav}${
+                        page.currentPage + 1
+                      }`}
+                    >
+                      {page.currentPage + 1}
+                    </a>
+                  )}
+                  {page.currentPage + 2 <= page.lastPage && (
+                    <a
+                      class="currentPage"
+                      href={`${Variables.PAGES.article.nav}${
+                        page.currentPage + 2
+                      }`}
+                    >
+                      {page.currentPage + 2}
+                    </a>
+                  )}
+                  {page.currentPage + 3 <= page.lastPage && (
+                    <>
+                      {page.currentPage + 3 < page.lastPage && <div>...</div>}
+                      <a
+                        class="currentPage"
+                        href={`${Variables.PAGES.article.nav}${page.lastPage}`}
+                      >
+                        {page.lastPage}
+                      </a>
+                    </>
+                  )}
+                </>
+              )
+            }
+            {
+              // 2ページ目以降の時
+              page.currentPage !== 1 && page.currentPage !== page.lastPage && (
+                <>
+                  {page.currentPage - 2 >= 1 && (
+                    <>
+                      <a
+                        class="currentPage"
+                        href={`${Variables.PAGES.article.nav}1`}
+                      >
+                        1
+                      </a>
+                      {page.currentPage - 2 > 1 && <div>...</div>}
+                    </>
+                  )}
+                  <a
+                    class="currentPage"
+                    href={`${Variables.PAGES.article.nav}${
+                      page.currentPage - 1
+                    }`}
+                  >
+                    {page.currentPage - 1}
+                  </a>
+                  <a
+                    class="currentPage"
+                    href={`${Variables.PAGES.article.nav}${page.currentPage}`}
+                    data-pageActive="true"
+                  >
+                    {page.currentPage}
+                  </a>
+                  {page.currentPage + 1 <= page.lastPage && (
+                    <a
+                      class="currentPage"
+                      href={`${Variables.PAGES.article.nav}${
+                        page.currentPage + 1
+                      }`}
+                    >
+                      {page.currentPage + 1}
+                    </a>
+                  )}
+                  {page.currentPage + 2 <= page.lastPage && (
+                    <>
+                      {page.currentPage + 2 < page.lastPage && <div>...</div>}
+                      <a
+                        class="currentPage"
+                        href={`${Variables.PAGES.article.nav}${page.lastPage}`}
+                      >
+                        {page.lastPage}
+                      </a>
+                    </>
+                  )}
+                </>
+              )
+            }
+            {
+              // 最後のページの時
+              page.currentPage === page.lastPage && (
+                <>
+                  <a
+                    class="currentPage"
+                    href={`${Variables.PAGES.article.nav}1`}
+                  >
+                    1
+                  </a>
+                  {page.currentPage - 3 > 1 && <div>...</div>}
+                  {page.currentPage - 2 < page.lastPage &&
+                    page.currentPage - 2 > 1 && (
+                      <a
+                        class="currentPage"
+                        href={`${Variables.PAGES.article.nav}${
+                          page.currentPage - 2
+                        }`}
+                      >
+                        {page.currentPage - 2}
+                      </a>
+                    )}
+                  {page.currentPage - 1 < page.lastPage &&
+                    page.currentPage - 1 > 1 && (
+                      <a
+                        class="currentPage"
+                        href={`${Variables.PAGES.article.nav}${
+                          page.currentPage - 1
+                        }`}
+                      >
+                        {page.currentPage - 1}
+                      </a>
+                    )}
+                  <a
+                    class="currentPage"
+                    href={page.url.current}
+                    data-pageActive="true"
+                  >
+                    {page.currentPage}
+                  </a>
+                </>
+              )
+            }
           </div>
           {
             page.url.next ? (
@@ -182,12 +321,22 @@ console.log(page);
     }
   }
 
-  .lastPage {
+  .currentPage {
     font-size: vw(14);
     font-weight: 400;
+    opacity: 0.7;
 
     @include sp() {
       font-size: vw_sp(14);
+    }
+
+    &[data-pageActive='true'] {
+      font-size: vw(19);
+      font-weight: 700;
+
+      @include sp() {
+        font-size: vw_sp(16);
+      }
     }
   }
 </style>
