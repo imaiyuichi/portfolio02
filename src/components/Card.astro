@@ -24,7 +24,7 @@ interface Props {
 const { BlogData, splide } = Astro.props;
 ---
 
-<article class:list=`root blog ${splide && "splide__slide"}`>
+<article class:list=`root blog blogHover ${splide && "splide__slide"}`>
   <a href={`/article/${BlogData.id}`} class="link">
     <div class="blog__inner">
       <div class="blog__img">
@@ -93,7 +93,6 @@ const { BlogData, splide } = Astro.props;
     position: relative;
     width: 100%;
     height: vw(170);
-    opacity: 0.8;
 
     @include sp() {
       height: vw_sp(110);
@@ -190,6 +189,27 @@ const { BlogData, splide } = Astro.props;
 </style>
 <style lang="scss" is:global>
   @import '../styles/_single';
+
+  // ブログ記事のhover時のアニメーション
+  .blogHover {
+    .blog__img {
+      overflow: hidden;
+
+      img {
+        transition: 0.3s;
+      }
+    }
+
+    @include hover() {
+      opacity: 0.8;
+
+      .blog__img {
+        img {
+          transform: scale(1.1);
+        }
+      }
+    }
+  }
 
   .blog__category__image {
     img {
