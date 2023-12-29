@@ -64,7 +64,7 @@ const { metaTitle, metaDescription, ogpImage, favicon, pageType } = Astro.props;
   <body class={pageType}>
     <BaseHeader />
     <slot />
-    <BaseFooter />
+    <BaseFooter {pageType} />
     <BaseScript />
   </body>
 </html>
