@@ -311,30 +311,21 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
   }
 
   .currentPage {
-    font-size: vw(16);
-    font-weight: 700;
+    font-size: vw(14);
+    font-weight: 400;
+    opacity: 0.7;
 
     @include sp() {
-      font-size: vw_sp(16);
+      font-size: vw_sp(14);
+    }
+
+    &[data-pageActive='true'] {
+      font-size: vw(19);
+      font-weight: 700;
+
+      @include sp() {
+        font-size: vw_sp(16);
+      }
     }
   }
-
-  // .currentPage {
-  //   font-size: vw(14);
-  //   font-weight: 400;
-  //   opacity: 0.7;
-
-  //   @include sp() {
-  //     font-size: vw_sp(14);
-  //   }
-
-  //   &[data-pageActive='true'] {
-  //     font-size: vw(19);
-  //     font-weight: 700;
-
-  //     @include sp() {
-  //       font-size: vw_sp(16);
-  //     }
-  //   }
-  // }
 </style>
