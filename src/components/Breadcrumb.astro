@@ -40,12 +40,11 @@ const { lowerTitel, lowerTitelSecond } = Astro.props;
   .inner {
     display: flex;
     gap: vw(11);
-    align-items: baseline;
+    align-items: center;
     padding: vw(17) vw(30);
 
-    @include sp () {
+    @include sp() {
       gap: vw_sp(8);
-      align-items: center;
       padding: vw_sp(5) vw_sp(10);
     }
   }
@@ -56,7 +55,7 @@ const { lowerTitel, lowerTitelSecond } = Astro.props;
     line-height: 1;
     border-bottom: 1px solid $color-base-black;
 
-    @include sp () {
+    @include sp() {
       font-size: vw_sp(10);
     }
   }
@@ -68,7 +67,7 @@ const { lowerTitel, lowerTitelSecond } = Astro.props;
 
     @include line-clamp(1);
 
-    @include sp () {
+    @include sp() {
       font-size: vw_sp(10);
     }
   }

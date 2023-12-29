@@ -1,6 +1,7 @@
 ---
 import { GetStaticPathsOptions } from 'astro';
 import { getBlogs, getTop } from '../../libs/macrocms';
+import * as Variables from '../../variables.astro';
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import BaseTitle from '../../components/BaseTitle.astro';
@@ -21,13 +22,16 @@ const title = lowerData.lowerTItle.articleTitle;
 
 export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
   const BlogData = await getBlogs({ limit: 100 });
-  return paginate(BlogData.contents, { pageSize: 9 });
+  return paginate(BlogData.contents, { pageSize: Variables.pageSize });
 };
 ---
 
 <Layout {...metaInfo} pageType="blog">
   <div class="bg">
-    <Breadcrumb lowerTitel="Articles" />
+    <Breadcrumb
+      lowerTitel="Articles"
+      lowerTitelSecond={`${page.currentPage}ページ目`}
+    />
     <main class="main">
       <BaseTitle title={title} />
       <div class="blogs">
@@ -49,9 +53,148 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
             )
           }
           <div class="current">
-            <span class="currentPage">{page.currentPage}</span>
-            <span class="border">/</span>
-            <span class="lastPage">{page.lastPage}</span>
+            {
+              // 1ページ目の時
+              page.currentPage === 1 && (
+                <>
+                  <a
+                    class="currentPage"
+                    href={page.url.current}
+                    data-pageActive="true"
+                  >
+                    {page.currentPage}
+                  </a>
+                  {page.currentPage + 1 <= page.lastPage && (
+                    <a
+                      class="currentPage"
+                      href={`${Variables.PAGES.article.nav}${
+                        page.currentPage + 1
+                      }`}
+                    >
+                      {page.currentPage + 1}
+                    </a>
+                  )}
+                  {page.currentPage + 2 <= page.lastPage && (
+                    <a
+                      class="currentPage"
+                      href={`${Variables.PAGES.article.nav}${
+                        page.currentPage + 2
+                      }`}
+                    >
+                      {page.currentPage + 2}
+                    </a>
+                  )}
+                  {page.currentPage + 3 <= page.lastPage && (
+                    <>
+                      {page.currentPage + 3 < page.lastPage && <div>...</div>}
+                      <a
+                        class="currentPage"
+                        href={`${Variables.PAGES.article.nav}${page.lastPage}`}
+                      >
+                        {page.lastPage}
+                      </a>
+                    </>
+                  )}
+                </>
+              )
+            }
+            {
+              // 2ページ目以降の時
+              page.currentPage !== 1 && page.currentPage !== page.lastPage && (
+                <>
+                  {page.currentPage - 2 >= 1 && (
+                    <>
+                      <a
+                        class="currentPage"
+                        href={`${Variables.PAGES.article.nav}1`}
+                      >
+                        1
+                      </a>
+                      {page.currentPage - 2 > 1 && <div>...</div>}
+                    </>
+                  )}
+                  <a
+                    class="currentPage"
+                    href={`${Variables.PAGES.article.nav}${
+                      page.currentPage - 1
+                    }`}
+                  >
+                    {page.currentPage - 1}
+                  </a>
+                  <a
+                    class="currentPage"
+                    href={`${Variables.PAGES.article.nav}${page.currentPage}`}
+                    data-pageActive="true"
+                  >
+                    {page.currentPage}
+                  </a>
+                  {page.currentPage + 1 <= page.lastPage && (
+                    <a
+                      class="currentPage"
+                      href={`${Variables.PAGES.article.nav}${
+                        page.currentPage + 1
+                      }`}
+                    >
+                      {page.currentPage + 1}
+                    </a>
+                  )}
+                  {page.currentPage + 2 <= page.lastPage && (
+                    <>
+                      {page.currentPage + 2 < page.lastPage && <div>...</div>}
+                      <a
+                        class="currentPage"
+                        href={`${Variables.PAGES.article.nav}${page.lastPage}`}
+                      >
+                        {page.lastPage}
+                      </a>
+                    </>
+                  )}
+                </>
+              )
+            }
+            {
+              // 最後のページの時
+              page.currentPage === page.lastPage && (
+                <>
+                  <a
+                    class="currentPage"
+                    href={`${Variables.PAGES.article.nav}1`}
+                  >
+                    1
+                  </a>
+                  {page.currentPage - 3 > 1 && <div>...</div>}
+                  {page.currentPage - 2 < page.lastPage &&
+                    page.currentPage - 2 > 1 && (
+                      <a
+                        class="currentPage"
+                        href={`${Variables.PAGES.article.nav}${
+                          page.currentPage - 2
+                        }`}
+                      >
+                        {page.currentPage - 2}
+                      </a>
+                    )}
+                  {page.currentPage - 1 < page.lastPage &&
+                    page.currentPage - 1 > 1 && (
+                      <a
+                        class="currentPage"
+                        href={`${Variables.PAGES.article.nav}${
+                          page.currentPage - 1
+                        }`}
+                      >
+                        {page.currentPage - 1}
+                      </a>
+                    )}
+                  <a
+                    class="currentPage"
+                    href={page.url.current}
+                    data-pageActive="true"
+                  >
+                    {page.currentPage}
+                  </a>
+                </>
+              )
+            }
           </div>
           {
             page.url.next ? (
@@ -176,12 +319,22 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
     }
   }
 
-  .lastPage {
-    font-size: vw(14);
-    font-weight: 400;
+  // .currentPage {
+  //   font-size: vw(14);
+  //   font-weight: 400;
+  //   opacity: 0.7;
 
-    @include sp() {
-      font-size: vw_sp(14);
-    }
-  }
+  //   @include sp() {
+  //     font-size: vw_sp(14);
+  //   }
+
+  //   &[data-pageActive='true'] {
+  //     font-size: vw(19);
+  //     font-weight: 700;
+
+  //     @include sp() {
+  //       font-size: vw_sp(16);
+  //     }
+  //   }
+  // }
 </style>
