@@ -4,12 +4,15 @@ import Layout from '../../layouts/Layout.astro';
 import ImageWrapper from '../../components/ImageWrapper.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Category from '../../components/Category.astro';
+import { meta } from '@typescript-eslint/parser';
 
 const topData = await getTop({
   fields: ['metaInfo'],
 });
 
 const { metaInfo } = topData;
+
+console.log(metaInfo);
 
 export async function getStaticPaths() {
   const BlogData = await getBlogs({ fields: 'id' });
@@ -27,9 +30,18 @@ const publishedAt = new Date(BlogData.publishedAt).toLocaleString('ja-JP', {
   month: 'numeric',
   day: 'numeric',
 });
+
+const metaData = {
+  metaTitle: BlogData.title,
+  metaDescription: metaInfo.metaDescription,
+  favicon: metaInfo.favicon,
+  ogpImage: BlogData.eyecatch,
+};
+
+console.log(metaData);
 ---
 
-<Layout {...metaInfo} pageType="blogId">
+<Layout {...metaData} pageType="blogId">
   <div class="bg">
     <Breadcrumb lowerTitel="Articles" lowerTitelSecond={BlogData.title} />
     <main class="main">
