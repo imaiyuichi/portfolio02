@@ -1,6 +1,7 @@
 ---
 import { GetStaticPathsOptions } from 'astro';
 import { getBlogs, getTop } from '../../libs/macrocms';
+import * as Variables from '../../variables.astro';
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import BaseTitle from '../../components/BaseTitle.astro';
@@ -21,13 +22,18 @@ const title = lowerData.lowerTItle.articleTitle;
 
 export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
   const BlogData = await getBlogs({ limit: 100 });
-  return paginate(BlogData.contents, { pageSize: 9 });
+  return paginate(BlogData.contents, { pageSize: Variables.pageSize });
 };
+
+console.log(page);
 ---
 
 <Layout {...metaInfo} pageType="blog">
   <div class="bg">
-    <Breadcrumb lowerTitel="Articles" />
+    <Breadcrumb
+      lowerTitel="Articles"
+      lowerTitelSecond={`${page.currentPage}ページ目`}
+    />
     <main class="main">
       <BaseTitle title={title} />
       <div class="blogs">
