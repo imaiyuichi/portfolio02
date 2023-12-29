@@ -25,7 +25,7 @@ const { BlogData, splide } = Astro.props;
 ---
 
 <article class:list=`root blog ${splide && "splide__slide"}`>
-  <a href={`/blog/${BlogData.id}`} class="link">
+  <a href={`/article/${BlogData.id}`} class="link">
     <div class="blog__inner">
       <div class="blog__img">
         <ImageWrapper

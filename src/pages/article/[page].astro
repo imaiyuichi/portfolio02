@@ -11,18 +11,6 @@ const topData = await getTop({
   fields: ['metaInfo'],
 });
 
-const BlogData = await getBlogs({
-  fields: [
-    'metaInfo',
-    'id',
-    'title',
-    'eyecatch',
-    'category',
-    'publishedAt',
-    'writer',
-  ],
-});
-
 const lowerData = await getTop({
   fields: ['lowerTItle'],
 });
@@ -35,8 +23,6 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
   const BlogData = await getBlogs({ limit: 100 });
   return paginate(BlogData.contents, { pageSize: 9 });
 };
-
-console.log(page);
 ---
 
 <Layout {...metaInfo} pageType="blog">
@@ -89,6 +75,7 @@ console.log(page);
   .bg {
     background-color: $color-base-gray;
   }
+
   .main {
     position: relative;
     width: vw(1200);
@@ -103,14 +90,14 @@ console.log(page);
     }
 
     &::before {
-      content: '';
       position: absolute;
       bottom: 0;
       left: 50%;
-      transform: translateX(-50%);
       width: 100vw;
       height: 1px;
+      content: '';
       background-color: $color-base-black;
+      transform: translateX(-50%);
     }
   }
 
@@ -122,36 +109,36 @@ console.log(page);
     margin: 60px auto 0;
 
     @include sp() {
-      width: 100%;
-      margin: vw_sp(50) auto 0;
       gap: vw_sp(30);
       justify-content: center;
+      width: 100%;
+      margin: vw_sp(50) auto 0;
     }
   }
 
   .pagenation {
-    margin: 60px 0 0;
     padding: 20px 0;
+    margin: 60px 0 0;
     border-top: 1px solid $color-base-black;
 
     @include sp() {
-      margin: vw_sp(40) 0 0;
       padding: vw_sp(20) 0;
+      margin: vw_sp(40) 0 0;
     }
   }
 
   .pagenation__wrapper {
     display: flex;
     gap: vw(100);
-    justify-content: center;
     align-items: center;
+    justify-content: center;
   }
 
   .pageLInk {
     font-size: vw(14);
+    font-weight: 400;
     line-height: 1.2;
     border-bottom: 1px solid $color-base-black;
-    font-weight: 400;
     opacity: 0.3;
 
     @include sp() {
@@ -159,8 +146,8 @@ console.log(page);
     }
 
     &[data-pageActive='true'] {
-      opacity: 1;
       font-size: vw(16);
+      opacity: 1;
 
       @include sp() {
         font-size: vw_sp(16);
@@ -170,10 +157,10 @@ console.log(page);
 
   .current {
     display: flex;
-    align-items: center;
     gap: vw(15);
-    line-height: 1;
+    align-items: center;
     font-family: $font-family-termina;
+    line-height: 1;
 
     @include sp() {
       gap: vw_sp(15);
