@@ -15,7 +15,8 @@ export function SplideSlide() {
     pagination: true,
     breakpoints: {
       768: {
-        perPage: 1.5,
+        perPage: 1.3,
+        gap: 20,
       },
     },
   }).mount();

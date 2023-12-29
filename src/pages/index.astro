@@ -1,7 +1,7 @@
 ---
 import { getTop } from '../libs/macrocms';
 import Layout from '../layouts/Layout.astro';
-import IndexBlogs from '../partials/IndexBlogs.astro';
+import IndexArticle from '../partials/IndexArticle.astro';
 import IndexMv from '../partials/IndexMv.astro';
 import IndexAbout from '../partials/IndexAbout.astro';
 import IndexSkills from '../partials/IndexSkills.astro';
@@ -17,7 +17,7 @@ const { metaInfo } = topData;
 <Layout {...metaInfo} pageType="top">
   <main class="main">
     <IndexMv />
-    <IndexBlogs />
+    <IndexArticle />
     <div class="webGl">
       <canvas class="canvas" id="webGl"></canvas>
       <IndexSkills />

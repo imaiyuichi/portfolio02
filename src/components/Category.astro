@@ -1,0 +1,100 @@
+---
+import ImageWrapper from './ImageWrapper.astro';
+
+interface Props {
+  data: {
+    category: {
+      image: { url: string; width: number; height: number };
+      name: string;
+    };
+    writer?: string;
+  };
+}
+
+const { data } = Astro.props;
+---
+
+<div class="blog__category">
+  <div class="blog__category__inner">
+    <div class="blog__category__image">
+      <ImageWrapper
+        src={data.category.image.url}
+        width={data.category.image.width}
+        height={data.category.image.height}
+        alt=""
+      />
+    </div>
+    <p class="blog__category__text">{data.category.name}</p>
+    <span>|</span>
+    <p class="blog__category__text">{data.writer[0]}</p>
+  </div>
+</div>
+
+<style lang="scss">
+  @import '../styles/_single';
+
+  .blog__category {
+    display: inline-block;
+    padding: 3px vw(15) 3px vw(2);
+    font-family: $font-family-termina;
+    font-size: vw(16);
+    font-weight: 700;
+    color: $color-base-white;
+    background-color: $color-base-black;
+    border-radius: 9999px;
+
+    @include sp() {
+      padding: vw_sp(2) vw_sp(10) vw_sp(2) vw_sp(2);
+      font-size: vw_sp(10);
+    }
+  }
+
+  .blog__category--modify {
+    padding: 10px vw(20);
+
+    @include sp() {
+      padding: 10px vw_sp(10);
+    }
+  }
+
+  .blog__category__inner {
+    display: flex;
+    gap: vw(10);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .blog__category__image {
+    position: relative;
+    width: vw(33);
+    height: vw(33);
+    background-color: $color-base-white;
+    border-radius: 50%;
+
+    @include sp() {
+      width: vw_sp(20);
+      height: vw_sp(20);
+    }
+  }
+
+  .blog__category__text {
+    line-height: 1;
+  }
+</style>
+<style lang="scss" is:global>
+  @import '../styles/_single';
+
+  .blog__category__image {
+    img {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: vw(25);
+      transform: translate(-50%, -50%);
+
+      @include sp() {
+        width: vw_sp(15);
+      }
+    }
+  }
+</style>
