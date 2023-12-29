@@ -4,15 +4,12 @@ import Layout from '../../layouts/Layout.astro';
 import ImageWrapper from '../../components/ImageWrapper.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Category from '../../components/Category.astro';
-import { meta } from '@typescript-eslint/parser';
 
 const topData = await getTop({
   fields: ['metaInfo'],
 });
 
 const { metaInfo } = topData;
-
-console.log(metaInfo);
 
 export async function getStaticPaths() {
   const BlogData = await getBlogs({ fields: 'id' });
