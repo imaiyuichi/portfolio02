@@ -8,7 +8,7 @@ const { lowerTitel } = Astro.props;
 
 <div class="root">
   <div class="inner">
-    <p class="page">TOP</p>
+    <a class="page" href="/">TOP</a>
     <span>&gt</span>
     <p class="lower">{lowerTitel}</p>
   </div>
@@ -26,17 +26,31 @@ const { lowerTitel } = Astro.props;
     gap: vw(11);
     align-items: baseline;
     padding: vw(17) vw(30);
+
+    @include sp {
+      gap: vw_sp(5);
+      padding: vw_sp(5) vw_sp(10);
+      align-items: center;
+    }
   }
 
   .page {
     font-size: vw(12);
     line-height: 1;
     border-bottom: 1px solid $color-base-black;
+
+    @include sp {
+      font-size: vw_sp(10);
+    }
   }
 
   .lower {
     font-size: vw(12);
     font-weight: 700;
     line-height: 1;
+
+    @include sp {
+      font-size: vw_sp(10);
+    }
   }
 </style>

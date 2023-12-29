@@ -1,11 +1,15 @@
 ---
 import { GetStaticPathsOptions } from 'astro';
-import { getBlogs } from '../../libs/macrocms';
+import { getBlogs, getTop } from '../../libs/macrocms';
 import Layout from '../../layouts/Layout.astro';
-import { getTop } from '../../libs/macrocms';
+import Breadcrumb from '../../components/Breadcrumb.astro';
 import BaseTitle from '../../components/BaseTitle.astro';
 import Card from '../../components/Card.astro';
-import Breadcrumb from '../../components/Breadcrumb.astro';
+import Contact from '../../partials/Contact.astro';
+
+const topData = await getTop({
+  fields: ['metaInfo'],
+});
 
 const BlogData = await getBlogs({
   fields: [
@@ -19,67 +23,94 @@ const BlogData = await getBlogs({
   ],
 });
 
-const data = BlogData.contents;
-const { page } = Astro.props;
-
-export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
-  const BlogData = await getBlogs({ limit: 3 });
-  const totalCount = BlogData.totalCount;
-  const totallimit = BlogData.limit;
-  return paginate(BlogData.contents, { pageSize: totalCount / totallimit });
-};
-
-const topData = await getTop({
-  fields: ['metaInfo'],
-});
-
-const { metaInfo } = topData;
-
 const lowerData = await getTop({
   fields: ['lowerTItle'],
 });
 
+const { metaInfo } = topData;
+const { page } = Astro.props;
 const title = lowerData.lowerTItle.articleTitle;
+
+export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
+  const BlogData = await getBlogs({ limit: 100 });
+  return paginate(BlogData.contents, { pageSize: 9 });
+};
+
+console.log(page);
 ---
 
 <Layout {...metaInfo} pageType="blog">
-  <Breadcrumb lowerTitel="Articles" />
-  <main class="main">
-    <BaseTitle title={title} />
-    <div class="blogs">
-      {
-        data.map((data: any) => {
-          return <Card BlogData={data} />;
-        })
-      }
-    </div>
-    <nav class="pagenation">
-      <div class="pagenation__wrapper">
-        <div>
-          <a href={page.url.prev}>PREV</a>
-        </div>
-        <p>{page.currentPage}/{page.lastPage}</p>
-        <div>
-          <a href={page.url.next}>NEXT</a>
-        </div>
+  <div class="bg">
+    <Breadcrumb lowerTitel="Articles" />
+    <main class="main">
+      <BaseTitle title={title} />
+      <div class="blogs">
+        {
+          page.data.map((data: any) => {
+            return <Card BlogData={data} />;
+          })
+        }
       </div>
-    </nav>
-  </main>
+      <nav class="pagenation">
+        <div class="pagenation__wrapper">
+          {
+            page.url.prev ? (
+              <a class="pageLInk" href={page.url.prev} data-pageActive="true">
+                Prev
+              </a>
+            ) : (
+              <div class="pageLInk">Prev</div>
+            )
+          }
+          <div class="current">
+            <span class="currentPage">{page.currentPage}</span>
+            <span class="border">/</span>
+            <span class="lastPage">{page.lastPage}</span>
+          </div>
+          {
+            page.url.next ? (
+              <a class="pageLInk" href={page.url.next} data-pageActive="true">
+                Next
+              </a>
+            ) : (
+              <div class="pageLInk">Next</div>
+            )
+          }
+        </div>
+      </nav>
+    </main>
+    <Contact />
+  </div>
 </Layout>
 
 <style lang="scss">
   @import '../../styles/_single';
 
+  .bg {
+    background-color: $color-base-gray;
+  }
   .main {
+    position: relative;
     width: vw(1200);
-    padding: vw(110) 0;
+    padding: 60px 0 0;
     margin: auto;
     border-right: 1px solid $color-base-black;
     border-left: 1px solid $color-base-black;
 
     @include sp() {
-      width: 100%;
-      padding: 0 vw_sp(30);
+      width: vvw_sp(320);
+      padding: vw_sp(40) 0 0;
+    }
+
+    &::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100vw;
+      height: 1px;
+      background-color: $color-base-black;
     }
   }
 
@@ -88,16 +119,82 @@ const title = lowerData.lowerTItle.articleTitle;
     flex-wrap: wrap;
     gap: vw(50);
     width: vw(1060);
-    margin: vw(50) auto 0;
+    margin: 60px auto 0;
+
+    @include sp() {
+      width: 100%;
+      margin: vw_sp(50) auto 0;
+      gap: vw_sp(30);
+      justify-content: center;
+    }
   }
 
   .pagenation {
     margin: 60px 0 0;
+    padding: 20px 0;
+    border-top: 1px solid $color-base-black;
+
+    @include sp() {
+      margin: vw_sp(40) 0 0;
+      padding: vw_sp(20) 0;
+    }
   }
 
   .pagenation__wrapper {
     display: flex;
     gap: vw(100);
     justify-content: center;
+    align-items: center;
+  }
+
+  .pageLInk {
+    font-size: vw(14);
+    line-height: 1.2;
+    border-bottom: 1px solid $color-base-black;
+    font-weight: 400;
+    opacity: 0.3;
+
+    @include sp() {
+      font-size: vw_sp(14);
+    }
+
+    &[data-pageActive='true'] {
+      opacity: 1;
+      font-size: vw(16);
+
+      @include sp() {
+        font-size: vw_sp(16);
+      }
+    }
+  }
+
+  .current {
+    display: flex;
+    align-items: center;
+    gap: vw(15);
+    line-height: 1;
+    font-family: $font-family-termina;
+
+    @include sp() {
+      gap: vw_sp(15);
+    }
+  }
+
+  .currentPage {
+    font-size: vw(16);
+    font-weight: 700;
+
+    @include sp() {
+      font-size: vw_sp(16);
+    }
+  }
+
+  .lastPage {
+    font-size: vw(14);
+    font-weight: 400;
+
+    @include sp() {
+      font-size: vw_sp(14);
+    }
   }
 </style>
