@@ -10,12 +10,12 @@ export function SplideSlide() {
     focus: 'center', // アクティブなスライドを中央にする
     updateOnMove: true, // is-activeクラスを移動前に更新する
     // padding: '20%', // スライダーの左右の余白
-    gap: 50,
+    gap: 40,
     perPage: 3.5,
     pagination: true,
     breakpoints: {
       768: {
-        perPage: 1.3,
+        perPage: 1.5,
         gap: 20,
       },
     },
