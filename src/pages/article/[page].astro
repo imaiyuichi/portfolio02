@@ -1,6 +1,6 @@
 ---
 import { GetStaticPathsOptions } from 'astro';
-import { getBlogs, getTop } from '../../libs/macrocms';
+import { getBlogsAll, getTop } from '../../libs/macrocms';
 import * as Variables from '../../variables.astro';
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
@@ -21,8 +21,8 @@ const { page } = Astro.props;
 const title = lowerData.lowerTItle.articleTitle;
 
 export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
-  const BlogData = await getBlogs({ limit: 100 });
-  return paginate(BlogData.contents, { pageSize: Variables.pageSize });
+  const BlogDataall = await getBlogsAll();
+  return paginate(BlogDataall, { pageSize: Variables.pageSize });
 };
 ---
 
