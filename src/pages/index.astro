@@ -5,7 +5,7 @@ import IndexBlogs from '../partials/IndexBlogs.astro';
 import IndexMv from '../partials/IndexMv.astro';
 import IndexAbout from '../partials/IndexAbout.astro';
 import IndexSkills from '../partials/IndexSkills.astro';
-import IndexContact from '../partials/IndexContact.astro';
+import Contact from '../partials/Contact.astro';
 
 const topData = await getTop({
   fields: ['metaInfo'],
@@ -22,7 +22,7 @@ const { metaInfo } = topData;
       <canvas class="canvas" id="webGl"></canvas>
       <IndexSkills />
       <IndexAbout />
-      <IndexContact />
+      <Contact />
     </div>
   </main>
 </Layout>
