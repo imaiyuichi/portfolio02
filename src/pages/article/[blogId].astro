@@ -33,7 +33,7 @@ const publishedAt = new Date(BlogData.publishedAt).toLocaleString('ja-JP', {
 
 const metaData = {
   metaTitle: BlogData.title,
-  metaDescription: metaInfo.metaDescription,
+  metaDescription: `${metaInfo.metaDescription}です。エンジニアリングやデザインに関わる記事を書いています。`,
   favicon: metaInfo.favicon,
   ogpImage: BlogData.eyecatch,
 };
