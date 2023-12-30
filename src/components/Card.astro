@@ -48,7 +48,7 @@ const { BlogData, splide } = Astro.props;
               />
             </div>
             <p class="blog__category__text">{BlogData.category.name}</p>
-            <span>|</span>
+            <span class="blog__category__border">|</span>
             <p class="blog__category__text">{BlogData.writer[0]}</p>
           </div>
         </div>
@@ -175,6 +175,10 @@ const { BlogData, splide } = Astro.props;
       margin: vw_sp(10) 0 0;
       font-size: vw_sp(17);
     }
+  }
+
+  .blog__category__border {
+    font-weight: 400;
   }
 
   .blog__date {

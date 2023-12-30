@@ -25,7 +25,7 @@ const { data } = Astro.props;
       />
     </div>
     <p class="blog__category__text">{data.category.name}</p>
-    <span>|</span>
+    <span class="blog__category__border">|</span>
     <p class="blog__category__text">{data.writer[0]}</p>
   </div>
 </div>
@@ -79,6 +79,10 @@ const { data } = Astro.props;
 
   .blog__category__text {
     line-height: 1;
+  }
+
+  .blog__category__border {
+    font-weight: 400;
   }
 </style>
 <style lang="scss" is:global>
