@@ -2,6 +2,10 @@
 import * as Variables from '../variables.astro';
 import { getTop } from '../libs/macrocms';
 
+interface Props {
+  pageType?: string;
+}
+
 const logData = await getTop({
   fields: ['topTitles'],
 });
