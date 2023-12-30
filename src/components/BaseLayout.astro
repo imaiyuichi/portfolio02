@@ -44,8 +44,8 @@ const { id, background, color, current, total } = Astro.props;
     width: vw(1280);
     padding: vw(80) 0 vw(100);
     margin: auto;
-    border-right: 1px solid $color-base-white;
-    border-left: 1px solid $color-base-white;
+    border-right: 1px solid $color-base-lower-black;
+    border-left: 1px solid $color-base-lower-black;
 
     @include sp() {
       width: vw_sp(320);
@@ -53,8 +53,8 @@ const { id, background, color, current, total } = Astro.props;
     }
 
     [data-background='gray'] & {
-      border-right: 1px solid $color-base-black;
-      border-left: 1px solid $color-base-black;
+      border-right: 1px solid $color-base-lower-white;
+      border-left: 1px solid $color-base-lower-white;
     }
 
     @include sp() {
