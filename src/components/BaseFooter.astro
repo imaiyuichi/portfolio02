@@ -194,6 +194,7 @@ const { pageType } = Astro.props;
 
     &[data-primary='ture'] {
       font-size: vw(16);
+      font-weight: 400;
 
       @include sp() {
         font-size: vw_sp(16);
@@ -207,7 +208,7 @@ const { pageType } = Astro.props;
   }
 
   .item + .item {
-    margin: 20px 0 0;
+    margin: 5px 0 0;
     transition: 0.3s;
 
     @include hover() {
@@ -215,12 +216,12 @@ const { pageType } = Astro.props;
     }
 
     @include sp() {
-      margin: vw_sp(10) 0 0;
+      margin: vw_sp(5) 0 0;
     }
   }
 
   .item:nth-child(2) {
-    margin: 8px 0 0;
+    margin: 10px 0 0;
 
     @include sp() {
       margin: vw_sp(10) 0 0;

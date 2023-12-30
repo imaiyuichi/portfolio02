@@ -4,6 +4,7 @@ import Layout from '../../layouts/Layout.astro';
 import ImageWrapper from '../../components/ImageWrapper.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import Category from '../../components/Category.astro';
+import Contact from '../../partials/Contact.astro';
 
 const topData = await getTop({
   fields: ['metaInfo'],
@@ -60,6 +61,7 @@ const metaData = {
         </div>
       </div>
     </main>
+    <Contact />
   </div>
 
   <style lang="scss">
@@ -70,14 +72,26 @@ const metaData = {
     }
 
     .inner {
+      position: relative;
       width: vw(950);
-      padding: 70px 0 80px;
+      padding: 70px 0 100px;
       margin: auto;
 
       @include sp() {
         width: vw_sp(300);
         padding: vw_sp(50) 0 vw_sp(70);
         margin: auto;
+      }
+
+      &::before {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100vw;
+        height: 1px;
+        background-color: $color-base-black;
+        content: '';
       }
     }
 
@@ -94,6 +108,10 @@ const metaData = {
     .date {
       margin: 30px 0 0;
       color: $color-footer-gray;
+
+      @include sp() {
+        margin: vw_sp(10) 0 0;
+      }
     }
 
     .date + .date {
@@ -114,7 +132,11 @@ const metaData = {
     }
 
     .editor {
-      margin: 80px 0 0;
+      margin: 60px 0 0;
+
+      @include sp() {
+        margin: vw_sp(40) 0 0;
+      }
 
       h2 {
         position: relative;
