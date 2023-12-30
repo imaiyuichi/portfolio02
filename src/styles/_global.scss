@@ -35,6 +35,7 @@ svg {
 h1 {
   font-size: vw(50);
   line-height: 1.37;
+  font-weight: 700 !important;
 
   @include sp() {
     font-size: vw_sp(60);
