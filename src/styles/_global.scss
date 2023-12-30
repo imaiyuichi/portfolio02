@@ -28,14 +28,16 @@ img {
 
 svg {
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: auto;
 }
 
 h1 {
   font-size: vw(50);
-  line-height: 1.37;
   font-weight: 700 !important;
+  line-height: 1.37;
 
   @include sp() {
     font-size: vw_sp(60);
