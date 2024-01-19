@@ -8,6 +8,8 @@ import BaseTitle from '../../components/BaseTitle.astro';
 import Card from '../../components/Card.astro';
 import Contact from '../../partials/Contact.astro';
 
+import '@pagefind/default-ui/css/ui.css';
+
 const topData = await getTop({
   fields: ['metaInfo'],
 });
@@ -26,6 +28,28 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
 };
 ---
 
+<script>
+  import { PagefindUI } from '@pagefind/default-ui';
+
+  new PagefindUI({
+    element: '#search',
+    pageSize: 10,
+    excerptLength: 50,
+    showSubResults: false,
+    showImages: true,
+    translations: {
+      placeholder: 'ブログ記事を検索',
+      clear_search: 'クリア',
+      load_more: 'More',
+      search_label: '',
+      zero_results: '「[SEARCH_TERM]」に一致する記事は見つかりませんでした 🙇‍♂️',
+      many_results: '「[SEARCH_TERM]」の検索結果（[COUNT] 件）',
+      one_result: '「[SEARCH_TERM]」の検索結果（[COUNT] 件）',
+      searching: '「[SEARCH_TERM]」を検索しています...',
+    },
+  });
+</script>
+
 <Layout {...metaInfo} pageType="blog">
   <div class="bg">
     <Breadcrumb
@@ -34,6 +58,9 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
     />
     <main class="main">
       <BaseTitle title={title} />
+      <div class="search">
+        <div id="search"></div>
+      </div>
       <div class="blogs">
         {
           page.data.map((data: any) => {
@@ -244,12 +271,25 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
     }
   }
 
+  .search {
+    width: vw(1060);
+    margin: 60px auto 0;
+    transition-duration: 300ms;
+    background: white;
+    border-radius: 8px;
+
+    @include sp() {
+      width: vw_sp(210);
+      margin: vw_sp(40) auto 0;
+    }
+  }
+
   .blogs {
     display: flex;
     flex-wrap: wrap;
     gap: vw(50);
     width: vw(1060);
-    margin: 60px auto 0;
+    margin: 70px auto 0;
 
     @include sp() {
       gap: vw_sp(30);
@@ -327,5 +367,14 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
         font-size: vw_sp(16);
       }
     }
+  }
+</style>
+<style lang="scss" is:global>
+  .pagefind-ui__drawer.svelte-e9gkc3 {
+    padding: 0 30px;
+  }
+
+  .pagefind-ui__results-area.svelte-e9gkc3 {
+    margin-top: 0 !important;
   }
 </style>
