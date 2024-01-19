@@ -40,7 +40,7 @@ const metaData = {
 <Layout {...metaData} pageType="blogId">
   <div class="bg">
     <Breadcrumb lowerTitel="Articles" lowerTitelSecond={BlogData.title} />
-    <main class="main">
+    <main class="main" data-pagefind-body>
       <div class="inner">
         <Category data={BlogData} />
         <h1 class="title">{BlogData.title}</h1>

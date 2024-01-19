@@ -275,7 +275,7 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
     width: vw(1060);
     margin: 60px auto 0;
     transition-duration: 300ms;
-    background: white;
+    background: $color-base-gray;
     border-radius: 8px;
 
     @include sp() {
@@ -367,14 +367,5 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
         font-size: vw_sp(16);
       }
     }
-  }
-</style>
-<style lang="scss" is:global>
-  .pagefind-ui__drawer.svelte-e9gkc3 {
-    padding: 0 30px;
-  }
-
-  .pagefind-ui__results-area.svelte-e9gkc3 {
-    margin-top: 0 !important;
   }
 </style>
