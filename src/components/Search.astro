@@ -1,0 +1,126 @@
+---
+import '@pagefind/default-ui/css/ui.css';
+import ImageWrapper from '../components/ImageWrapper.astro';
+import SearchIcon from '/search.png';
+---
+
+<script>
+  import { PagefindUI } from '@pagefind/default-ui';
+
+  new PagefindUI({
+    element: '#search',
+    pageSize: 10,
+    excerptLength: 50,
+    showSubResults: false,
+    showImages: true,
+    translations: {
+      placeholder: 'ブログ記事を検索',
+      clear_search: 'クリア',
+      load_more: 'More',
+      search_label: '',
+      zero_results: '「[SEARCH_TERM]」に一致する記事は見つかりませんでした 🙇‍♂️',
+      many_results: '「[SEARCH_TERM]」の検索結果（[COUNT] 件）',
+      one_result: '「[SEARCH_TERM]」の検索結果（[COUNT] 件）',
+      searching: '「[SEARCH_TERM]」を検索しています...',
+    },
+  });
+
+  const searchButton = document.querySelector('.js-search-button');
+  const searchArea = document.querySelector('.search-area');
+  const overlay = document.querySelector('.overlay');
+  const body = document.querySelector('body');
+
+  searchButton.addEventListener('click', () => {
+    searchArea.classList.toggle('is-active');
+    overlay.classList.toggle('is-active');
+    body.classList.toggle('overflow-hidden');
+  });
+
+  overlay.addEventListener('click', () => {
+    searchArea.classList.toggle('is-active');
+    overlay.classList.toggle('is-active');
+    body.classList.toggle('overflow-hidden');
+  });
+</script>
+
+<div class="root">
+  <button class="search-button js-search-button" aria-label="Search"
+    ><ImageWrapper src={SearchIcon} width={30} height={30} alt={'Search'} />
+  </button>
+  <div class="search-area js-search-area">
+    <div id="search"></div>
+  </div>
+  <div class="overlay js-overlay"></div>
+</div>
+
+<style lang="scss">
+  @import '../styles/_single';
+
+  .root {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .search-button {
+    width: vw(30);
+    height: vw(30);
+
+    @include sp() {
+      width: vw_sp(20);
+      height: vw_sp(20);
+    }
+  }
+
+  .search-area {
+    position: fixed;
+    top: 20%;
+    left: 50%;
+    z-index: 20;
+    display: none;
+    width: vw(1060);
+    height: vw(500);
+    padding: vw(30) vw(100);
+    background: $color-base-white;
+    border-radius: 8px;
+    transform: translateX(-50%);
+
+    @include sp() {
+      width: 80%;
+      height: vw_sp(450);
+      padding: vw_sp(30) vw_sp(30);
+    }
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    background-color: $color-base-black;
+    opacity: 0.8;
+  }
+
+  .is-active {
+    display: block;
+  }
+
+  body.overflow-hidden {
+    overflow: hidden;
+  }
+</style>
+<style lang="scss" is:global>
+  @import '../styles/_single';
+
+  .pagefind-ui__results-area.svelte-e9gkc3 {
+    height: vw(300);
+    overflow-y: scroll;
+
+    @include sp() {
+      height: vw_sp(300);
+    }
+  }
+</style>
