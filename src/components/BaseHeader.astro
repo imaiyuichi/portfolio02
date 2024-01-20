@@ -24,7 +24,9 @@ const topLInk = Variables.PAGES.index.url;
           /></a
         >
       </h1>
-      <Search />
+      <div class="search">
+        <Search />
+      </div>
     </div>
   </div>
 </header>
@@ -68,5 +70,14 @@ const topLInk = Variables.PAGES.index.url;
   img {
     display: block;
     height: 100%;
+  }
+
+  .search {
+    position: relative;
+    top: -5px;
+
+    @include sp() {
+      top: -8px;
+    }
   }
 </style>
