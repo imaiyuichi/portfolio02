@@ -14,12 +14,7 @@ interface Props {
 const { data } = Astro.props;
 ---
 
-<div
-  class="blog__category"
-  data-pagefind-filter={data.writer[0] === 'Imai' && 'imai[content]'}
-  data-pagefind-filter={data.writer[0] === 'Nakayama' && 'nakayama[content]'}
-  data-pagefind-filter={data.writer[0] === 'Shigeta' && 'shigeta[content]'}
->
+<div class="blog__category">
   <div class="blog__category__inner">
     <div class="blog__category__image">
       <ImageWrapper
@@ -29,9 +24,13 @@ const { data } = Astro.props;
         alt=""
       />
     </div>
-    <p class="blog__category__text">{data.category.name}</p>
+    <p class="blog__category__text">
+      {data.category.name}
+    </p>
     <span class="blog__category__border">|</span>
-    <p class="blog__category__text">{data.writer[0]}</p>
+    <p class="blog__category__text" data-pagefind-filter="Author">
+      {data.writer[0]}
+    </p>
   </div>
 </div>
 
