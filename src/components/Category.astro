@@ -14,7 +14,12 @@ interface Props {
 const { data } = Astro.props;
 ---
 
-<div class="blog__category">
+<div
+  class="blog__category"
+  data-pagefind-filter={data.writer[0] === 'Imai' && 'imai[content]'}
+  data-pagefind-filter={data.writer[0] === 'Nakayama' && 'nakayama[content]'}
+  data-pagefind-filter={data.writer[0] === 'Shigeta' && 'shigeta[content]'}
+>
   <div class="blog__category__inner">
     <div class="blog__category__image">
       <ImageWrapper
