@@ -9,7 +9,7 @@ import SearchIcon from '/search.png';
 
   new PagefindUI({
     element: '#search',
-    pageSize: 10,
+    pageSize: 100,
     excerptLength: 50,
     showSubResults: false,
     showImages: true,
@@ -79,17 +79,17 @@ import SearchIcon from '/search.png';
     z-index: 20;
     display: none;
     width: vw(1060);
-    height: vw(500);
-    padding: vw(30) vw(100);
+    min-height: vh(200);
+    padding: vw(30) vw(100) vw(50);
     background: $color-base-white;
     border-radius: 8px;
     transform: translateX(-50%);
 
     @include sp() {
-      top: 10%;
-      width: 80%;
-      height: vw_sp(450);
-      padding: vw_sp(30) vw_sp(30);
+      top: 5%;
+      width: 83%;
+      min-height: vh_sp(200);
+      padding: vw_sp(15);
     }
   }
 
@@ -116,12 +116,22 @@ import SearchIcon from '/search.png';
 <style lang="scss" is:global>
   @import '../styles/_single';
 
-  .pagefind-ui__results-area.svelte-e9gkc3 {
-    height: vw(350);
+  .pagefind-ui__results {
+    height: vh(400);
     overflow-y: scroll;
 
+    @include mq_free(964) {
+      height: vh(300);
+    }
+
     @include sp() {
-      height: vw_sp(330);
+      height: vh_sp(250);
+    }
+  }
+
+  .pagefind-ui__drawer {
+    @include sp() {
+      gap: 0 !important;
     }
   }
 </style>
