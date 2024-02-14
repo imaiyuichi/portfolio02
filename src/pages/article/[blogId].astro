@@ -364,16 +364,6 @@ const metaData = {
         height: auto;
       }
 
-      .iframeWrapper {
-        width: 25rem;
-        margin: 2.5rem auto 0;
-
-        @include sp() {
-          width: 100%;
-          margin: 6.666rem auto 0;
-        }
-      }
-
       table {
         margin: 2.5rem 0 0;
 
@@ -408,167 +398,25 @@ const metaData = {
         }
       }
 
-      .cvSection {
-        padding: 1.5rem 3.541rem;
-        margin: 1.666rem 0 0;
-        border: 1px solid $color-base-gray;
-        border-radius: 0.416rem;
-
-        @include sp() {
-          padding: 5rem 3rem;
-          margin: 6.666rem 0 0;
-          border-radius: 1.666rem;
-        }
-
-        p {
-          margin: 0;
-        }
-      }
-
-      .buttonWrapper {
-        width: fit-content;
-        min-width: 12.333rem;
-        height: 2.416rem;
-        margin: 1rem auto 0;
-        text-align: center;
-
-        @include sp() {
-          width: 45.666rem;
-          height: 13.333rem;
-          margin: 3.333rem auto 0;
-        }
-      }
-
-      .colorSection {
-        padding: 1.666rem 2rem;
-        margin: 1.666rem 0 0;
-        text-align: center;
-
-        @include sp() {
-          padding: 6.666rem 8rem;
-          margin: 6.666rem 0 0;
-        }
-
-        p {
-          margin: 0;
-        }
-      }
-
-      .content2LeftImageWrapper,
-      .content2LeftTextWrapper {
-        display: grid;
-        grid-template-rows: auto auto;
-        grid-template-columns: 1fr 1fr;
-        margin: 2.5rem 0 0;
-
-        @include sp() {
-          display: flex;
-          flex-flow: column;
-          margin: 6.666rem 0 0;
-        }
-
-        h2,
-        h3,
-        h4 {
-          margin: 0;
-        }
-      }
-
-      .leftImage {
-        grid-row: 1 / 3;
-        grid-column: 1 / 2;
-      }
-
-      .rightHeading {
-        grid-row: 1 / 2;
-        grid-column: 2 / 2;
-        width: 16rem;
-      }
-
-      .rightText {
-        grid-row: 2 / 3;
-        grid-column: 2 / 2;
-      }
-
-      .leftHeading {
-        grid-row: 1 / 2;
-        grid-column: 1 / 2;
-      }
-
-      .leftText {
-        grid-row: 2 / 3;
-        grid-column: 1 / 2;
-      }
-
-      .rightImage {
-        grid-row: 1 / 3;
-        grid-column: 2 / 2;
-      }
-
-      .leftHeading,
-      .rightHeading {
-        width: 16rem;
-
-        @include sp() {
-          order: 1;
-          width: 100%;
-        }
-      }
-
-      .leftImage,
-      .rightImage {
-        width: 15.5rem !important;
-
-        @include sp() {
-          order: 2;
-          width: 100% !important;
-          margin: 6rem 0 0;
-        }
-      }
-
-      .rightText,
-      .leftText {
-        width: 16rem;
-
-        @include sp() {
-          order: 3;
-          width: 100%;
-        }
-
-        h3 {
-          margin: 0;
-
-          &:nth-child(n + 2) {
-            width: 100%;
-          }
-        }
-
-        p {
-          margin: 0.866rem 0 0;
-
-          @include sp() {
-            margin: 4.333rem 0 0;
-          }
-        }
-      }
-
-      .rightHeading,
-      .rightText,
-      .rightImage {
-        margin: 0 0 0 auto;
-      }
-    }
-
-    pre {
+      pre {
       width: 100%;
       padding: 20px;
       white-space: pre-wrap;
       background-color: $color-base-code;
+
+      code {
+        color: $color-base-white;
+        white-space: pre-wrap;
+      }
     }
 
     code {
       color: $color-base-white;
+      background-color: $color-base-code;
       white-space: pre-wrap;
+      padding: 3px 6px;
     }
+  }
+
   </style>
 </Layout>
