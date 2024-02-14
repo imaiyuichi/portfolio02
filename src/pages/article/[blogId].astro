@@ -399,24 +399,25 @@ const metaData = {
       }
 
       pre {
-      width: 100%;
-      padding: 20px;
-      white-space: pre-wrap;
-      background-color: $color-base-code;
+        width: 100%;
+        padding: 20px;
+        white-space: pre-wrap;
+        background-color: $color-base-code;
+
+        code {
+          color: $color-base-white;
+          word-break: break-all;
+          white-space: pre-wrap;
+        }
+      }
 
       code {
+        padding: 3px 6px;
         color: $color-base-white;
+        word-break: break-all;
         white-space: pre-wrap;
+        background-color: $color-base-code;
       }
     }
-
-    code {
-      color: $color-base-white;
-      background-color: $color-base-code;
-      white-space: pre-wrap;
-      padding: 3px 6px;
-    }
-  }
-
   </style>
 </Layout>
