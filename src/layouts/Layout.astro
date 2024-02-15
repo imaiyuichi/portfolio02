@@ -60,6 +60,18 @@ const { metaTitle, metaDescription, ogpImage, favicon, pageType } = Astro.props;
     <meta property="twitter:title" content={metaTitle} />
     <meta property="twitter:description" content={metaDescription} />
     <meta property="twitter:image" content={ogpImage.url} />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-7C4BRG3RY6"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'G-7C4BRG3RY6');
+    </script>
   </head>
   <body class={pageType}>
     <BaseHeader />
