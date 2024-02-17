@@ -1,6 +1,5 @@
 ---
 import '@pagefind/default-ui/css/ui.css';
-import ImageWrapper from '../components/ImageWrapper.astro';
 import SearchIcon from '/search.png';
 ---
 
@@ -45,7 +44,7 @@ import SearchIcon from '/search.png';
 
 <div class="root">
   <button class="search-button js-search-button" aria-label="Search"
-    ><ImageWrapper src={SearchIcon} width={30} height={30} alt={'Search'} />
+    ><img src={`${SearchIcon}?fm=webp`} width={30} height={30} alt={'Search'} />
   </button>
   <div class="search-area js-search-area">
     <div id="search"></div>

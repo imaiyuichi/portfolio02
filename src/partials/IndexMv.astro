@@ -1,6 +1,5 @@
 ---
 import { getTop } from '../libs/macrocms';
-import ImageWrapper from '../components/ImageWrapper.astro';
 import PageNumber from '../components/PageNumber.astro';
 
 const MvData = await getTop({
@@ -26,8 +25,8 @@ const mvImage = mv.topMvImage;
     {
       mvImage && (
         <div class="image">
-          <ImageWrapper
-            src={mvImage.url}
+          <igm
+            src={`${mvImage.url}?fm=webp`}
             width={mvImage.width}
             height={mvImage.height}
             alt=""
