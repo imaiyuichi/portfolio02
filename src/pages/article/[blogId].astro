@@ -7,7 +7,7 @@ import Category from '../../components/Category.astro';
 import Contact from '../../partials/Contact.astro';
 
 const topData = await getTop({
-  fields: ['metaInfo'],
+  fields: ['metaInfo', 'topSkills'],
 });
 
 const { metaInfo } = topData;
@@ -35,6 +35,25 @@ const metaData = {
   favicon: metaInfo.favicon,
   ogpImage: BlogData.eyecatch,
 };
+
+const categoryData = {
+  category:
+    BlogData.writer[0] === 'Imai'
+      ? {
+          image: topData.topSkills.skill_icon_imai,
+          name: topData.topSkills.skill_work_imai,
+        }
+      : BlogData.writer[0] === 'Nakayama'
+      ? {
+          image: topData.topSkills.skill_icon_nakayama,
+          name: topData.topSkills.skill_work_nakayama,
+        }
+      : {
+          image: topData.topSkills.skill_icon_shigeta,
+          name: topData.topSkills.skill_work_shigeta,
+        },
+  writer: BlogData.writer,
+};
 ---
 
 <Layout {...metaData} pageType="blogId">
@@ -42,7 +61,7 @@ const metaData = {
     <Breadcrumb lowerTitel="Articles" lowerTitelSecond={BlogData.title} />
     <main class="main" data-pagefind-body>
       <div class="inner">
-        <Category data={BlogData} />
+        <Category data={categoryData} />
         <h1 class="title">{BlogData.title}</h1>
         <p class="date">
           公開日：{publishedAt}

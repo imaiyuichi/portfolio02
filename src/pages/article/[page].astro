@@ -11,16 +11,42 @@ import Contact from '../../partials/Contact.astro';
 import '@pagefind/default-ui/css/ui.css';
 
 const topData = await getTop({
-  fields: ['metaInfo'],
+  fields: ['metaInfo', 'topSkills'],
 });
 
 const lowerData = await getTop({
   fields: ['lowerTItle'],
 });
 
-const { metaInfo } = topData;
+const { metaInfo, topSkills } = topData;
 const { page } = Astro.props;
 const title = lowerData.lowerTItle.articleTitle;
+
+const data = page.data.map((item: any) =>
+  item.writer[0] === 'Imai'
+    ? {
+        ...item,
+        category: {
+          image: topData.topSkills.skill_icon_imai,
+          name: topData.topSkills.skill_work_imai,
+        },
+      }
+    : item.writer[0] === 'Nakayama'
+    ? {
+        ...item,
+        category: {
+          image: topData.topSkills.skill_icon_nakayama,
+          name: topData.topSkills.skill_work_nakayama,
+        },
+      }
+    : {
+        ...item,
+        category: {
+          image: topData.topSkills.skill_icon_shigeta,
+          name: topData.topSkills.skill_work_shigeta,
+        },
+      }
+);
 
 export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
   const BlogDataAll = await getBlogsAll();
@@ -39,7 +65,7 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
 
       <div class="blogs">
         {
-          page.data.map((data: any) => {
+          data.map((data: any) => {
             return <Card BlogData={data} />;
           })
         }
