@@ -1,4 +1,5 @@
 ---
+import Category from './Category.astro';
 import ImageWrapper from '../components/ImageWrapper.astro';
 
 interface Props {
@@ -37,21 +38,7 @@ const { BlogData, splide } = Astro.props;
         />
       </div>
       <div class="blog__text-area">
-        <div class="blog__category">
-          <div class="blog__category__inner">
-            <div class="blog__category__image">
-              <ImageWrapper
-                src={BlogData.category.image.url}
-                width={BlogData.category.image.width}
-                height={BlogData.category.image.height}
-                alt=""
-              />
-            </div>
-            <p class="blog__category__text">{BlogData.category.name}</p>
-            <span class="blog__category__border">|</span>
-            <p class="blog__category__text">{BlogData.writer[0]}</p>
-          </div>
-        </div>
+        <Category data={BlogData} />
         <h2 class="blog__title">{BlogData.title}</h2>
         <p class="blog__date">
           {
@@ -113,54 +100,6 @@ const { BlogData, splide } = Astro.props;
     }
   }
 
-  .blog__category {
-    display: inline-block;
-    padding: 3px vw(15) 3px vw(2);
-    font-family: $font-family-termina;
-    font-size: vw(16);
-    font-weight: 700;
-    color: $color-base-white;
-    background-color: $color-base-black;
-    border-radius: 9999px;
-
-    @include sp() {
-      padding: vw_sp(2) vw_sp(10) vw_sp(2) vw_sp(2);
-      font-size: vw_sp(10);
-    }
-  }
-
-  .blog__category--modify {
-    padding: 10px vw(20);
-
-    @include sp() {
-      padding: 10px vw_sp(10);
-    }
-  }
-
-  .blog__category__inner {
-    display: flex;
-    gap: vw(10);
-    align-items: center;
-    justify-content: center;
-  }
-
-  .blog__category__image {
-    position: relative;
-    width: vw(33);
-    height: vw(33);
-    background-color: $color-base-white;
-    border-radius: 50%;
-
-    @include sp() {
-      width: vw_sp(20);
-      height: vw_sp(20);
-    }
-  }
-
-  .blog__category__text {
-    line-height: 1;
-  }
-
   .blog__title {
     height: vw(100);
     margin: 15px 0 0;
@@ -175,10 +114,6 @@ const { BlogData, splide } = Astro.props;
       margin: vw_sp(10) 0 0;
       font-size: vw_sp(17);
     }
-  }
-
-  .blog__category__border {
-    font-weight: 400;
   }
 
   .blog__date {

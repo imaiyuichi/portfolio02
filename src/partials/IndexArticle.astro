@@ -9,11 +9,11 @@ import ViewElement from '../components/ViewElement.astro';
 import AnimationBlur from '../components/AnimationBlur.astro';
 
 const topData = await getTop({
-  fields: ['topTitles'],
+  fields: ['topTitles', 'topSkills'],
 });
 
 const BlogData = await getBlogs({
-  fields: ['id', 'title', 'eyecatch', 'category', 'publishedAt', 'writer'],
+  fields: ['id', 'title', 'eyecatch', 'publishedAt', 'writer'],
   limit: 10,
 });
 
@@ -27,7 +27,31 @@ export async function getStaticPaths() {
 }
 
 const title = topData.topTitles.blogTitle;
-const data = BlogData.contents;
+const data = BlogData.contents.map((item: any) =>
+  item.writer[0] === 'Imai'
+    ? {
+        ...item,
+        category: {
+          image: topData.topSkills.skill_icon_imai,
+          name: topData.topSkills.skill_work_imai,
+        },
+      }
+    : item.writer[0] === 'Nakayama'
+    ? {
+        ...item,
+        category: {
+          image: topData.topSkills.skill_icon_nakayama,
+          name: topData.topSkills.skill_work_nakayama,
+        },
+      }
+    : {
+        ...item,
+        category: {
+          image: topData.topSkills.skill_icon_shigeta,
+          name: topData.topSkills.skill_work_shigeta,
+        },
+      }
+);
 ---
 
 <BaseLayout
