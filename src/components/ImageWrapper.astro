@@ -15,7 +15,7 @@ const { src, width, height, alt = '', classValue = '' } = Astro.props;
 ---
 
 <img
-  src={src}
+  src={`${src}?fm=webp`}
   width={width}
   height={height}
   alt={alt}
