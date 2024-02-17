@@ -18,7 +18,7 @@ const lowerData = await getTop({
   fields: ['lowerTItle'],
 });
 
-const { metaInfo, topSkills } = topData;
+const { metaInfo } = topData;
 const { page } = Astro.props;
 const title = lowerData.lowerTItle.articleTitle;
 
