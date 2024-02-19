@@ -1,0 +1,33 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getTop, getWorksAll, getWorksDetail } from '../../libs/macrocms';
+
+export async function getStaticPaths() {
+  const worksData = await getWorksAll({ fields: 'id' });
+  return worksData.map(work => ({
+    params: {
+      worksId: work.id,
+    },
+  }));
+}
+const { worksId } = Astro.params;
+const worksData = await getWorksDetail(worksId as string);
+
+const topData = await getTop({
+  fields: ['metaInfo', 'topSkills'],
+});
+const { metaInfo } = topData;
+const metaData = {
+  metaTitle: worksData.title,
+  metaDescription: `${metaInfo.metaDescription}です。エンジニアリングやデザインに関わる記事を書いています。`,
+  favicon: metaInfo.favicon,
+  ogpImage: metaInfo.ogpImage,
+};
+
+---
+
+<Layout {...metaData} pageType={worksId}>
+  <div>
+    
+  </div>
+</Layout>
