@@ -29,11 +29,21 @@ export const getBlogDetail = async (
   });
 };
 
-// //APIの呼び出し
-// export const getAbout = async (queries?: MicroCMSQueries) => {
-//     return await client.get({ endpoint: 'about', queries });
-// };
+export const getWorks = async (queries?:MicroCMSQueries) => {
+  return await client.get({ endpoint: 'works', queries });
+}
 
-// export const getAbout = async (queries?: MicroCMSQueries) => {
-//     return await client.get<ApiResponse>({ endpoint: 'about', queries });
-// };
+export const getWorksAll = async (queries?: MicroCMSQueries) => {
+  return await client.getAllContents({ endpoint: 'works', queries });
+};
+
+export const getWorksDetail = async (
+  blogId: string,
+  queries?: MicroCMSQueries
+) => {
+  return await client.getListDetail({
+    endpoint: 'works',
+    contentId: blogId,
+    queries,
+  });
+};
