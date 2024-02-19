@@ -11,10 +11,6 @@ const topData = await getTop({
 
 const worksData = await getWorks();
 
-console.log(worksData);
-
-
-
 const { metaInfo,lowerTItle } = topData;
 ---
 
@@ -37,11 +33,11 @@ const { metaInfo,lowerTItle } = topData;
 </Layout>
 
 <style lang="scss">
-  @import '../../styles/_single.scss';
+  @import '../../styles/_single';
 
   .bg {
-    background-color: $color-base-gray;
     height: 100%;
+    background-color: $color-base-gray;
   }
 
   .inner {
