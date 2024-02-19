@@ -1,0 +1,54 @@
+---
+import { getTop,getWorks } from '../../libs/macrocms';
+import Layout from '../../layouts/Layout.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import { PAGES } from '../../variables.astro'
+import BaseTitle from '../../components/BaseTitle.astro';
+
+const topData = await getTop({
+  fields: ['metaInfo','lowerTItle'],
+});
+
+const worksData = await getWorks();
+
+console.log(worksData);
+
+
+
+const { metaInfo,lowerTItle } = topData;
+---
+
+<Layout {...metaInfo} pageType="work">
+  <main class="main">
+    <div class="bg">
+      <Breadcrumb lowerTitel={PAGES.works.name}/>
+      <div class="inner">
+        <BaseTitle title={lowerTItle.worksTitle} />
+          {worksData.contents.map((work:any) => (
+            <div>
+              <a href={`${PAGES.works.url}/${work.id}`}>
+                {work.title}
+              </a>
+            </div>
+          ))}
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style lang="scss">
+  @import '../../styles/_single.scss';
+
+  .bg {
+    background-color: $color-base-gray;
+    height: 100%;
+  }
+
+  .inner {
+    padding: 70px vw(84);
+  }
+
+  .main {
+    height: 100vh;
+  }
+</style>
