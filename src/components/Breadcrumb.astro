@@ -2,10 +2,11 @@
 import * as Variables from '../variables.astro';
 interface Props {
   lowerTitel: string;
+  lowerUrl: string;
   lowerTitelSecond?: string;
 }
 
-const { lowerTitel, lowerTitelSecond } = Astro.props;
+const { lowerTitel, lowerUrl, lowerTitelSecond } = Astro.props;
 ---
 
 <div class="root">
@@ -17,8 +18,8 @@ const { lowerTitel, lowerTitelSecond } = Astro.props;
     {
       lowerTitelSecond ? (
         <>
-          <a class="page" href={Variables.PAGES.article.url}>
-            {Variables.PAGES.article.name}
+          <a class="page" href={lowerUrl}>
+            {lowerTitel}
           </a>
           <span>&gt</span>
           <p class="lower">{lowerTitelSecond}</p>

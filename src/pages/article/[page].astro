@@ -57,7 +57,8 @@ export const getStaticPaths = async ({ paginate }: GetStaticPathsOptions) => {
 <Layout {...metaInfo} pageType="blog">
   <div class="bg">
     <Breadcrumb
-      lowerTitel="Articles"
+      lowerTitel={Variables.PAGES.article.name}
+      lowerUrl={Variables.PAGES.article.url}
       lowerTitelSecond={`${page.currentPage}ページ目`}
     />
     <main class="main">

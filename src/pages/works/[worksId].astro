@@ -1,10 +1,9 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+import { PAGES } from '../../variables.astro';
 import { getTop, getWorksAll, getWorksDetail } from '../../libs/macrocms';
 import Breadcrumb from '../../components/Breadcrumb.astro';
-import { PAGES } from '../../variables.astro'
 import BaseTitle from '../../components/BaseTitle.astro';
-
 
 export async function getStaticPaths() {
   const worksData = await getWorksAll({ fields: 'id' });
@@ -18,9 +17,9 @@ const { worksId } = Astro.params;
 const worksData = await getWorksDetail(worksId as string);
 
 const topData = await getTop({
-  fields: ['metaInfo','lowerTItle' ,'topSkills'],
+  fields: ['metaInfo', 'lowerTItle', 'topSkills'],
 });
-const { metaInfo,lowerTItle } = topData;
+const { metaInfo, lowerTItle } = topData;
 const metaData = {
   metaTitle: worksData.title,
   metaDescription: `${metaInfo.metaDescription}です。エンジニアリングやデザインに関わる記事を書いています。`,
@@ -29,26 +28,35 @@ const metaData = {
 };
 
 console.log(worksData);
-
-
 ---
 
 <Layout {...metaData} pageType={worksId}>
   <main>
-    <Breadcrumb lowerTitel={PAGES.works.name} lowerTitelSecond={worksData.title} />
+    <Breadcrumb
+      lowerTitel={PAGES.works.name}
+      lowerUrl={PAGES.works.url}
+      lowerTitelSecond={worksData.title}
+    />
     <div class="inner">
       <BaseTitle title={lowerTItle.worksTitle} />
-        {worksData.mv.map((mv:any, index:number) => (
+      {
+        worksData.mv.map((mv: any, index: number) => (
           <div>
-            <img src={mv.url} alt={mv.alt} width={mv.width} height={mv.height}/>
+            <img
+              src={mv.url}
+              alt={mv.alt}
+              width={mv.width}
+              height={mv.height}
+            />
           </div>
-        ))}
+        ))
+      }
       <h1>{worksData.title}</h1>
       <p>作成者：{worksData.author}</p>
       <p>サブタイトル：{worksData.subTitle}</p>
       <p>概要：{worksData.overview}</p>
       <p>制作期間：{worksData.term}</p>
-      <p>その他：{worksData.other}</p>    
+      <p>その他：{worksData.other}</p>
     </div>
   </main>
 </Layout>
