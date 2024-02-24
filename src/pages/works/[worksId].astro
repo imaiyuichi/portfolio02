@@ -26,8 +26,6 @@ const metaData = {
   favicon: metaInfo.favicon,
   ogpImage: metaInfo.ogpImage,
 };
-
-console.log(worksData);
 ---
 
 <Layout {...metaData} pageType={worksId}>
@@ -40,7 +38,7 @@ console.log(worksData);
     <div class="inner">
       <BaseTitle title={lowerTItle.worksTitle} />
       {
-        worksData.mv.map((mv: any, index: number) => (
+        worksData.mv.map((mv: any) => (
           <div>
             <img
               src={mv.url}

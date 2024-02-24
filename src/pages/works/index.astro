@@ -1,19 +1,113 @@
 ---
-import { getTop, getWorks } from '../../libs/macrocms';
+import { getTop, getWorksAll } from '../../libs/macrocms';
 import Layout from '../../layouts/Layout.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import { PAGES } from '../../variables.astro';
 import BaseTitle from '../../components/BaseTitle.astro';
+import Category from '../../components/Category.astro';
+import WorksCard from '../../components/WorksCard.astro';
 
 const topData = await getTop({
-  fields: ['metaInfo', 'lowerTItle'],
+  fields: ['metaInfo', 'lowerTItle', 'topSkills'],
 });
 
-const worksData = await getWorks();
+const worksData = await getWorksAll();
 
-const { metaInfo, lowerTItle } = topData;
-console.log(worksData);
+const { metaInfo, lowerTItle, topSkills } = topData;
+const categoryData = [
+  {
+    category: {
+      image: {
+        url: topSkills.skill_icon_imai.url,
+        width: topSkills.skill_icon_imai.width,
+        height: topSkills.skill_icon_imai.height,
+      },
+      name: topSkills.skill_work_imai,
+    },
+    writer: ['Imai'],
+  },
+  {
+    category: {
+      image: {
+        url: topSkills.skill_icon_nakayama.url,
+        width: topSkills.skill_icon_nakayama.width,
+        height: topSkills.skill_icon_nakayama.height,
+      },
+      name: topSkills.skill_work_nakayama,
+    },
+    writer: ['Nakayama'],
+  },
+  {
+    category: {
+      image: {
+        url: topSkills.skill_icon_shigeta.url,
+        width: topSkills.skill_icon_shigeta.width,
+        height: topSkills.skill_icon_shigeta.height,
+      },
+      name: topSkills.skill_work_shigeta,
+    },
+    writer: ['Shigeta'],
+  },
+];
 ---
+
+<script>
+  const categories = document.querySelectorAll<HTMLElement>('.js-category');
+
+  const allCategory = document.querySelector<HTMLElement>('.js-catetory-all');
+  allCategory.addEventListener('click', () => {
+    const categoryItems =
+      document.querySelectorAll<HTMLElement>('.js-category');
+    const articleItemss = document.querySelectorAll<HTMLElement>('.js-article');
+
+    // all viewをカレント
+    allCategory.style.backgroundColor = 'black';
+    allCategory.style.color = 'white';
+    categoryItems.forEach(item => {
+      item.style.backgroundColor = 'white';
+      item.style.color = 'black';
+    });
+    articleItemss.forEach(article => {
+      article.style.display = 'block';
+    });
+  });
+
+  categories.forEach(category => {
+    category.style.backgroundColor = 'white';
+    category.style.color = 'black';
+
+    category.addEventListener('click', e => {
+      const categoryItems =
+        document.querySelectorAll<HTMLElement>('.js-category');
+      const target = e.currentTarget as HTMLElement;
+      const writer = target.getAttribute('data-writer');
+      const articleItemss =
+        document.querySelectorAll<HTMLElement>('.js-article');
+
+      // 全てのカテゴリーのスタイルをリセット
+      categoryItems.forEach(item => {
+        item.style.backgroundColor = 'white';
+        item.style.color = 'black';
+        allCategory.style.backgroundColor = 'white';
+        allCategory.style.color = 'black';
+      });
+
+      // クリックした要素のスタイルを変更
+      target.style.backgroundColor = 'black';
+      target.style.color = 'white';
+
+      // カードの表示を切り替え
+      articleItemss.forEach(article => {
+        const worksName = article.getAttribute('data-works-name');
+        if (worksName === writer) {
+          article.style.display = 'block';
+        } else {
+          article.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
 
 <Layout {...metaInfo} pageType="work">
   <main class="main">
@@ -21,13 +115,34 @@ console.log(worksData);
       <Breadcrumb lowerTitel={PAGES.works.name} lowerUrl={PAGES.works.url} />
       <div class="inner">
         <BaseTitle title={lowerTItle.worksTitle} />
-        {
-          worksData.contents.map((work: any) => (
-            <div>
-              <a href={`${PAGES.works.url}/${work.id}`}>{work.title}</a>
-            </div>
-          ))
-        }
+        <div class="category">
+          <div class="writer writer-all js-catetory-all">All View</div>
+          {
+            categoryData.map((category: any) => (
+              <div class="writer">
+                <Category data={category} />
+              </div>
+            ))
+          }
+        </div>
+        <div class="card">
+          {
+            worksData.map((work: any) => (
+              <article
+                class="article js-article"
+                data-works-name={
+                  work.author[0] === '今井'
+                    ? 'Imai'
+                    : work.author[0] === '中山'
+                    ? 'Nakayama'
+                    : 'Shigeta'
+                }
+              >
+                <WorksCard data={work} />
+              </article>
+            ))
+          }
+        </div>
       </div>
     </div>
   </main>
@@ -45,7 +160,41 @@ console.log(worksData);
     padding: 70px vw(84);
   }
 
-  .main {
-    height: 100vh;
+  .category {
+    display: flex;
+    gap: vw(10);
+    align-items: center;
+    justify-content: center;
+    margin: 60px 0 0;
+  }
+
+  .writer {
+    cursor: pointer;
+  }
+
+  .writer-all {
+    padding: 3px vw(15);
+    font-family: $font-family-termina;
+    font-size: vw(16);
+    font-weight: 700;
+    color: $color-base-white;
+    background-color: $color-base-black;
+    border: 1px solid $color-base-black;
+    border-radius: 9999px;
+
+    @include sp() {
+      padding: vw_sp(2) vw_sp(10) vw_sp(2) vw_sp(2);
+      font-size: vw_sp(10);
+    }
+  }
+
+  .card {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 60px 0 0;
+  }
+
+  .article {
+    width: 50%;
   }
 </style>
