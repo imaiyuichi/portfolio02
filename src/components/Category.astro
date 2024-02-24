@@ -14,7 +14,7 @@ interface Props {
 const { data } = Astro.props;
 ---
 
-<div class="blog__category">
+<div class="blog__category js-category" data-writer={data.writer[0]}>
   <div class="blog__category__inner">
     <div class="blog__category__image">
       <ImageWrapper
