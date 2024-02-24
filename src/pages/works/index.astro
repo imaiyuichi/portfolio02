@@ -49,38 +49,64 @@ const categoryData = [
     writer: ['Shigeta'],
   },
 ];
-
 ---
 
-
 <script>
-const categories = document.querySelectorAll<HTMLElement>('.js-category');
+  const categories = document.querySelectorAll<HTMLElement>('.js-category');
 
-categories.forEach((category) => {
-    category.addEventListener('click', (e) => {
-        // すべてのカテゴリの背景色を白くする
-        document.querySelectorAll<HTMLElement>('.js-category').forEach((item) => {
-            item.style.backgroundColor = 'white';
-            item.style.color = 'black';
-        });
+  const allCategory = document.querySelector<HTMLElement>('.js-catetory-all');
+  allCategory.addEventListener('click', () => {
+    const categoryItems =
+      document.querySelectorAll<HTMLElement>('.js-category');
+    const articleItemss = document.querySelectorAll<HTMLElement>('.js-article');
 
-        // クリックされたカテゴリの背景色を赤くする
-        const target = e.currentTarget as HTMLElement;
-        target.style.backgroundColor = 'black';
-        target.style.color = 'white';
-
-        const writer = target.getAttribute('data-writer');
-        // eの子要素のクラスを取得
-        document.querySelectorAll<HTMLElement>('.js-article').forEach((article) => {
-            const worksName = article.getAttribute('data-works-name');
-            if (worksName === writer) {
-                article.style.display = 'block';
-            } else {
-                article.style.display = 'none';
-            }
-        });
+    // all viewをカレント
+    allCategory.style.backgroundColor = 'black';
+    allCategory.style.color = 'white';
+    categoryItems.forEach(item => {
+      item.style.backgroundColor = 'white';
+      item.style.color = 'black';
     });
-});
+    articleItemss.forEach(article => {
+      article.style.display = 'block';
+    });
+  });
+
+  categories.forEach(category => {
+    category.style.backgroundColor = 'white';
+    category.style.color = 'black';
+
+    category.addEventListener('click', e => {
+      const categoryItems =
+        document.querySelectorAll<HTMLElement>('.js-category');
+      const target = e.currentTarget as HTMLElement;
+      const writer = target.getAttribute('data-writer');
+      const articleItemss =
+        document.querySelectorAll<HTMLElement>('.js-article');
+
+      // 全てのカテゴリーのスタイルをリセット
+      categoryItems.forEach(item => {
+        item.style.backgroundColor = 'white';
+        item.style.color = 'black';
+        allCategory.style.backgroundColor = 'white';
+        allCategory.style.color = 'black';
+      });
+
+      // クリックした要素のスタイルを変更
+      target.style.backgroundColor = 'black';
+      target.style.color = 'white';
+
+      // カードの表示を切り替え
+      articleItemss.forEach(article => {
+        const worksName = article.getAttribute('data-works-name');
+        if (worksName === writer) {
+          article.style.display = 'block';
+        } else {
+          article.style.display = 'none';
+        }
+      });
+    });
+  });
 </script>
 
 <Layout {...metaInfo} pageType="work">
@@ -90,16 +116,28 @@ categories.forEach((category) => {
       <div class="inner">
         <BaseTitle title={lowerTItle.worksTitle} />
         <div class="category">
-          {categoryData.map((category: any) => (
-            <div class="writer">
-              <Category data={category} />
-            </div>
-          ))}
+          <div class="writer writer-all js-catetory-all">All View</div>
+          {
+            categoryData.map((category: any) => (
+              <div class="writer">
+                <Category data={category} />
+              </div>
+            ))
+          }
         </div>
         <div class="card">
           {
             worksData.map((work: any) => (
-              <article class="article js-article" data-works-name={work.author[0] === "今井" ? "Imai" : work.author[0] === "中山"? "Nakayama" : "Shigeta"}>
+              <article
+                class="article js-article"
+                data-works-name={
+                  work.author[0] === '今井'
+                    ? 'Imai'
+                    : work.author[0] === '中山'
+                    ? 'Nakayama'
+                    : 'Shigeta'
+                }
+              >
                 <WorksCard data={work} />
               </article>
             ))
@@ -132,6 +170,22 @@ categories.forEach((category) => {
 
   .writer {
     cursor: pointer;
+  }
+
+  .writer-all {
+    padding: 3px vw(15);
+    font-family: $font-family-termina;
+    font-size: vw(16);
+    font-weight: 700;
+    color: $color-base-white;
+    background-color: $color-base-black;
+    border: 1px solid $color-base-black;
+    border-radius: 9999px;
+
+    @include sp() {
+      padding: vw_sp(2) vw_sp(10) vw_sp(2) vw_sp(2);
+      font-size: vw_sp(10);
+    }
   }
 
   .card {
