@@ -81,7 +81,13 @@ const categoryData = {
           />
         </div>
         <div class="editor">
-          <div set:html={BlogData.content} />
+          {BlogData.content && <div set:html={BlogData.content} />}
+          {
+            BlogData.blogContents &&
+              BlogData.blogContents.map((data: any) => (
+                <div set:html={data.content} />
+              ))
+          }
         </div>
       </div>
     </main>
