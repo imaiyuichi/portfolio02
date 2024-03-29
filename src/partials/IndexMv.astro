@@ -9,19 +9,81 @@ const MvData = await getTop({
 const mv = MvData.topMv;
 const mvBg = mv.topMvBg;
 const mvImage = mv.topMvImage;
+
+console.log(mvBg);
 ---
 
-<section class="root">
-  <div class="bg">
-    <img
-      src={`${mvBg.url}?fm=webp`}
-      width={mvBg.width}
-      height={mvBg.height}
-      alt=""
-      class="image-cover"
-    />
-  </div>
+<script
+  src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r121/three.min.js"
+  is:inline></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.birds.min.js"
+  is:inline></script>
+<script
+  src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.dots.min.js"
+  is:inline></script>
+<script>
+  const setVanta = () => {
+    if (window.VANTA.DOTS)
+      window.VANTA.DOTS({
+        el: '.js-three-dots',
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: true,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.0,
+        scaleMobile: 1.0,
+        color: 0xffffff,
+        color2: 0xffffff,
+        backgroundColor: 0x0,
+        size: 2.0,
+        spacing: 25.0,
+        showLines: false,
+      });
+    if (window.VANTA.BIRDS)
+      window.VANTA.BIRDS({
+        el: '.js-three-bird',
+        mouseControls: true,
+        touchControls: true,
+        gyroControls: true,
+        minHeight: 200.0,
+        minWidth: 200.0,
+        scale: 1.6,
+        scaleMobile: 1.0,
+        backgroundColor: 0x0,
+        color1: 0xffffff,
+        color2: 0xffffff,
+        colorMode: 'variance',
+        birdSize: 0.5,
+        wingSpan: 40.0,
+        speedLimit: 6.0,
+        separation: 100.0,
+        alignment: 1.0,
+        cohesion: 100.0,
+        quantity: 2.0,
+      });
+    return;
+  };
+  setVanta();
+</script><section class="root">
   <div class="inner">
+    {
+      mvBg && (
+        <div class="bg">
+          <img
+            src={`${mvBg.url}?fm=webp`}
+            width={mvBg.width}
+            height={mvBg.height}
+            alt=""
+            class="image-cover"
+          />
+        </div>
+      )
+    }
+    <span class="bg-dots js-three-dots"></span>
+    <span class="bg-bird js-three-bird"></span>
+
     {
       mvImage && (
         <div class="image">
@@ -51,7 +113,6 @@ const mvImage = mv.topMvImage;
   @import '../styles/_single';
 
   .root {
-    position: relative;
     border-top: 1px solid $color-base-lower-black;
   }
 
@@ -59,8 +120,8 @@ const mvImage = mv.topMvImage;
     position: absolute;
     top: 0;
     left: 0;
-    z-index: -1;
-    width: 100vw;
+    z-index: 10;
+    width: 100%;
     height: 720px;
 
     @include sp() {
@@ -69,11 +130,41 @@ const mvImage = mv.topMvImage;
     }
   }
 
+  .bg-dots {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    width: 100%;
+    height: 720px;
+
+    @include sp() {
+      width: 100%;
+      height: 100vh;
+    }
+  }
+  .bg-bird {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    width: 100%;
+    height: 400px;
+
+    @include sp() {
+      width: 100%;
+      height: 60vh;
+    }
+  }
+
   .inner {
+    position: relative;
     width: vw(1280);
     height: 720px;
     padding: vw(200) 0 0;
     margin: auto;
+    overflow: hidden;
     border-right: 1px solid $color-base-lower-black;
     border-left: 1px solid $color-base-lower-black;
 
@@ -85,6 +176,8 @@ const mvImage = mv.topMvImage;
   }
 
   .title {
+    position: relative;
+    z-index: 100;
     font-size: vw(40);
     font-weight: 700;
     line-height: 1.6;
@@ -98,8 +191,10 @@ const mvImage = mv.topMvImage;
   }
 
   .sub-title {
-    margin: vw(50) 0 0;
-    font-size: vw(40);
+    position: relative;
+    z-index: 100;
+    margin: vw(30) 0 0;
+    font-size: 70px;
     font-weight: 700;
     line-height: 1.6;
     color: $color-base-white;
@@ -108,12 +203,13 @@ const mvImage = mv.topMvImage;
 
     @include sp() {
       margin: vw_sp(20) 0 0;
-      font-size: vw_sp(25);
+      font-size: vw_sp(27);
     }
   }
 
   .catch {
-    margin: vw(40) 0 0;
+    position: relative;
+    z-index: 100;
     font-size: vw(40);
     font-weight: 700;
     line-height: 1.6;
